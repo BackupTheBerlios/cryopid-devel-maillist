@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Cryopid on NixOS
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20on%20NixOS&In-Reply-To=%3C25E6512C-0236-4A4C-AAF1-2376C827DE58%40math.unifi.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000308.html">
+   <LINK REL="Next"  HREF="000310.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Cryopid on NixOS</H1>
+    <B>Marco Maggesi</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20on%20NixOS&In-Reply-To=%3C25E6512C-0236-4A4C-AAF1-2376C827DE58%40math.unifi.it%3E"
+       TITLE="[Cryopid-devel] Cryopid on NixOS">maggesi at math.unifi.it
+       </A><BR>
+    <I>Sat Jan  9 18:54:08 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000308.html">[Cryopid-devel] build error
+</A></li>
+        <LI>Next message: <A HREF="000310.html">[Cryopid-devel] Cryopid on NixOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+I'm trying to use cryopid on NixOS (<A HREF="http://nixos.org">http://nixos.org</A>).
+I compiled and installed successfully cryopid on my machine and I used
+it for many months without problems.
+
+Recently, just after a system update, the generated binaries crashes
+shortly after a few I/O operations.
+
+What is even more interesting is that I have two almost identical  
+machines
+(both virtualize with VirtualBox) and cryopid works on the first machine
+but do not on the second one.  I would like to isolate what is  
+responsible
+for this difference.
+
+I tried to use strace &amp; gdb to get some insight but I'm not competent
+enough to understand what is going on.
+
+I put three files in the directory:
+
+<A HREF="http://web.math.unifi.it/users/maggesi/Hello/">http://web.math.unifi.it/users/maggesi/Hello/</A>
+
+- hello.c        a test program.
+- hello          the compiled version.
+- hello.freeze   the binary freezed with cryopid.
+
+When I run ./hello.freeze the program crashes shortly after one line of
+output.
+
+Thank you,
+Marco
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000308.html">[Cryopid-devel] build error
+</A></li>
+	<LI>Next message: <A HREF="000310.html">[Cryopid-devel] Cryopid on NixOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

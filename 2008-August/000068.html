@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Value too large for defined data type problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Value%20too%20large%20for%20defined%20data%20type%20problem&In-Reply-To=%3Cdfa53ad0808262357s4d61cc36q11ae55f4369ab926%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000067.html">
+   <LINK REL="Next"  HREF="000069.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Value too large for defined data type problem</H1>
+    <B>mukti jain</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Value%20too%20large%20for%20defined%20data%20type%20problem&In-Reply-To=%3Cdfa53ad0808262357s4d61cc36q11ae55f4369ab926%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Value too large for defined data type problem">muktijn at gmail.com
+       </A><BR>
+    <I>Wed Aug 27 08:57:25 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000067.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+        <LI>Next message: <A HREF="000069.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Please give a try with  -D_FILE_OFFSET_BITS=64  option too.
+
+Thanks,
+Mukti
+
+On Wed, Aug 27, 2008 at 11:46 AM, mukti jain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Try to add -D_LARGEFILE64_SOURCE option while compiling cryopid.
+</I>&gt;<i> Since stat may fail on large files if the st_size in stat structure is not
+</I>&gt;<i> 64 bits.
+</I>&gt;<i> other people got similar errors as  google groups comp.unix.programmer&lt;<A HREF="http://groups.google.com/group/comp.unix.programmer?hl=en">http://groups.google.com/group/comp.unix.programmer?hl=en</A>&gt;have a discussion thread.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Mukti
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Tue, Aug 26, 2008 at 7:03 PM, Amir Hossein Jadidinejad &lt;
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi All,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm going to use WikiPrep &lt;<A HREF="http://sourceforge.net/projects/wikiprep">http://sourceforge.net/projects/wikiprep</A>&gt; to
+</I>&gt;&gt;<i> parse a huge Wikipedia dump file (17GB). It takes almost 60 hours but I have
+</I>&gt;&gt;<i> some power depleted limitaions. So I have to suspend running process and
+</I>&gt;&gt;<i> resume it again later.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Here is my running command:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;*perl wikiprep.pl -f
+</I>&gt;&gt;<i> /mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xml*
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Following is the consol output after using CryoPID to freez my process to
+</I>&gt;&gt;<i> disk:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> *
+</I>&gt;&gt;<i> ------------------------------------------------------------------------------------------------------
+</I>&gt;&gt;<i> *
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;*./freeze ~/resume 7812*
+</I>&gt;&gt;<i> *Map: 08048000-08166000 r-xp 00000000 08:02 1339899 /usr/bin/perl
+</I>&gt;&gt;<i> [+] Found a syscall location at 0x8056b30
+</I>&gt;&gt;<i> Map: 08166000-0816b000 rw-p 0011d000 08:02 1339899 /usr/bin/perl
+</I>&gt;&gt;<i> Map: 0816b000-09827000 rw-p 0816b000 00:00 0 [heap]
+</I>&gt;&gt;<i> Map: b7948000-b7c4e000 rw-p b7948000 00:00 0 (null)
+</I>&gt;&gt;<i> [+] Found scribble zone: 0xb7948000
+</I>&gt;&gt;<i> Map: b7c4e000-b7c6c000 r-xp 00000000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;<i> Map: b7c6c000-b7c6d000 r--p 0001e000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;<i> Map: b7c6d000-b7c6f000 rw-p 0001f000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;<i> Map: b7c6f000-b7c71000 r-xp 00000000 08:02 622045
+</I>&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;<i> Map: b7c71000-b7c72000 r--p 00001000 08:02 622045
+</I>&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;<i> Map: b7c72000-b7c73000 rw-p 00002000 08:02 622045
+</I>&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;<i> Map: b7c73000-b7c76000 r-xp 00000000 08:02 1466203
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+</I>&gt;&gt;<i> Map: b7c76000-b7c78000 rw-p 00002000 08:02 1466203
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+</I>&gt;&gt;<i> Map: b7c78000-b7c7e000 r-xp 00000000 08:02 35460
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+</I>&gt;&gt;<i> Map: b7c7e000-b7c80000 rw-p 00005000 08:02 35460
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+</I>&gt;&gt;<i> Map: b7c80000-b7c88000 r-xp 00000000 08:02 35411
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+</I>&gt;&gt;<i> Map: b7c88000-b7c8a000 rw-p 00007000 08:02 35411
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+</I>&gt;&gt;<i> Map: b7c8a000-b7ca3000 r-xp 00000000 08:02 83131
+</I>&gt;&gt;<i> /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+</I>&gt;&gt;<i> Map: b7ca3000-b7ca5000 rw-p 00018000 08:02 83131
+</I>&gt;&gt;<i> /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+</I>&gt;&gt;<i> Map: b7ca5000-b7caf000 r-xp 00000000 08:02 1466224
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+</I>&gt;&gt;<i> Map: b7caf000-b7cb1000 rw-p 00009000 08:02 1466224
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+</I>&gt;&gt;<i> Map: b7cb1000-b7cb5000 r-xp 00000000 08:02 1466220
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+</I>&gt;&gt;<i> Map: b7cb5000-b7cb7000 rw-p 00003000 08:02 1466220
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+</I>&gt;&gt;<i> Map: b7cb7000-b7cd8000 rw-p b7cb7000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7cd8000-b7d17000 r--p 00000000 08:02 1450996
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_CTYPE
+</I>&gt;&gt;<i> Map: b7d17000-b7df7000 r--p 00000000 08:02 1450997
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_COLLATE
+</I>&gt;&gt;<i> Map: b7df7000-b7df8000 rw-p b7df7000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7df8000-b7f25000 r-xp 00000000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f25000-b7f26000 r--p 0012c000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f26000-b7f28000 rw-p 0012d000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f28000-b7f2c000 rw-p b7f28000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7f2c000-b7f3f000 r-xp 00000000 08:02 1107623 /lib/
+</I>&gt;&gt;<i> libpthread-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f3f000-b7f41000 rw-p 00013000 08:02 1107623 /lib/
+</I>&gt;&gt;<i> libpthread-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f41000-b7f43000 rw-p b7f41000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7f43000-b7f45000 r-xp 00000000 08:02 1107631 /lib/libutil-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f45000-b7f47000 rw-p 00001000 08:02 1107631 /lib/libutil-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f47000-b7f4f000 r-xp 00000000 08:02 1107601 /lib/libcrypt-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f4f000-b7f52000 rw-p 00007000 08:02 1107601 /lib/libcrypt-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f52000-b7f79000 rw-p b7f52000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7f79000-b7f9c000 r-xp 00000000 08:02 1107605 /lib/libm-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f9c000-b7f9e000 rw-p 00022000 08:02 1107605 /lib/libm-2.6.1.so
+</I>&gt;&gt;<i> Map: b7f9e000-b7fa0000 r-xp 00000000 08:02 1107603 /lib/libdl-2.6.1.so
+</I>&gt;&gt;<i> Map: b7fa0000-b7fa2000 rw-p 00001000 08:02 1107603 /lib/libdl-2.6.1.so
+</I>&gt;&gt;<i> Map: b7fa2000-b7fb5000 r-xp 00000000 08:02 1107608 /lib/libnsl-2.6.1.so
+</I>&gt;&gt;<i> Map: b7fb5000-b7fb7000 rw-p 00012000 08:02 1107608 /lib/libnsl-2.6.1.so
+</I>&gt;&gt;<i> Map: b7fb7000-b7fba000 rw-p b7fb7000 00:00 0 (null)
+</I>&gt;&gt;<i> Map: b7fbb000-b7fbd000 r-xp 00000000 08:02 1466195
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+</I>&gt;&gt;<i> Map: b7fbd000-b7fbf000 rw-p 00001000 08:02 1466195
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+</I>&gt;&gt;<i> Map: b7fbf000-b7fc2000 r-xp 00000000 08:02 1466213
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+</I>&gt;&gt;<i> Map: b7fc2000-b7fc4000 rw-p 00002000 08:02 1466213
+</I>&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+</I>&gt;&gt;<i> Map: b7fc4000-b7fc5000 r--p 00000000 08:02 1450978
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_NUMERIC
+</I>&gt;&gt;<i> Map: b7fc5000-b7fc6000 r--p 00000000 08:02 1434916
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_TIME
+</I>&gt;&gt;<i> Map: b7fc6000-b7fc7000 r--p 00000000 08:02 1434915
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MONETARY
+</I>&gt;&gt;<i> Map: b7fc7000-b7fc8000 r--p 00000000 08:02 1450971
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+</I>&gt;&gt;<i> Map: b7fc8000-b7fc9000 r--p 00000000 08:02 1450894
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_PAPER
+</I>&gt;&gt;<i> Map: b7fc9000-b7fca000 r--p 00000000 08:02 1450923
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_NAME
+</I>&gt;&gt;<i> Map: b7fca000-b7fcb000 r--p 00000000 08:02 1434912
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_ADDRESS
+</I>&gt;&gt;<i> Map: b7fcb000-b7fcc000 r--p 00000000 08:02 1450879
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+</I>&gt;&gt;<i> Map: b7fcc000-b7fcd000 r--p 00000000 08:02 1450880
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+</I>&gt;&gt;<i> Map: b7fcd000-b7fd4000 r--s 00000000 08:02 1434173
+</I>&gt;&gt;<i> /usr/lib/gconv/gconv-modules.cache
+</I>&gt;&gt;<i> Map: b7fd4000-b7fd5000 r--p 00000000 08:02 1434913
+</I>&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION
+</I>&gt;&gt;<i> Map: b7fd5000-b7fef000 r-xp 00000000 08:02 1107590 /lib/ld-2.6.1.so
+</I>&gt;&gt;<i> Map: b7fef000-b7ff1000 rw-p 0001a000 08:02 1107590 /lib/ld-2.6.1.so
+</I>&gt;&gt;<i> Map: bfc03000-bfc19000 rw-p bfc03000 00:00 0 [stack]
+</I>&gt;&gt;<i>   Ignoring map - vsyscall page.
+</I>&gt;&gt;<i>   Error parsing map: ffffe000-fffff000 r-xp 00000000 00:00 0 [vdso]
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [+] Terminal device appears to be 136:0
+</I>&gt;&gt;<i> Saved console chunk (0).
+</I>&gt;&gt;<i> Saved console chunk (1).
+</I>&gt;&gt;<i> Saved console chunk (2).
+</I>&gt;&gt;<i> Failed to stat(/proc/7812/fd/11): Value too large for defined data type
+</I>&gt;&gt;<i> Aborted
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ------------------------------------------------------------------------------------------------------
+</I>&gt;&gt;<i> *
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> What's the problem?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> By the way, I have no problems with other programs and examples.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I would be glad if anybody can solve my problem or give me a solution.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks.
+</I>&gt;&gt;<i> *-----------------------------------
+</I>&gt;&gt;<i> **Amir Hossein Jadidinejad
+</I>&gt;&gt;<i> Master of Computer Science
+</I>&gt;&gt;<i> Islamic Azad University, Iran
+</I>&gt;&gt;<i> Home Page: <A HREF="http://jadidi.info">http://jadidi.info</A> &lt;<A HREF="http://www.jadidi.info/">http://www.jadidi.info/</A>&gt;*
+</I>&gt;&gt;<i> *E-Mail : <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A> ,
+</I>&gt;&gt;<i>           <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>*
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> CryoPID-devel mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080827/50f7fb3e/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080827/50f7fb3e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000067.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+	<LI>Next message: <A HREF="000069.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

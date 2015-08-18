@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C64116.84.221.71.91.1243415652.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C64116.84.221.71.91.1243415652.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] cryopid patch">alberti at cs.unibo.it
+       </A><BR>
+    <I>Wed May 27 11:14:12 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000155.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000154.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#152">[ date ]</a>
+              <a href="thread.html#152">[ thread ]</a>
+              <a href="subject.html#152">[ subject ]</a>
+              <a href="author.html#152">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> On Wed, 2009-05-27 at 09:18 +0200, Michele Alberti wrote:
+</I>&gt;&gt;<i> &gt; Please go ahead and send the patch, I'll apply it after I do the git
+</I>&gt;&gt;<i> &gt; conversion. I also need to get you commit access at sharesource (and
+</I>&gt;&gt;<i> &gt; github while its in use).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Yes, I need a commit access. Let me know ASAP.
+</I>&gt;<i>
+</I>&gt;<i> I'll contact you off list for github, for ShareSource, simply sign up at
+</I>&gt;<i> <A HREF="http://sharesource.org">http://sharesource.org</A> and send me your user name.
+</I>
+Thanks.
+
+&gt;<i> - There are some blank line insertions, though at this point I doubt
+</I>&gt;<i> anyone really cares. Its a matter of c-style and (I too) like a bit of
+</I>&gt;<i> space between preprocessors and actual code beginning, however in
+</I>&gt;<i> functions it can get confusing, since a newline typically segments the
+</I>&gt;<i> flow of the code.
+</I>
+I think that blank line are good to divide logically the code, even inside
+the functions. But I don't know, I don't care.
+
+&gt;<i>
+</I>&gt;<i> - Instead of getpagesize(), can we use a static _getpagesize() that
+</I>&gt;<i> looks for PAGE_SIZE being defined on the command line? If defined, it
+</I>&gt;<i> just uses that value. That should be agreeably inlined by gcc and saves
+</I>&gt;<i> numerous jumps and calls to sysconf, since we can get the value via
+</I>&gt;<i> autoconf (while obeying what the user thinks it should be).
+</I>
+The problems with previous cryopid version is there, PAGE_SIZE. Latest
+libc, kernel headers changed that. I'm ok with static _getpagesize() to
+avoid too much calls to sysconf, but I don't think define PAGE_SIZE on the
+command line is ok because PAGE_SIZE is system depending.
+What about a global variable that store getpagesize() value? or something
+similar with macros?
+
+&gt;<i>
+</I>&gt;<i> - We (those of us working on it) need to have a discussion regarding
+</I>&gt;<i> legacy kernel support .. and how many backwards compatibility kludges
+</I>&gt;<i> we're comfortable with. Linux is a moving target .. perhaps some cut off
+</I>&gt;<i> point needs to be established. I can work around all of that with
+</I>&gt;<i> preprocessor soup that I get from autoconf, but really, its going to get
+</I>&gt;<i> ugly and difficult to maintain. 2.6.24 sounds good to me, but I'd like
+</I>&gt;<i> to hear from others.
+</I>
+It's ok for me. I don't know if people still uses 2.4 version.
+ciao
+
+michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000155.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000154.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#152">[ date ]</a>
+              <a href="thread.html#152">[ thread ]</a>
+              <a href="subject.html#152">[ subject ]</a>
+              <a href="author.html#152">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

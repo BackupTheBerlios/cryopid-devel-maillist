@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3C7dd3843b0808011512t7721d42cqb96ebc826b4b6d3%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000061.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)</H1>
+    <B>Rafael Gardenal</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3C7dd3843b0808011512t7721d42cqb96ebc826b4b6d3%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)">rafaelcuenca at gmail.com
+       </A><BR>
+    <I>Sat Aug  2 00:12:30 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000061.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+        <LI>Next message: <A HREF="000063.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hellow guys I'm new at the group and I've problens too when compiling at
+gentoo!
+
+I've made the changes (created the arch script and copied the .h file) by I
+still have the
+error
+
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+make: *** No rule to make target `arch/asmfuncs.o', needed by `freeze'.
+Stop.
+make: *** Waiting for unfinished jobs....
+make -C arch 'CFLAGS+='
+make[1]: Entering directory
+`/var/tmp/portage/sys-process/cryopid-0.5.9/work/cryopid-0.5.9/src/arch-x86_64'
+make[1]: warning: jobserver unavailable: using -j1.  Add `+' to parent
+make rule.
+cc -g -Wall -Os -I. -Iarch -D__x86_64__   -g -Wall -Os -fpic -I. -I..   -c
+-o common.o common.c
+In file included from ../cryopid.h:9,                 from common.c:5:
+../arch/arch.h:22: error: expected declaration specifiers or '...' before
+'rt_sigaction'
+../arch/arch.h:22: error: expected declaration specifiers or '...' before
+'sig'
+../arch/arch.h:22: error: expected declaration specifiers or '...' before
+'ksa'
+../arch/arch.h:23: error: expected declaration specifiers or '...' before
+'oksa'
+../arch/arch.h:23: error: expected declaration specifiers or '...' before
+'sigsetsize'
+../arch/arch.h:23: warning: type defaults to 'int' in declaration of
+'_syscall4'
+distcc[6580] ERROR: compile common.c on localhost failed
+make[1]: *** [common.o] Error 1
+make[1]: Leaving directory
+`/var/tmp/portage/sys-process/cryopid-0.5.9/work/cryopid-0.5.9/src/arch-x86_64'
+make: *** [arch] Error 2
+
+do you have an idea to help me?
+
+Thanks
+
+
+On Fri, Aug 1, 2008 at 2:34 AM, Manish Dwivedi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">mdwivedi at gmail.com</A>&gt; wrote:
+
+&gt;<i> Has anyone tried porting cryopid to ARM ?
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Manish
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Fri, Aug 1, 2008 at 4:29 AM, Dan Sanders &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">dans.spam at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> &gt; Do you _have_ an 'arch' command? It was obsoleted in favor of uname -m
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> No, I did not, but I did make one. Using your script instead made no
+</I>&gt;&gt;<i> difference to the build.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> - Dan
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> CryoPID-devel mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080801/64afb6f6/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080801/64afb6f6/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000061.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+	<LI>Next message: <A HREF="000063.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

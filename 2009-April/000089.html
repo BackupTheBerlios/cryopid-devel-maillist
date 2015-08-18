@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryoPID-devel%20Digest%2C%20Vol%2022%2C%20Issue%201&In-Reply-To=%3Cf3cc57c60904130555i794e6c04sa824a0a78acd53d8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000088.html">
+   <LINK REL="Next"  HREF="000090.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1</H1>
+    <B>geremy condra</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryoPID-devel%20Digest%2C%20Vol%2022%2C%20Issue%201&In-Reply-To=%3Cf3cc57c60904130555i794e6c04sa824a0a78acd53d8%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1">cto at openmigration.net
+       </A><BR>
+    <I>Mon Apr 13 14:55:14 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000088.html">[Cryopid-devel] Patch available for latest version of CryoPID
+</A></li>
+        <LI>Next message: <A HREF="000090.html">[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm willing to fork. Anybody up for collecting some of those patches for me?
+
+On Mon, Apr 13, 2009 at 6:00 AM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel-request at lists.berlios.de</A>&gt;wrote:
+
+&gt;<i> Send CryoPID-devel mailing list submissions to
+</I>&gt;<i>        <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i>        <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i> or, via email, send a message with subject or body 'help' to
+</I>&gt;<i>        <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel-request at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i>        <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel-owner at lists.berlios.de</A>
+</I>&gt;<i>
+</I>&gt;<i> When replying, please edit your Subject line so it is more specific
+</I>&gt;<i> than &quot;Re: Contents of CryoPID-devel digest...&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i>
+</I>&gt;<i>   1. Patch available for latest version of CryoPID (J?r?me Poulin)
+</I>&gt;<i>   2. Re: Patch available for latest version of CryoPID (Tim Post)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 1
+</I>&gt;<i> Date: Sun, 12 Apr 2009 11:50:35 -0400
+</I>&gt;<i> From: J?r?me Poulin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jeromepoulin at gmail.com</A>&gt;
+</I>&gt;<i> Subject: [Cryopid-devel] Patch available for latest version of CryoPID
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">debc30fc0904120850xa1a7b7j121ee694f9ec296 at mail.gmail.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=&quot;iso-8859-1&quot;
+</I>&gt;<i>
+</I>&gt;<i> I found on the Debian bug tracker that there's a bug for CryoPID and a
+</I>&gt;<i> patch
+</I>&gt;<i> has been attached, I tried it for x86, it seems to work for console
+</I>&gt;<i> applications. Is there a planned future release for CryoPID or is it
+</I>&gt;<i> abandonned? In the current state, it won't compile at all because
+</I>&gt;<i> linux/user.h was moved to sys/user.h and does not contain the same register
+</I>&gt;<i> in the user_regs_struct, seems they moved from short to long integer.
+</I>&gt;<i>
+</I>&gt;<i> Here is the bug report:
+</I>&gt;<i> <A HREF="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=479902">http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=479902</A>
+</I>&gt;<i> -------------- next part --------------
+</I>&gt;<i> An HTML attachment was scrubbed...
+</I>&gt;<i> URL:
+</I>&gt;<i> <A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090412/a473b5e2/attachment-0001.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090412/a473b5e2/attachment-0001.html</A>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 2
+</I>&gt;<i> Date: Mon, 13 Apr 2009 01:51:17 +0800
+</I>&gt;<i> From: Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] Patch available for latest version of
+</I>&gt;<i>        CryoPID
+</I>&gt;<i> To: J?r?me Poulin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jeromepoulin at gmail.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">1239558677.5444.413.camel at localhost.localdomain</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=utf-8
+</I>&gt;<i>
+</I>&gt;<i> On Sun, 2009-04-12 at 11:50 -0400, J?r?me Poulin wrote:
+</I>&gt;<i> &gt; I found on the Debian bug tracker that there's a bug for CryoPID and a
+</I>&gt;<i> &gt; patch has been attached, I tried it for x86, it seems to work for
+</I>&gt;<i> &gt; console applications. Is there a planned future release for CryoPID or
+</I>&gt;<i> &gt; is it abandonned?
+</I>&gt;<i>
+</I>&gt;<i> Its pretty well abandoned, beyond the little bit of love that distros
+</I>&gt;<i> give it.
+</I>&gt;<i>
+</I>&gt;<i> &gt; In the current state, it won't compile at all because linux/user.h was
+</I>&gt;<i> &gt; moved to sys/user.h and does not contain the same register in the
+</I>&gt;<i> &gt; user_regs_struct, seems they moved from short to long integer.
+</I>&gt;<i>
+</I>&gt;<i> Patches, patches, patches. At this point, I'd say fork it, start a repo,
+</I>&gt;<i> tag it with whatever kernel it works with and publish the link here.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> End of CryoPID-devel Digest, Vol 22, Issue 1
+</I>&gt;<i> ********************************************
+</I>&gt;<i>
+</I>
+
+
+-- 
+OpenMigration LLC- Open Source solutions for your business. Visit us at
+<A HREF="http://OpenMigration.net.">http://OpenMigration.net.</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090413/05477a6c/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090413/05477a6c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000088.html">[Cryopid-devel] Patch available for latest version of CryoPID
+</A></li>
+	<LI>Next message: <A HREF="000090.html">[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

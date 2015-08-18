@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Value too large for defined data type problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Value%20too%20large%20for%20defined%20data%20type%20problem&In-Reply-To=%3C772087.90792.qm%40web56211.mail.re3.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000065.html">
+   <LINK REL="Next"  HREF="000067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Value too large for defined data type problem</H1>
+    <B>Amir Hossein Jadidinejad</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Value%20too%20large%20for%20defined%20data%20type%20problem&In-Reply-To=%3C772087.90792.qm%40web56211.mail.re3.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Value too large for defined data type problem">amir.jadidi at yahoo.com
+       </A><BR>
+    <I>Tue Aug 26 15:33:55 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000065.html">[Cryopid-devel]  maps parsing problem, cannot freeze
+</A></li>
+        <LI>Next message: <A HREF="000067.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi All,I'm going to use WikiPrep to parse a huge Wikipedia dump file (17GB). It takes almost 60 hours but I have some power depleted limitaions. So I have to suspend running process and resume it again later.
+Here is my running command:&gt;perl wikiprep.pl -f /mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xmlFollowing is the consol output after using CryoPID to freez my process to disk:------------------------------------------------------------------------------------------------------&gt;./freeze ~/resume 7812
+Map: 08048000-08166000 r-xp 00000000 08:02 1339899    /usr/bin/perl
+[+] Found a syscall location at 0x8056b30
+Map: 08166000-0816b000 rw-p 0011d000 08:02 1339899   
+ /usr/bin/perl
+Map: 0816b000-09827000 rw-p 0816b000 00:00 0          [heap]
+Map: b7948000-b7c4e000 rw-p b7948000 00:00 0          (null)
+[+] Found scribble zone: 0xb7948000
+Map: b7c4e000-b7c6c000 r-xp 00000000 08:02 1107674    /lib/libexpat.so.1.5.2
+Map: b7c6c000-b7c6d000 r--p 0001e000 08:02 1107674    /lib/libexpat.so.1.5.2
+Map: b7c6d000-b7c6f000 rw-p 0001f000 08:02 1107674    /lib/libexpat.so.1.5.2
+Map: b7c6f000-b7c71000 r-xp 00000000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+Map: b7c71000-b7c72000 r--p 00001000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+Map: b7c72000-b7c73000 rw-p 00002000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+Map: b7c73000-b7c76000 r-xp 00000000 08:02 1466203    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+Map: b7c76000-b7c78000 rw-p 00002000 08:02
+ 1466203    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+Map: b7c78000-b7c7e000 r-xp 00000000 08:02 35460      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+Map: b7c7e000-b7c80000 rw-p 00005000 08:02 35460      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+Map: b7c80000-b7c88000 r-xp 00000000 08:02 35411      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+Map: b7c88000-b7c8a000 rw-p 00007000 08:02 35411      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+Map: b7c8a000-b7ca3000 r-xp 00000000 08:02 83131      /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+Map: b7ca3000-b7ca5000 rw-p 00018000 08:02 83131      /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+Map: b7ca5000-b7caf000 r-xp 00000000 08:02 1466224   
+ /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+Map: b7caf000-b7cb1000 rw-p 00009000 08:02 1466224    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+Map: b7cb1000-b7cb5000 r-xp 00000000 08:02 1466220    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+Map: b7cb5000-b7cb7000 rw-p 00003000 08:02 1466220    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+Map: b7cb7000-b7cd8000 rw-p b7cb7000 00:00 0          (null)
+Map: b7cd8000-b7d17000 r--p 00000000 08:02 1450996    /usr/lib/locale/en_US.utf8/LC_CTYPE
+Map: b7d17000-b7df7000 r--p 00000000 08:02 1450997    /usr/lib/locale/en_US.utf8/LC_COLLATE
+Map: b7df7000-b7df8000 rw-p b7df7000 00:00 0          (null)
+Map: b7df8000-b7f25000 r-xp 00000000 08:02 1107597    /lib/libc-2.6.1.so
+Map: b7f25000-b7f26000 r--p 0012c000 08:02 1107597    /lib/libc-2.6.1.so
+Map: b7f26000-b7f28000 rw-p 0012d000 08:02 1107597   
+ /lib/libc-2.6.1.so
+Map: b7f28000-b7f2c000 rw-p b7f28000 00:00 0          (null)
+Map: b7f2c000-b7f3f000 r-xp 00000000 08:02 1107623    /lib/libpthread-2.6.1.so
+Map: b7f3f000-b7f41000 rw-p 00013000 08:02 1107623    /lib/libpthread-2.6.1.so
+Map: b7f41000-b7f43000 rw-p b7f41000 00:00 0          (null)
+Map: b7f43000-b7f45000 r-xp 00000000 08:02 1107631    /lib/libutil-2.6.1.so
+Map: b7f45000-b7f47000 rw-p 00001000 08:02 1107631    /lib/libutil-2.6.1.so
+Map: b7f47000-b7f4f000 r-xp 00000000 08:02 1107601    /lib/libcrypt-2.6.1.so
+Map: b7f4f000-b7f52000 rw-p 00007000 08:02 1107601    /lib/libcrypt-2.6.1.so
+Map: b7f52000-b7f79000 rw-p b7f52000 00:00 0          (null)
+Map: b7f79000-b7f9c000 r-xp 00000000 08:02 1107605    /lib/libm-2.6.1.so
+Map: b7f9c000-b7f9e000 rw-p 00022000 08:02 1107605    /lib/libm-2.6.1.so
+Map: b7f9e000-b7fa0000 r-xp 00000000 08:02 1107603    /lib/libdl-2.6.1.so
+Map: b7fa0000-b7fa2000 rw-p 00001000 08:02
+ 1107603    /lib/libdl-2.6.1.so
+Map: b7fa2000-b7fb5000 r-xp 00000000 08:02 1107608    /lib/libnsl-2.6.1.so
+Map: b7fb5000-b7fb7000 rw-p 00012000 08:02 1107608    /lib/libnsl-2.6.1.so
+Map: b7fb7000-b7fba000 rw-p b7fb7000 00:00 0          (null)
+Map: b7fbb000-b7fbd000 r-xp 00000000 08:02 1466195    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+Map: b7fbd000-b7fbf000 rw-p 00001000 08:02 1466195    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+Map: b7fbf000-b7fc2000 r-xp 00000000 08:02 1466213    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+Map: b7fc2000-b7fc4000 rw-p 00002000 08:02 1466213    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+Map: b7fc4000-b7fc5000 r--p 00000000 08:02 1450978    /usr/lib/locale/en_US.utf8/LC_NUMERIC
+Map: b7fc5000-b7fc6000 r--p 00000000 08:02 1434916    /usr/lib/locale/en_US.utf8/LC_TIME
+Map: b7fc6000-b7fc7000 r--p 00000000 08:02
+ 1434915    /usr/lib/locale/en_US.utf8/LC_MONETARY
+Map: b7fc7000-b7fc8000 r--p 00000000 08:02 1450971    /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+Map: b7fc8000-b7fc9000 r--p 00000000 08:02 1450894    /usr/lib/locale/en_US.utf8/LC_PAPER
+Map: b7fc9000-b7fca000 r--p 00000000 08:02 1450923    /usr/lib/locale/en_US.utf8/LC_NAME
+Map: b7fca000-b7fcb000 r--p 00000000 08:02 1434912    /usr/lib/locale/en_US.utf8/LC_ADDRESS
+Map: b7fcb000-b7fcc000 r--p 00000000 08:02 1450879    /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+Map: b7fcc000-b7fcd000 r--p 00000000 08:02 1450880    /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+Map: b7fcd000-b7fd4000 r--s 00000000 08:02 1434173    /usr/lib/gconv/gconv-modules.cache
+Map: b7fd4000-b7fd5000 r--p 00000000 08:02 1434913    /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION
+Map: b7fd5000-b7fef000 r-xp 00000000 08:02 1107590    /lib/ld-2.6.1.so
+Map: b7fef000-b7ff1000 rw-p 0001a000 08:02 1107590   
+ /lib/ld-2.6.1.so
+Map: bfc03000-bfc19000 rw-p bfc03000 00:00 0          [stack]
+&#160;    Ignoring map - vsyscall page.
+&#160;    Error parsing map: ffffe000-fffff000 r-xp 00000000 00:00 0          [vdso]
+
+[+] Terminal device appears to be 136:0
+Saved console chunk (0).
+Saved console chunk (1).
+Saved console chunk (2).
+Failed to stat(/proc/7812/fd/11): Value too large for defined data type
+Aborted
+------------------------------------------------------------------------------------------------------
+What's the problem?By the way, I have no problems with other programs and examples.I would be glad if anybody can solve my problem or give me a solution.Thanks.----------------------------------- 
+Amir Hossein Jadidinejad 
+Master of Computer Science 
+Islamic Azad University, Iran 
+Home Page: <A HREF="http://jadidi.info">http://jadidi.info</A>  E-Mail :&#160;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A> , 
+&#160;&#160;&#160; &#160;&#160;&#160;&#160;&#160; <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080826/3a76681f/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080826/3a76681f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000065.html">[Cryopid-devel]  maps parsing problem, cannot freeze
+</A></li>
+	<LI>Next message: <A HREF="000067.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

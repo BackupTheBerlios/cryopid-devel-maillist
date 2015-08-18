@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch%20%28on%20mmap_min_addr%20%26c.%29&In-Reply-To=%3C38656.82.85.160.133.1245311175.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000179.html">
+   <LINK REL="Next"  HREF="000186.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch%20%28on%20mmap_min_addr%20%26c.%29&In-Reply-To=%3C38656.82.85.160.133.1245311175.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)">alberti at cs.unibo.it
+       </A><BR>
+    <I>Thu Jun 18 09:46:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000179.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000186.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;&gt;<i> Its probably also worth mentioning that many distros now
+</I>&gt;&gt;<i> set this
+</I>&gt;&gt;<i> (somewhere) in /etc/sysctl.d .. if your going to be working
+</I>&gt;&gt;<i> with
+</I>&gt;&gt;<i> CryoPID, its probably a good idea to comment that out.
+</I>&gt;<i> Better change CryoPID to mmap to address &gt;= 65536
+</I>
+It's planned. But for now, maybe it could be resolved with autotools and a
+.cryopidrc?!
+
+&gt;&gt;<i> This brings to light that we don't handle mmap() failing in
+</I>&gt;&gt;<i> many places,
+</I>&gt;&gt;<i> could just be a matter of wrapping it in cryopid_mmap()
+</I>&gt;&gt;<i> with an
+</I>&gt;&gt;<i> assertion?
+</I>&gt;<i> Good idea. I actually think that result of any syscall should be checked
+</I>&gt;<i> and if it's failed then should be error message and exit.
+</I>
+Syscall results are checked, but often the warn message is poor and useless.
+But again, they are checked.
+Cheers,
+
+Michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000179.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000186.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

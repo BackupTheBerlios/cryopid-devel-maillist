@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel]  Fwd: getpid hack updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%20Fwd%3A%20getpid%20hack%20updated&In-Reply-To=%3C20090818195209.GQ50073%40holmberg.to%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000285.html">
+   <LINK REL="Next"  HREF="000287.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel]  Fwd: getpid hack updated</H1>
+    <B>Greg H</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%20Fwd%3A%20getpid%20hack%20updated&In-Reply-To=%3C20090818195209.GQ50073%40holmberg.to%3E"
+       TITLE="[Cryopid-devel]  Fwd: getpid hack updated">greg+cryopid at holmberg.to
+       </A><BR>
+    <I>Tue Aug 18 21:52:09 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000285.html">[Cryopid-devel] Fwd: getpid hack updated
+</A></li>
+        <LI>Next message: <A HREF="000287.html">[Cryopid-devel] Fwd: getpid hack updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#286">[ date ]</a>
+              <a href="thread.html#286">[ thread ]</a>
+              <a href="subject.html#286">[ subject ]</a>
+              <a href="author.html#286">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Aug 18, 2009 Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt; scritti:
+&gt;<i>
+</I>&gt;<i> i have just updated the getpid hack code. It can be applied to the
+</I>&gt;<i> latest sharesource code.
+</I>&gt;<i>
+</I>&gt;<i> Feedback are _really_ welcome. Please try the patch and send them.
+</I>&gt;<i>
+</I>
+Patch applies cleanly to latest Cryopid sources from cryopid.org.
+
+Build tested on Debian Sid, updated seven days ago. Build is clean using
+gcc version 4.3.2 (Debian 4.3.2-1.1), with the following minor warnings.
+
+&gt;<i> 
+</I>&gt;<i> ...
+</I>&gt;<i> cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd_socket.o cp_w_fd_socket.c
+</I>&gt;<i> cp_w_fd_socket.c: In function &#226;get_tcp_socket&#226;:
+</I>&gt;<i> cp_w_fd_socket.c:64: warning: pointer targets in passing argument 4 of &#226;r_getpeername&#226; differ in signedness
+</I>&gt;<i> cp_w_fd_socket.c: In function &#226;get_socket_info&#226;:
+</I>&gt;<i> cp_w_fd_socket.c:140: warning: value computed is not used
+</I>&gt;<i> ...
+</I>&gt;<i> Linking stub-gzip
+</I>&gt;<i> cc -static -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP -DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip stub_common.o common.c arch/asmfuncs.o cpimage_r.o cp_r_fd.o cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o cp_r_fd_socket.o cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib -nostartfiles ../dietlibc-i386/dietlibc.a -lgcc
+</I>&gt;<i> ../dietlibc-i386/dietlibc.a(stderr.o): In function `__fflush_stderr':
+</I>&gt;<i> stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).
+</I>&gt;<i> ../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+</I>&gt;<i> vsnprintf.c:(.text+0x88): warning: warning: the printf functions add several kilobytes of bloat.
+</I>
+Cryopid freezes testers/mypidis correctly, without errors.
+
+A 'mypidis' process frozen with &quot; -l&quot; starts and runs correctly on the
+build server (Debian Sid) and a CentOS 5.3 web server. The process id
+is updated correctly on both machines (32 bit, 2.6.26-2-686 and 2.6.23.17 i686).
+
+The frozen process starts in a promising way on 32-bit FreeBSD 7 with
+linux_base-fc-4_13, but exits with an error when it cannot find /proc/self/.
+The layout of /proc is different between Linux and FreeBSD.
+
+The frozen process exits with an error on a 64-bit Linux web server with
+2.6.18-53.1.21.el5xen x86_64.
+
+  Error in munmap(stack): Invalid argument
+
+The frozen process segfaults on 32-bit Red Hat 9 (Shrike) with 
+2.6.11.12 i686 i686 i386 and glibc-2.3.2-11.9.
+
+What else should we be testing? :)
+
+-- Greg
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000285.html">[Cryopid-devel] Fwd: getpid hack updated
+</A></li>
+	<LI>Next message: <A HREF="000287.html">[Cryopid-devel] Fwd: getpid hack updated
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#286">[ date ]</a>
+              <a href="thread.html#286">[ thread ]</a>
+              <a href="subject.html#286">[ subject ]</a>
+              <a href="author.html#286">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

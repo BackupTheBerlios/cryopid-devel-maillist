@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Installation help needed
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Installation%20help%20needed&In-Reply-To=%3Cbbb2a6940906171736t39e128a1t63dc6f1e6af5f5be%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000171.html">
+   <LINK REL="Next"  HREF="000173.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Installation help needed</H1>
+    <B>Amjidanutpan Ramanujam</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Installation%20help%20needed&In-Reply-To=%3Cbbb2a6940906171736t39e128a1t63dc6f1e6af5f5be%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Installation help needed">amjith.r at gmail.com
+       </A><BR>
+    <I>Thu Jun 18 02:36:45 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000171.html">[Cryopid-devel] [patch.2] minor changes
+</A></li>
+        <LI>Next message: <A HREF="000173.html">[Cryopid-devel] Installation help needed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#172">[ date ]</a>
+              <a href="thread.html#172">[ thread ]</a>
+              <a href="subject.html#172">[ subject ]</a>
+              <a href="author.html#172">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,    I am trying to compile cryopid 0.5.9.1 on Ubuntu Jaunty. But I get
+the following error:
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amjith at andLinux</A>:~/cryopid-0.5.9.1/src$ make
+make: arch: Command not found
+make: arch: Command not found
+make: arch: Command not found
+make: arch: Command not found
+make: arch: Command not found
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch- arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory `/home/amjith/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o
+cp_r_regs.o cp_r_regs.c
+cp_r_regs.c:1:24: error: linux/user.h: No such file or directory
+cp_r_regs.c: In function 'load_chunk_regs':
+cp_r_regs.c:17: error: dereferencing pointer to incomplete type
+cp_r_regs.c:21: error: 'PAGE_SIZE' undeclared (first use in this function)
+cp_r_regs.c:21: error: (Each undeclared identifier is reported only once
+cp_r_regs.c:21: error: for each function it appears in.)
+cp_r_regs.c:27: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:31: error: dereferencing pointer to incomplete type
+cp_r_regs.c:32: error: dereferencing pointer to incomplete type
+cp_r_regs.c:36: error: dereferencing pointer to incomplete type
+cp_r_regs.c:37: error: dereferencing pointer to incomplete type
+cp_r_regs.c:63: error: dereferencing pointer to incomplete type
+cp_r_regs.c:64: error: dereferencing pointer to incomplete type
+cp_r_regs.c:65: error: dereferencing pointer to incomplete type
+cp_r_regs.c:66: error: dereferencing pointer to incomplete type
+cp_r_regs.c:67: error: dereferencing pointer to incomplete type
+cp_r_regs.c:84: error: dereferencing pointer to incomplete type
+cp_r_regs.c:85: error: dereferencing pointer to incomplete type
+cp_r_regs.c:86: error: dereferencing pointer to incomplete type
+cp_r_regs.c:92: error: dereferencing pointer to incomplete type
+cp_r_regs.c:93: error: dereferencing pointer to incomplete type
+cp_r_regs.c:94: error: dereferencing pointer to incomplete type
+cp_r_regs.c:93: error: invalid lvalue in asm output 0
+cp_r_regs.c: In function 'read_chunk_regs':
+cp_r_regs.c:102: error: storage size of 'user' isn't known
+cp_r_regs.c:104: error: invalid application of 'sizeof' to incomplete type
+'struct user'
+cp_r_regs.c:102: warning: unused variable 'user'
+make[1]: *** [cp_r_regs.o] Error 1
+make[1]: Leaving directory `/home/amjith/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+
+
+I have the linux-sources installed, but I am still missing &lt;linux/user.h&gt;.
+
+What package do I need to get the user.h header file?
+
+Thanks for the help,
+Amjith.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090617/45bfa149/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090617/45bfa149/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000171.html">[Cryopid-devel] [patch.2] minor changes
+</A></li>
+	<LI>Next message: <A HREF="000173.html">[Cryopid-devel] Installation help needed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#172">[ date ]</a>
+              <a href="thread.html#172">[ thread ]</a>
+              <a href="subject.html#172">[ subject ]</a>
+              <a href="author.html#172">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

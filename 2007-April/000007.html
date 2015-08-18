@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid and statifier
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20and%20statifier&In-Reply-To=%3C461120B4.6010906%40largestprime.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid and statifier</H1>
+    <B>Bernard Blackham</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20and%20statifier&In-Reply-To=%3C461120B4.6010906%40largestprime.net%3E"
+       TITLE="[Cryopid-devel] cryopid and statifier">bernard at largestprime.net
+       </A><BR>
+    <I>Mon Apr  2 17:26:44 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+        <LI>Next message: <A HREF="000008.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Valery Reznic wrote:
+&gt;<i> Good day, list.
+</I>&gt;<i> 
+</I>&gt;<i> I am author of ELF statifier
+</I>&gt;<i> (<A HREF="http://statifier.sf.net">http://statifier.sf.net</A>)
+</I>&gt;<i> 
+</I>&gt;<i> Statifier can be considered as special case of
+</I>&gt;<i> CryoPid: it's freeze executable exactly in one point:
+</I>&gt;<i> when all DSO already loaded, but before initilization.
+</I>&gt;<i> 
+</I>&gt;<i> Usually, statifier work good enough, but on system
+</I>&gt;<i> where memory randomization affect stack and/or  kernel
+</I>&gt;<i> DSO location statified executable segfault.
+</I>&gt;<i> 
+</I>&gt;<i> I wonder, how CryoPid deal with this issue.
+</I>
+I forked CryoPID once to do this too, but I haven't maintained it - 
+<A HREF="http://dagobah.ucc.asn.au/things/make-static.html">http://dagobah.ucc.asn.au/things/make-static.html</A> . It's suffering worse 
+from bitrot than CryoPID itself. I'm pretty sure I went to lengths to 
+get it to play nicely with stack randomisation, but it pre-dated the 
+kernel VDSO.
+
+The trick to stack randomisation was just to discard the stack segment 
+from the image, and let the new executable get the stack provided. 
+Though maybe recent changes to ld.so have broken that.
+
+The kernel VDSO should also be ubiquitous enough now that you can just 
+rely on it being there (and not save it). To transport statified 
+binaries between machines with and without the VDSO would take a lot 
+more effort (catching segfaults and doing instruction translation), but 
+it would certainly be possible. More troublesome would be transporting 
+statified binaries from TLS kernels (2.6.*) to non-TLS kernels (2.4.* or 
+xen guests). CryoPID has some code to support this which used to cover 
+everything glibc threw at it, but glibc's evolved further since then and 
+it needs some more instruction translations.
+
+HTH,
+Bernard.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+	<LI>Next message: <A HREF="000008.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Trouble compiling cryopid
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Trouble%20compiling%20cryopid&In-Reply-To=%3Cca16631e0707161031x351ec070qcf967b6c04b187ed%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Trouble compiling cryopid</H1>
+    <B>Alexandre Strube</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Trouble%20compiling%20cryopid&In-Reply-To=%3Cca16631e0707161031x351ec070qcf967b6c04b187ed%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Trouble compiling cryopid">surak at surak.eti.br
+       </A><BR>
+    <I>Mon Jul 16 19:31:18 CEST 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at aogrdini</A> src]$ make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP '
+make[1]: Entering directory `/users/surak/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP  -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+cc -DUSE_TCPCP  -g -Wall -Os -fpic -I. -I..   -c -o cp_r_regs.o cp_r_regs.c
+cp_r_regs.c:1:24: linux/user.h: No such file or directory
+cp_r_regs.c: In function `load_chunk_regs':
+cp_r_regs.c:17: error: dereferencing pointer to incomplete type
+cp_r_regs.c:21: error: `PAGE_SIZE' undeclared (first use in this function)
+cp_r_regs.c:21: error: (Each undeclared identifier is reported only once
+cp_r_regs.c:21: error: for each function it appears in.)
+cp_r_regs.c:27: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:31: error: dereferencing pointer to incomplete type
+cp_r_regs.c:32: error: dereferencing pointer to incomplete type
+cp_r_regs.c:36: error: dereferencing pointer to incomplete type
+cp_r_regs.c:37: error: dereferencing pointer to incomplete type
+cp_r_regs.c:63: error: dereferencing pointer to incomplete type
+cp_r_regs.c:64: error: dereferencing pointer to incomplete type
+cp_r_regs.c:65: error: dereferencing pointer to incomplete type
+cp_r_regs.c:66: error: dereferencing pointer to incomplete type
+cp_r_regs.c:67: error: dereferencing pointer to incomplete type
+cp_r_regs.c:84: error: dereferencing pointer to incomplete type
+cp_r_regs.c:85: error: dereferencing pointer to incomplete type
+cp_r_regs.c:86: error: dereferencing pointer to incomplete type
+cp_r_regs.c:92: error: dereferencing pointer to incomplete type
+cp_r_regs.c:93: error: dereferencing pointer to incomplete type
+cp_r_regs.c:94: error: dereferencing pointer to incomplete type
+cp_r_regs.c: In function `read_chunk_regs':
+cp_r_regs.c:102: error: storage size of 'user' isn't known
+cp_r_regs.c:104: error: invalid application of `sizeof' to incomplete type
+`user'
+cp_r_regs.c:102: warning: unused variable `user'
+make[1]: *** [cp_r_regs.o] Error 1
+make[1]: Leaving directory `/users/surak/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+
+If I copy from /usr/include/sys to linux, the things change
+
+cd linux
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at aogrdini</A> linux]$ cp /usr/include/sys/* .
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at aogrdini</A> linux]$ cd ..
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at aogrdini</A> src]$ make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP '
+make[1]: Entering directory `/users/surak/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP  -g -Wall -Os -fpic -I. -I..   -c -o cp_r_regs.o cp_r_regs.c
+cp_r_regs.c: In function `load_chunk_regs':
+cp_r_regs.c:31: error: structure has no member named `gs'
+cp_r_regs.c:32: error: structure has no member named `gs'
+cp_r_regs.c:93: error: structure has no member named `cs'
+cp_r_regs.c:94: error: structure has no member named `cs'
+cp_r_regs.c: In function `read_chunk_regs':
+cp_r_regs.c:114: error: structure has no member named `ds'
+cp_r_regs.c:114: error: structure has no member named `es'
+cp_r_regs.c:114: error: structure has no member named `fs'
+cp_r_regs.c:114: error: structure has no member named `gs'
+make[1]: *** [cp_r_regs.o] Error 1
+make[1]: Leaving directory `/users/surak/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+
+Can someone help me? It's a fedora 4.
+
+-- 
+[]
+Alexandre Strube
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at ubuntu.com</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20070716/05edb504/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20070716/05edb504/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

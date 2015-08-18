@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.0.1331727786.30536.cryopid-devel%40lists.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.0.1331727786.30536.cryopid-devel%40lists.berlios.de%3E"
+       TITLE="No subject">
+       </A><BR>
+    <I>Wed Mar 14 13:23:05 CET 2012</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>larger file version for mkstemp, mkstemp64.
+As the stdlib.h header we use from the host machine the mkstemp is replaced
+with mkstemp64 if *_FILE_OFFSET_BITS *is defined.
+Some little large file support is only present dietlibc, glibc and uclibc
+have the support for mkstemp64.
+
+Regards,
+Mukti
+
+
+
+
+
+On Wed, Aug 27, 2008 at 9:10 PM, Amir Hossein Jadidinejad &lt;
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&gt; wrote:
+
+&gt;<i> Hi Mukti,
+</I>&gt;<i> Thank you.
+</I>&gt;<i>
+</I>&gt;<i> I did both, but problem is intact. Here is my changes based on this&lt;<A HREF="http://groups.google.com/group/comp.unix.programmer/browse_frm/thread/cb112831d1109097/decafff67ce3a40c?lnk=st&amp;q=&amp;rnum=1&amp;hl=en#decafff67ce3a40c">http://groups.google.com/group/comp.unix.programmer/browse_frm/thread/cb112831d1109097/decafff67ce3a40c?lnk=st&amp;q=&amp;rnum=1&amp;hl=en#decafff67ce3a40c</A>&gt;
+</I>&gt;<i> :
+</I>&gt;<i>
+</I>&gt;<i> 1. Add following argument to CFLAGS on Line12 of Makefile:
+</I>&gt;<i>
+</I>&gt;<i> *           -D_FILE_OFFSET_BITS=64 *
+</I>&gt;<i> Output:
+</I>&gt;<i>
+</I>&gt;<i> ....
+</I>&gt;<i>
+</I>&gt;<i> *stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).
+</I>&gt;<i> ../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+</I>&gt;<i> vsnprintf.c:(.text+0x88): warning: warning: the printf functions add
+</I>&gt;<i> several kilobytes of bloat.
+</I>&gt;<i> cp_r_fd_file.o: In function `restore_fd_file':
+</I>&gt;<i> /root/freez/cryopid-0.5.9.1/src/cp_r_fd_file.c:18: undefined reference to
+</I>&gt;<i> `mkstemp64'
+</I>&gt;<i> collect2: ld returned 1 exit status
+</I>&gt;<i> make: *** [stub-gzip] Error 1
+</I>&gt;<i> rm stub_common.o*
+</I>&gt;<i>
+</I>&gt;<i> ----------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> 2. Change the following command with this:
+</I>&gt;<i>
+</I>&gt;<i> *-D_LARGEFILE64_SOURCE**
+</I>&gt;<i> *
+</I>&gt;<i>
+</I>&gt;<i> Make perfectly but same problem is exist.
+</I>&gt;<i> I'm using VMWare (SUSE is gust OS) and calling my huge file from Share
+</I>&gt;<i> Folder (*/mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xml*): WIKI
+</I>&gt;<i> is a folder in Windows partion. Maybe it?
+</I>&gt;<i> *-----------------------------------
+</I>&gt;<i> **Amir Hossein Jadidinejad
+</I>&gt;<i> Master of Computer Science
+</I>&gt;<i> Islamic Azad University, Iran
+</I>&gt;<i> Home Page: <A HREF="http://jadidi.info">http://jadidi.info</A> &lt;<A HREF="http://www.jadidi.info/">http://www.jadidi.info/</A>&gt;*
+</I>&gt;<i> *E-Mail : <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A> ,
+</I>&gt;<i>           <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>*
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --- On *Wed, 8/27/08, mukti jain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&gt;* wrote:
+</I>&gt;<i>
+</I>&gt;<i> From: mukti jain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] Value too large for defined data type problem
+</I>&gt;<i> To: &quot;Amir Hossein Jadidinejad&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Wednesday, August 27, 2008, 2:57 AM
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Please give a try with  -D_FILE_OFFSET_BITS=64  option too.
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> Mukti
+</I>&gt;<i>
+</I>&gt;<i> On Wed, Aug 27, 2008 at 11:46 AM, mukti jain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Try to add -D_LARGEFILE64_SOURCE option while compiling cryopid.
+</I>&gt;&gt;<i> Since stat may fail on large files if the st_size in stat structure is not
+</I>&gt;&gt;<i> 64 bits.
+</I>&gt;&gt;<i> other people got similar errors as  google groups comp.unix.programmer&lt;<A HREF="http://groups.google.com/group/comp.unix.programmer?hl=en">http://groups.google.com/group/comp.unix.programmer?hl=en</A>&gt;have a discussion thread.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> Mukti
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Tue, Aug 26, 2008 at 7:03 PM, Amir Hossein Jadidinejad &lt;
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Hi All,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I'm going to use WikiPrep &lt;<A HREF="http://sourceforge.net/projects/wikiprep">http://sourceforge.net/projects/wikiprep</A>&gt; to
+</I>&gt;&gt;&gt;<i> parse a huge Wikipedia dump file (17GB). It takes almost 60 hours but I have
+</I>&gt;&gt;&gt;<i> some power depleted limitaions. So I have to suspend running process and
+</I>&gt;&gt;&gt;<i> resume it again later.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Here is my running command:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &gt;*perl wikiprep.pl -f
+</I>&gt;&gt;&gt;<i> /mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xml*
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Following is the consol output after using CryoPID to freez my process to
+</I>&gt;&gt;&gt;<i> disk:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> *
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> *
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &gt;*./freeze ~/resume 7812*
+</I>&gt;&gt;&gt;<i> *Map: 08048000-08166000 r-xp 00000000 08:02 1339899 /usr/bin/perl
+</I>&gt;&gt;&gt;<i> [+] Found a syscall location at 0x8056b30
+</I>&gt;&gt;&gt;<i> Map: 08166000-0816b000 rw-p 0011d000 08:02 1339899 /usr/bin/perl
+</I>&gt;&gt;&gt;<i> Map: 0816b000-09827000 rw-p 0816b000 00:00 0 [heap]
+</I>&gt;&gt;&gt;<i> Map: b7948000-b7c4e000 rw-p b7948000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> [+] Found scribble zone: 0xb7948000
+</I>&gt;&gt;&gt;<i> Map: b7c4e000-b7c6c000 r-xp 00000000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;&gt;<i> Map: b7c6c000-b7c6d000 r--p 0001e000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;&gt;<i> Map: b7c6d000-b7c6f000 rw-p 0001f000 08:02 1107674 /lib/libexpat.so.1.5.2
+</I>&gt;&gt;&gt;<i> Map: b7c6f000-b7c71000 r-xp 00000000 08:02 622045
+</I>&gt;&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;&gt;<i> Map: b7c71000-b7c72000 r--p 00001000 08:02 622045
+</I>&gt;&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;&gt;<i> Map: b7c72000-b7c73000 rw-p 00002000 08:02 622045
+</I>&gt;&gt;&gt;<i> /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so
+</I>&gt;&gt;&gt;<i> Map: b7c73000-b7c76000 r-xp 00000000 08:02 1466203
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+</I>&gt;&gt;&gt;<i> Map: b7c76000-b7c78000 rw-p 00002000 08:02 1466203
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so
+</I>&gt;&gt;&gt;<i> Map: b7c78000-b7c7e000 r-xp 00000000 08:02 35460
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+</I>&gt;&gt;&gt;<i> Map: b7c7e000-b7c80000 rw-p 00005000 08:02 35460
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so
+</I>&gt;&gt;&gt;<i> Map: b7c80000-b7c88000 r-xp 00000000 08:02 35411
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+</I>&gt;&gt;&gt;<i> Map: b7c88000-b7c8a000 rw-p 00007000 08:02 35411
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so
+</I>&gt;&gt;&gt;<i> Map: b7c8a000-b7ca3000 r-xp 00000000 08:02 83131
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+</I>&gt;&gt;&gt;<i> Map: b7ca3000-b7ca5000 rw-p 00018000 08:02 83131
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so
+</I>&gt;&gt;&gt;<i> Map: b7ca5000-b7caf000 r-xp 00000000 08:02 1466224
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+</I>&gt;&gt;&gt;<i> Map: b7caf000-b7cb1000 rw-p 00009000 08:02 1466224
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so
+</I>&gt;&gt;&gt;<i> Map: b7cb1000-b7cb5000 r-xp 00000000 08:02 1466220
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+</I>&gt;&gt;&gt;<i> Map: b7cb5000-b7cb7000 rw-p 00003000 08:02 1466220
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so
+</I>&gt;&gt;&gt;<i> Map: b7cb7000-b7cd8000 rw-p b7cb7000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7cd8000-b7d17000 r--p 00000000 08:02 1450996
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_CTYPE
+</I>&gt;&gt;&gt;<i> Map: b7d17000-b7df7000 r--p 00000000 08:02 1450997
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_COLLATE
+</I>&gt;&gt;&gt;<i> Map: b7df7000-b7df8000 rw-p b7df7000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7df8000-b7f25000 r-xp 00000000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f25000-b7f26000 r--p 0012c000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f26000-b7f28000 rw-p 0012d000 08:02 1107597 /lib/libc-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f28000-b7f2c000 rw-p b7f28000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7f2c000-b7f3f000 r-xp 00000000 08:02 1107623 /lib/
+</I>&gt;&gt;&gt;<i> libpthread-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f3f000-b7f41000 rw-p 00013000 08:02 1107623 /lib/
+</I>&gt;&gt;&gt;<i> libpthread-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f41000-b7f43000 rw-p b7f41000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7f43000-b7f45000 r-xp 00000000 08:02 1107631 /lib/libutil-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f45000-b7f47000 rw-p 00001000 08:02 1107631 /lib/libutil-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f47000-b7f4f000 r-xp 00000000 08:02 1107601 /lib/
+</I>&gt;&gt;&gt;<i> libcrypt-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f4f000-b7f52000 rw-p 00007000 08:02 1107601 /lib/
+</I>&gt;&gt;&gt;<i> libcrypt-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f52000-b7f79000 rw-p b7f52000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7f79000-b7f9c000 r-xp 00000000 08:02 1107605 /lib/libm-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f9c000-b7f9e000 rw-p 00022000 08:02 1107605 /lib/libm-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7f9e000-b7fa0000 r-xp 00000000 08:02 1107603 /lib/libdl-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7fa0000-b7fa2000 rw-p 00001000 08:02 1107603 /lib/libdl-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7fa2000-b7fb5000 r-xp 00000000 08:02 1107608 /lib/libnsl-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7fb5000-b7fb7000 rw-p 00012000 08:02 1107608 /lib/libnsl-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7fb7000-b7fba000 rw-p b7fb7000 00:00 0 (null)
+</I>&gt;&gt;&gt;<i> Map: b7fbb000-b7fbd000 r-xp 00000000 08:02 1466195
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+</I>&gt;&gt;&gt;<i> Map: b7fbd000-b7fbf000 rw-p 00001000 08:02 1466195
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so
+</I>&gt;&gt;&gt;<i> Map: b7fbf000-b7fc2000 r-xp 00000000 08:02 1466213
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+</I>&gt;&gt;&gt;<i> Map: b7fc2000-b7fc4000 rw-p 00002000 08:02 1466213
+</I>&gt;&gt;&gt;<i> /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so
+</I>&gt;&gt;&gt;<i> Map: b7fc4000-b7fc5000 r--p 00000000 08:02 1450978
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_NUMERIC
+</I>&gt;&gt;&gt;<i> Map: b7fc5000-b7fc6000 r--p 00000000 08:02 1434916
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_TIME
+</I>&gt;&gt;&gt;<i> Map: b7fc6000-b7fc7000 r--p 00000000 08:02 1434915
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MONETARY
+</I>&gt;&gt;&gt;<i> Map: b7fc7000-b7fc8000 r--p 00000000 08:02 1450971
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+</I>&gt;&gt;&gt;<i> Map: b7fc8000-b7fc9000 r--p 00000000 08:02 1450894
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_PAPER
+</I>&gt;&gt;&gt;<i> Map: b7fc9000-b7fca000 r--p 00000000 08:02 1450923
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_NAME
+</I>&gt;&gt;&gt;<i> Map: b7fca000-b7fcb000 r--p 00000000 08:02 1434912
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_ADDRESS
+</I>&gt;&gt;&gt;<i> Map: b7fcb000-b7fcc000 r--p 00000000 08:02 1450879
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+</I>&gt;&gt;&gt;<i> Map: b7fcc000-b7fcd000 r--p 00000000 08:02 1450880
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+</I>&gt;&gt;&gt;<i> Map: b7fcd000-b7fd4000 r--s 00000000 08:02 1434173
+</I>&gt;&gt;&gt;<i> /usr/lib/gconv/gconv-modules.cache
+</I>&gt;&gt;&gt;<i> Map: b7fd4000-b7fd5000 r--p 00000000 08:02 1434913
+</I>&gt;&gt;&gt;<i> /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION
+</I>&gt;&gt;&gt;<i> Map: b7fd5000-b7fef000 r-xp 00000000 08:02 1107590 /lib/ld-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: b7fef000-b7ff1000 rw-p 0001a000 08:02 1107590 /lib/ld-2.6.1.so
+</I>&gt;&gt;&gt;<i> Map: bfc03000-bfc19000 rw-p bfc03000 00:00 0 [stack]
+</I>&gt;&gt;&gt;<i>   Ignoring map - vsyscall page.
+</I>&gt;&gt;&gt;<i>   Error parsing map: ffffe000-fffff000 r-xp 00000000 00:00 0 [vdso]
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> [+] Terminal device appears to be 136:0
+</I>&gt;&gt;&gt;<i> Saved console chunk (0).
+</I>&gt;&gt;&gt;<i> Saved console chunk (1).
+</I>&gt;&gt;&gt;<i> Saved console chunk (2).
+</I>&gt;&gt;&gt;<i> Failed to stat(/proc/7812/fd/11): Value too large for defined data type
+</I>&gt;&gt;&gt;<i> Aborted
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> *
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> What's the problem?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> By the way, I have no problems with other programs and examples.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I would be glad if anybody can solve my problem or give me a solution.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Thanks.
+</I>&gt;&gt;&gt;<i> *-----------------------------------
+</I>&gt;&gt;&gt;<i> **Amir Hossein Jadidinejad
+</I>&gt;&gt;&gt;<i> Master of Computer Science
+</I>&gt;&gt;&gt;<i> Islamic Azad University, Iran
+</I>&gt;&gt;&gt;<i> Home Page: <A HREF="http://jadidi.info">http://jadidi.info</A> &lt;<A HREF="http://www.jadidi.info/">http://www.jadidi.info/</A>&gt;*
+</I>&gt;&gt;&gt;<i> *E-Mail : <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A> ,
+</I>&gt;&gt;&gt;<i>           <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>*
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> CryoPID-devel mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;<i>
+</I>
+------=_Part_2590_3734624.1219927814184
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+&lt;div dir=&quot;ltr&quot;&gt;Hi Amir,&lt;br&gt;&lt;br&gt;From the error it seems dietlibc we are using does not have support for larger file version for mkstemp, mkstemp64.&lt;br&gt;As the stdlib.h header we use from the host machine the mkstemp is replaced with mkstemp64 if &lt;i&gt;&lt;b&gt;_FILE_OFFSET_BITS &lt;/b&gt;&lt;/i&gt;is defined.&lt;br&gt;
+Some little large file support is only present dietlibc, glibc and uclibc have the support for mkstemp64.&lt;br&gt;&lt;br&gt;Regards,&lt;br&gt;Mukti&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div class=&quot;gmail_quote&quot;&gt;On Wed, Aug 27, 2008 at 9:10 PM, Amir Hossein Jadidinejad &lt;span dir=&quot;ltr&quot;&gt;&lt;&lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&lt;/a&gt;&gt;&lt;/span&gt; wrote:&lt;br&gt;
+&lt;blockquote class=&quot;gmail_quote&quot; style=&quot;border-left: 1px solid rgb(204, 204, 204); margin: 0pt 0pt 0pt 0.8ex; padding-left: 1ex;&quot;&gt;&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;font-family: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; font-size-adjust: inherit; font-stretch: inherit;&quot; valign=&quot;top&quot;&gt;
+&lt;div&gt;&lt;div&gt;Hi Mukti,&lt;/div&gt;&lt;div&gt;Thank you.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;p&gt;I did both, but problem is intact. Here is my changes based on &lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://groups.google.com/group/comp.unix.programmer/browse_frm/thread/cb112831d1109097/decafff67ce3a40c?lnk=st&amp;amp;q=&amp;amp;rnum=1&amp;amp;hl=en#decafff67ce3a40c">http://groups.google.com/group/comp.unix.programmer/browse_frm/thread/cb112831d1109097/decafff67ce3a40c?lnk=st&amp;q=&amp;rnum=1&amp;hl=en#decafff67ce3a40c</A>&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;1. Add following argument to CFLAGS on Line12 of Makefile:&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;div class=&quot;Ih2E3d&quot;&gt;&lt;i&gt;&lt;b&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-D_FILE_OFFSET_BITS=64 &lt;/b&gt;&lt;/i&gt;&lt;br&gt;&lt;/div&gt;Output:&lt;br&gt;&lt;p&gt;....&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;i&gt;stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).&lt;br&gt;
+../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf&#39;:&lt;br&gt;vsnprintf.c:(.text+0x88): warning: warning: the printf functions add several kilobytes of bloat.&lt;br&gt;cp_r_fd_file.o: In function
+ `restore_fd_file&#39;:&lt;br&gt;/root/freez/cryopid-0.5.9.1/src/cp_r_fd_file.c:18:
+ undefined reference to `mkstemp64&#39;&lt;br&gt;collect2: ld returned 1 exit status&lt;br&gt;make: *** [stub-gzip] Error 1&lt;br&gt;rm stub_common.o&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;----------------------------------------------&lt;/p&gt;&lt;p&gt;2. Change the following command with this:&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;&lt;b&gt;-D_LARGEFILE64_SOURCE&lt;/b&gt;&lt;/i&gt;&lt;b&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Make perfectly but same problem is exist.&lt;/p&gt;I&#39;m using VMWare (SUSE is gust OS) and calling my huge file from Share Folder (&lt;b&gt;/mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xml&lt;/b&gt;): WIKI is a folder in Windows partion. Maybe it?&lt;div class=&quot;Ih2E3d&quot;&gt;
+&lt;br&gt;&lt;div style=&quot;font-family: comic sans ms;&quot;&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;font size=&quot;2&quot;&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;----------------------------------- &lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;Amir Hossein Jadidinejad &lt;br&gt;
+Master of Computer Science &lt;br&gt;Islamic Azad University, Iran &lt;br&gt;Home Page: &lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://www.jadidi.info/">http://www.jadidi.info/</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="http://jadidi.info&lt;/a">http://jadidi.info&lt;/a</A>&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;  &lt;div&gt;&lt;font size=&quot;2&quot;&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;E-Mail :&nbsp;&lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A>&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A>&lt;/span&gt;&lt;/a&gt; , &lt;br&gt;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&lt;/a&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;--- On &lt;b&gt;Wed, 8/27/08, mukti jain &lt;i&gt;&lt;&lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&lt;/a&gt;&gt;&lt;/i&gt;&lt;/b&gt; wrote:&lt;br&gt;
+&lt;blockquote style=&quot;border-left: 2px solid rgb(16, 16, 255); margin-left: 5px; padding-left: 5px;&quot;&gt;From: mukti jain &lt;&lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&lt;/a&gt;&gt;&lt;br&gt;Subject: Re: [Cryopid-devel] Value too large for defined data type problem&lt;br&gt;
+To: &quot;Amir Hossein Jadidinejad&quot; &lt;&lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&lt;/a&gt;&gt;&lt;br&gt;Cc: &lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>&lt;/a&gt;&lt;br&gt;
+Date: Wednesday, August 27, 2008, 2:57 AM&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;div class=&quot;Wj3C7c&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;div dir=&quot;ltr&quot;&gt;Please give a try with&nbsp; -D_FILE_OFFSET_BITS=64&nbsp; option too.&lt;br&gt;&lt;br&gt;Thanks,&lt;br&gt;Mukti&lt;br&gt;&lt;br&gt;&lt;div class=&quot;gmail_quote&quot;&gt;
+On Wed, Aug 27, 2008 at 11:46 AM, mukti jain &lt;span dir=&quot;ltr&quot;&gt;&lt;&lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">muktijn at gmail.com</A>&lt;/a&gt;&gt;&lt;/span&gt; wrote:&lt;br&gt;
+&lt;blockquote class=&quot;gmail_quote&quot; style=&quot;border-left: 1px solid rgb(204, 204, 204); margin: 0pt 0pt 0pt 0.8ex; padding-left: 1ex;&quot;&gt;&lt;div dir=&quot;ltr&quot;&gt;Hi,&lt;br&gt;&lt;br&gt;Try to add -D_LARGEFILE64_SOURCE option while compiling cryopid.&lt;br&gt;
+
+Since stat may fail on large files if the st_size in stat structure is not 64 bits.&lt;br&gt;other people got similar errors as&nbsp; google groups &lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://groups.google.com/group/comp.unix.programmer?hl=en">http://groups.google.com/group/comp.unix.programmer?hl=en</A>&quot; target=&quot;_blank&quot;&gt;comp.unix.programmer&lt;/a&gt; have a discussion thread.&lt;br&gt;
+
+
+&lt;br&gt;Regards,&lt;br&gt;Mukti&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div class=&quot;gmail_quote&quot;&gt;&lt;div&gt;&lt;div&gt;On Tue, Aug 26, 2008 at 7:03 PM, Amir Hossein Jadidinejad &lt;span dir=&quot;ltr&quot;&gt;&lt;&lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&lt;/a&gt;&gt;&lt;/span&gt; wrote:&lt;br&gt;
+
+
+&lt;/div&gt;&lt;/div&gt;&lt;blockquote class=&quot;gmail_quote&quot; style=&quot;border-left: 1px solid rgb(204, 204, 204); margin: 0pt 0pt 0pt 0.8ex; padding-left: 1ex;&quot;&gt;&lt;div&gt;&lt;div&gt;&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;font-family: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; font-size-adjust: inherit; font-stretch: inherit;&quot; valign=&quot;top&quot;&gt;
+
+&lt;p&gt;Hi All,&lt;/p&gt;&lt;p&gt;I&#39;m going to use &lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://sourceforge.net/projects/wikiprep">http://sourceforge.net/projects/wikiprep</A>&quot; target=&quot;_blank&quot;&gt;WikiPrep&lt;/a&gt; to parse a huge Wikipedia dump file (17GB). It takes almost 60 hours but I have some power depleted limitaions. So I have to suspend running process and resume it again later.&lt;br&gt;
+
+
+&lt;/p&gt;&lt;p&gt;Here is my running command:&lt;/p&gt;&lt;p&gt;&gt;&lt;b&gt;perl wikiprep.pl -f /mnt/hgfs/WIKI/enwiki/enwiki-20080714-pages-articles.xml&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Following is the consol output after using CryoPID to freez my process to disk:&lt;/p&gt;&lt;p&gt;
+
+
+&lt;i&gt;------------------------------------------------------------------------------------------------------&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&gt;&lt;b&gt;&lt;i&gt;./freeze ~/resume 7812&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;i&gt;Map: 08048000-08166000 r-xp 00000000 08:02 1339899    /usr/bin/perl&lt;br&gt;
+
+
+[+] Found a syscall location at 0x8056b30&lt;br&gt;Map: 08166000-0816b000 rw-p 0011d000
+ 08:02 1339899   
+ /usr/bin/perl&lt;br&gt;Map: 0816b000-09827000 rw-p 0816b000 00:00 0          [heap]&lt;br&gt;Map: b7948000-b7c4e000 rw-p b7948000 00:00 0          (null)&lt;br&gt;[+] Found scribble zone: 0xb7948000&lt;br&gt;Map: b7c4e000-b7c6c000 r-xp 00000000 08:02 1107674    /lib/libexpat.so.1.5.2&lt;br&gt;
+
+
+Map: b7c6c000-b7c6d000 r--p 0001e000 08:02 1107674    /lib/libexpat.so.1.5.2&lt;br&gt;Map: b7c6d000-b7c6f000 rw-p 0001f000 08:02 1107674    /lib/libexpat.so.1.5.2&lt;br&gt;Map: b7c6f000-b7c71000 r-xp 00000000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so&lt;br&gt;
+
+
+Map: b7c71000-b7c72000 r--p 00001000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so&lt;br&gt;Map: b7c72000-b7c73000 rw-p 00002000 08:02 622045     /root/wikiprep/_Inline/lib/auto/ctemplates_fe14/ctemplates_fe14.so&lt;br&gt;
+
+
+Map: b7c73000-b7c76000 r-xp 00000000 08:02 1466203    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so&lt;br&gt;Map: b7c76000-b7c78000 rw-p 00002000 08:02
+ 1466203    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Digest/MD5/MD5.so&lt;br&gt;Map: b7c78000-b7c7e000 r-xp 00000000 08:02 35460      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so&lt;br&gt;Map: b7c7e000-b7c80000 rw-p 00005000 08:02 35460      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/PerlIO/encoding/encoding.so&lt;br&gt;
+
+
+Map: b7c80000-b7c88000 r-xp 00000000 08:02 35411      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so&lt;br&gt;Map: b7c88000-b7c8a000 rw-p 00007000 08:02 35411      /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Encode/Encode.so&lt;br&gt;
+
+
+Map: b7c8a000-b7ca3000 r-xp 00000000 08:02 83131      /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so&lt;br&gt;Map: b7ca3000-b7ca5000 rw-p 00018000 08:02 83131      /usr/lib/perl5/vendor_perl/5.8.8/i586-linux-thread-multi/auto/XML/Parser/Expat/Expat.so&lt;br&gt;
+
+
+Map: b7ca5000-b7caf000 r-xp 00000000 08:02 1466224   
+ /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so&lt;br&gt;Map: b7caf000-b7cb1000 rw-p 00009000 08:02 1466224    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/List/Util/Util.so&lt;br&gt;Map: b7cb1000-b7cb5000 r-xp 00000000 08:02 1466220    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so&lt;br&gt;
+
+
+Map: b7cb5000-b7cb7000 rw-p 00003000 08:02 1466220    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/IO/IO.so&lt;br&gt;Map: b7cb7000-b7cd8000 rw-p b7cb7000 00:00 0          (null)&lt;br&gt;Map: b7cd8000-b7d17000 r--p 00000000 08:02 1450996    /usr/lib/locale/en_US.utf8/LC_CTYPE&lt;br&gt;
+
+
+Map: b7d17000-b7df7000 r--p 00000000 08:02 1450997    /usr/lib/locale/en_US.utf8/LC_COLLATE&lt;br&gt;Map: b7df7000-b7df8000 rw-p b7df7000 00:00 0          (null)&lt;br&gt;Map: b7df8000-b7f25000 r-xp 00000000 08:02 1107597    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libc-2.6.1.so">http://libc-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libc-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7f25000-b7f26000 r--p 0012c000 08:02 1107597    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libc-2.6.1.so">http://libc-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libc-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f26000-b7f28000 rw-p 0012d000 08:02 1107597   
+ /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libc-2.6.1.so">http://libc-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libc-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f28000-b7f2c000 rw-p b7f28000 00:00 0          (null)&lt;br&gt;Map: b7f2c000-b7f3f000 r-xp 00000000 08:02 1107623    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libpthread-2.6.1.so">http://libpthread-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libpthread-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7f3f000-b7f41000 rw-p 00013000 08:02 1107623    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libpthread-2.6.1.so">http://libpthread-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libpthread-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f41000-b7f43000 rw-p b7f41000 00:00 0          (null)&lt;br&gt;Map: b7f43000-b7f45000 r-xp 00000000 08:02 1107631    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libutil-2.6.1.so">http://libutil-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libutil-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7f45000-b7f47000 rw-p 00001000 08:02 1107631    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libutil-2.6.1.so">http://libutil-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libutil-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f47000-b7f4f000 r-xp 00000000 08:02 1107601    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libcrypt-2.6.1.so">http://libcrypt-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libcrypt-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7f4f000-b7f52000 rw-p 00007000 08:02 1107601    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libcrypt-2.6.1.so">http://libcrypt-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libcrypt-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f52000-b7f79000 rw-p b7f52000 00:00 0          (null)&lt;br&gt;Map: b7f79000-b7f9c000 r-xp 00000000 08:02 1107605    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libm-2.6.1.so">http://libm-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libm-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7f9c000-b7f9e000 rw-p 00022000 08:02 1107605    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libm-2.6.1.so">http://libm-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libm-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7f9e000-b7fa0000 r-xp 00000000 08:02 1107603    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libdl-2.6.1.so">http://libdl-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libdl-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+
+Map: b7fa0000-b7fa2000 rw-p 00001000 08:02
+ 1107603    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libdl-2.6.1.so">http://libdl-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libdl-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7fa2000-b7fb5000 r-xp 00000000 08:02 1107608    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libnsl-2.6.1.so">http://libnsl-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libnsl-2.6.1.so&lt;/a&gt;&lt;br&gt;
+Map: b7fb5000-b7fb7000 rw-p 00012000 08:02 1107608    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://libnsl-2.6.1.so">http://libnsl-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;libnsl-2.6.1.so&lt;/a&gt;&lt;br&gt;
+
+Map: b7fb7000-b7fba000 rw-p b7fb7000 00:00 0          (null)&lt;br&gt;Map: b7fbb000-b7fbd000 r-xp 00000000 08:02 1466195    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so&lt;br&gt;Map: b7fbd000-b7fbf000 rw-p 00001000 08:02 1466195    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Cwd/Cwd.so&lt;br&gt;
+
+
+Map: b7fbf000-b7fc2000 r-xp 00000000 08:02 1466213    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so&lt;br&gt;Map: b7fc2000-b7fc4000 rw-p 00002000 08:02 1466213    /usr/lib/perl5/5.8.8/i586-linux-thread-multi/auto/Fcntl/Fcntl.so&lt;br&gt;
+
+
+Map: b7fc4000-b7fc5000 r--p 00000000 08:02 1450978    /usr/lib/locale/en_US.utf8/LC_NUMERIC&lt;br&gt;Map: b7fc5000-b7fc6000 r--p 00000000 08:02 1434916    /usr/lib/locale/en_US.utf8/LC_TIME&lt;br&gt;Map: b7fc6000-b7fc7000 r--p 00000000 08:02
+ 1434915    /usr/lib/locale/en_US.utf8/LC_MONETARY&lt;br&gt;Map: b7fc7000-b7fc8000 r--p 00000000 08:02 1450971    /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES&lt;br&gt;Map: b7fc8000-b7fc9000 r--p 00000000 08:02 1450894    /usr/lib/locale/en_US.utf8/LC_PAPER&lt;br&gt;
+
+
+Map: b7fc9000-b7fca000 r--p 00000000 08:02 1450923    /usr/lib/locale/en_US.utf8/LC_NAME&lt;br&gt;Map: b7fca000-b7fcb000 r--p 00000000 08:02 1434912    /usr/lib/locale/en_US.utf8/LC_ADDRESS&lt;br&gt;Map: b7fcb000-b7fcc000 r--p 00000000 08:02 1450879    /usr/lib/locale/en_US.utf8/LC_TELEPHONE&lt;br&gt;
+
+
+Map: b7fcc000-b7fcd000 r--p 00000000 08:02 1450880    /usr/lib/locale/en_US.utf8/LC_MEASUREMENT&lt;br&gt;Map: b7fcd000-b7fd4000 r--s 00000000 08:02 1434173    /usr/lib/gconv/gconv-modules.cache&lt;br&gt;Map: b7fd4000-b7fd5000 r--p 00000000 08:02 1434913    /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION&lt;br&gt;
+
+
+Map: b7fd5000-b7fef000 r-xp 00000000 08:02 1107590    /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://ld-2.6.1.so">http://ld-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;ld-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: b7fef000-b7ff1000 rw-p 0001a000 08:02 1107590   
+ /lib/&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://ld-2.6.1.so">http://ld-2.6.1.so</A>&quot; target=&quot;_blank&quot;&gt;ld-2.6.1.so&lt;/a&gt;&lt;br&gt;Map: bfc03000-bfc19000 rw-p bfc03000 00:00 0          [stack]&lt;br&gt;&nbsp;    Ignoring map - vsyscall page.&lt;br&gt;&nbsp;    Error parsing map: ffffe000-fffff000 r-xp 00000000 00:00 0          [vdso]&lt;br&gt;
+
+
+&lt;br&gt;[+] Terminal device appears to be 136:0&lt;br&gt;Saved console chunk (0).&lt;br&gt;Saved console chunk (1).&lt;br&gt;Saved console chunk (2).&lt;br&gt;Failed to stat(/proc/7812/fd/11): Value too large for defined data type&lt;br&gt;Aborted&lt;br&gt;------------------------------------------------------------------------------------------------------&lt;br&gt;
+
+
+&lt;/i&gt;&lt;/p&gt;&lt;p&gt;What&#39;s the problem?&lt;/p&gt;&lt;p&gt;By the way, I have no problems with other programs and examples.&lt;/p&gt;&lt;p&gt;I would be glad if anybody can solve my problem or give me a solution.&lt;/p&gt;&lt;p&gt;Thanks.&lt;/p&gt;&lt;div style=&quot;font-family: comic sans ms;&quot;&gt;
+
+
+&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;font size=&quot;2&quot;&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;----------------------------------- &lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;Amir Hossein
+ Jadidinejad &lt;br&gt;Master of Computer Science &lt;br&gt;Islamic Azad University, Iran &lt;br&gt;Home Page: &lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="http://www.jadidi.info/">http://www.jadidi.info/</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="http://jadidi.info&lt;/a">http://jadidi.info&lt;/a</A>&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;
+  &lt;div&gt;&lt;font size=&quot;2&quot;&gt;&lt;b&gt;&lt;font color=&quot;#3b5738&quot;&gt;E-Mail :&nbsp;&lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A>&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir at jadidi.info</A>&lt;/span&gt;&lt;/a&gt; , &lt;br&gt;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">amir.jadidi at yahoo.com</A>&lt;/a&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br&gt;
+
+
+
+      &lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;_______________________________________________&lt;br&gt;
+CryoPID-devel mailing list&lt;br&gt;
+&lt;a rel=&quot;nofollow&quot; href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>&lt;/a&gt;&lt;br&gt;
+&lt;a rel=&quot;nofollow&quot; href=&quot;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>&quot; target=&quot;_blank&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel&lt;/a">https://lists.berlios.de/mailman/listinfo/cryopid-devel&lt;/a</A>&gt;&lt;br&gt;
+&lt;br&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;br&gt;
+
+
+
+      &lt;/blockquote&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;
+
+------=_Part_2590_3734624.1219927814184--
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#71">[ date ]</a>
+              <a href="thread.html#71">[ thread ]</a>
+              <a href="subject.html#71">[ subject ]</a>
+              <a href="author.html#71">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

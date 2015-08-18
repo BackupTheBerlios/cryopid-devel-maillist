@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Problems compiling cryopid-0.5.9.1-i386 on Ubuntu	11.04
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Problems%20compiling%20cryopid-0.5.9.1-i386%20on%20Ubuntu%0A%0911.04&In-Reply-To=%3Cf61cdc1a8b000afb5cdb58ce0e7294fd.squirrel%40physics.anu.edu.au%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000322.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Problems compiling cryopid-0.5.9.1-i386 on Ubuntu	11.04</H1>
+    <B>Gerard Borg</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Problems%20compiling%20cryopid-0.5.9.1-i386%20on%20Ubuntu%0A%0911.04&In-Reply-To=%3Cf61cdc1a8b000afb5cdb58ce0e7294fd.squirrel%40physics.anu.edu.au%3E"
+       TITLE="[Cryopid-devel] Problems compiling cryopid-0.5.9.1-i386 on Ubuntu	11.04">gerard.borg at anu.edu.au
+       </A><BR>
+    <I>Thu Feb 16 23:48:50 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000322.html">[Cryopid-devel] Problems compiling cryopid-0.5.9.1-i386 on Ubuntu 11.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear sir
+
+I have downloaded cryopid-0.5.9.1-i386 and am trying to compile for Ubuntu
+11.04.
+
+After tar xvzf cryopid-0.5.9.1-i386.tar.gz
+
+I cd to ./cryopid-0.5.9.1/src
+where I do
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% snip %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$ make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory
+`/home/gerard/gerard/BorgCo/MYLINUX/process_freezing/cryopid/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o
+stub.o stub.c
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o
+cp_r_regs.o cp_r_regs.c
+cp_r_regs.c:1:24: fatal error: linux/user.h: No such file or directory
+compilation terminated.
+make[1]: *** [cp_r_regs.o] Error 1
+make[1]: Leaving directory
+`/home/gerard/gerard/BorgCo/MYLINUX/process_freezing/cryopid/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% snip %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I wonder how to solve this problem. user.h is in
+/usr/src/linux-headers-2.6.38-13-generic-pae
+
+uname -srv
+Linux 2.6.38-13-generic-pae #55-Ubuntu SMP Tue Jan 24 15:54:51 UTC 2012
+
+But the are not located in
+/usr/include/linux  or
+/usr/include/asm
+
+Nor is page.h
+
+So I wonder if there is something wrong with the Make file. Or alternatively
+perhaps you could supply a configure script?
+
+Many thanks
+
+Gerard Borg
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000322.html">[Cryopid-devel] Problems compiling cryopid-0.5.9.1-i386 on Ubuntu 11.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

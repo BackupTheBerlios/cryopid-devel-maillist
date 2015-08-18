@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] getpid location
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20getpid%20location&In-Reply-To=%3C175428.70572.qm%40web110311.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000252.html">
+   <LINK REL="Next"  HREF="000254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] getpid location</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20getpid%20location&In-Reply-To=%3C175428.70572.qm%40web110311.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] getpid location">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Mon Jul 13 10:47:31 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000252.html">[Cryopid-devel] getpid location
+</A></li>
+        <LI>Next message: <A HREF="000254.html">[Cryopid-devel] getpid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Fri, 7/10/09, Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt; wrote:
+
+&gt;<i> From: Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;
+</I>&gt;<i> Subject: [Cryopid-devel] getpid location
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Friday, July 10, 2009, 6:08 PM
+</I>&gt;<i> Hi all,
+</I>&gt;<i> I want to share some thoughts to clarify the situation.
+</I>&gt;<i> First of all, thanks guys for your support; in particular
+</I>&gt;<i> to Valery.
+</I>
+Hi, Michele.
+I can't understand what problem do you see with finding __getpid() location via SYMTAB at FREEZE time.
+
+I'll try again to explain a way as I see it.
+1) freeze dump all needed information from the running process to the disk
+2) freeze has access to the /proc/PID/maps, so it can find address
+where libc (and which one) was loaded.
+3) using SYMTAB in the libc, find offset to __getpid() in the libc.
+4) using (2) and (3) find absolute __getpid() address in the process that to be frozen
+
+Now, you say that libc can be loaded at different addresses.
+While in general case it's correct - ld.so will load libc (and other libraries) at random addresses, it's not relevant for frozen
+programs - code at startup of frozen program have to load libraries at exactly same addresses where they were otherwise
+program will crush.
+
+So libs (and other libraries have to be loaded at same addresses, and __getpid() found at freeze time will be correct.
+
+Regards,
+Valery.
+
+
+&gt;<i> 
+</I>&gt;<i> On getpid (better: machine code to execute syscall)
+</I>&gt;<i> location there are
+</I>&gt;<i> some problems. In conclusion: we _can't_ use any SYMTAB
+</I>&gt;<i> section. Why?
+</I>&gt;<i> I think we have 2 scenarios:
+</I>&gt;<i> 1) use symbols internal the freezed image. Problem: not
+</I>&gt;<i> possible,
+</I>&gt;<i> binaries are stripped.
+</I>&gt;<i> 2) use generic /lib/libc installed on the machine. Problem:
+</I>&gt;<i> we can
+</I>&gt;<i> find a getpid location, but that location is a offset and
+</I>&gt;<i> naturally
+</I>&gt;<i> changed everytime libc is mapped in process memory.
+</I>&gt;<i> 
+</I>&gt;<i> So, I think the SYMTAB way is not good.
+</I>&gt;<i> Another idea: we have the process maps, in
+</I>&gt;<i> /proc/&lt;pid&gt;/maps. We can
+</I>&gt;<i> read the content of map /lib/libc and search a signature in
+</I>&gt;<i> some way,
+</I>&gt;<i> right?! I don't think so. Yes it's possible and quite easy
+</I>&gt;<i> (and dirty)
+</I>&gt;<i> but if we found an address (say 0x85f20000) we _can't_ use
+</I>&gt;<i> it at
+</I>&gt;<i> restore-time because the mapping maybe is changed (maybe we
+</I>&gt;<i> have the
+</I>&gt;<i> location at 0x86840000 and call it, it's wrong)
+</I>&gt;<i> 
+</I>&gt;<i> In my opinion the only way is to search the signature at
+</I>&gt;<i> restore time,
+</I>&gt;<i> inside /lib/libc maps (we have it and can recognize it).
+</I>&gt;<i> The reason
+</I>&gt;<i> are obvious.
+</I>&gt;<i> What do you think about that?
+</I>&gt;<i> Cheers,
+</I>&gt;<i> 
+</I>&gt;<i> Michele
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Michele Alberti - CS student @ UniBO
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000252.html">[Cryopid-devel] getpid location
+</A></li>
+	<LI>Next message: <A HREF="000254.html">[Cryopid-devel] getpid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] trouble with redhat install
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3C48302D75.9010909%40mentor.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000038.html">
+   <LINK REL="Next"  HREF="000040.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] trouble with redhat install</H1>
+    <B>Parviz Fariborz</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3C48302D75.9010909%40mentor.com%3E"
+       TITLE="[Cryopid-devel] trouble with redhat install">parviz_fariborz at mentor.com
+       </A><BR>
+    <I>Sun May 18 15:21:57 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000038.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+        <LI>Next message: <A HREF="000040.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Is this tool being maintained? If so, a configure script would make it 
+much easier to build.
+
+-Parviz
+
+Tim Post wrote:
+&gt;<i> On Fri, 2008-05-16 at 15:28 -0400, Jerod Sikorskyj wrote:
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Dear anyone who can help,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I am attempting to compile Cryopid on Redhat with the following uname
+</I>&gt;&gt;<i> info:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Linux bioinfo4.niagara.edu 2.4.21-9.ELsmp #1 SMP Thu Jan 8 17:08:56
+</I>&gt;&gt;<i> EST 2004 i686 i686 i386 GNU/Linux
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> That means that your tool chain (gcc, ld, ar, etc) are also from 2004
+</I>&gt;<i> and will not understand some of the compiler settings.
+</I>&gt;<i>
+</I>&gt;<i> My first inclination would be to simply upgrade your tool chain to a
+</I>&gt;<i> more recent version. 
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> I followed the installation readme, and typed &quot;make&quot; while in the /src
+</I>&gt;&gt;<i> directory.  Here is the error message I got:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at bioinfo4</A> src]# make
+</I>&gt;&gt;<i> ! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+</I>&gt;&gt;<i> make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+</I>&gt;&gt;<i> make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-i386'
+</I>&gt;&gt;<i> cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c
+</I>&gt;&gt;<i> -o stub.o stub.c
+</I>&gt;&gt;<i> cc1: unrecognized option `-fno-stack-protector'
+</I>&gt;&gt;<i> make[1]: *** [stub.o] Error 1
+</I>&gt;&gt;<i> make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-i386'
+</I>&gt;&gt;<i> make: *** [arch] Error 2
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> What version of gcc are you using, exactly? iirc, protection from stack
+</I>&gt;<i> smashing was introduced before the option to turn it off
+</I>&gt;<i> (no-stack-protector).
+</I>&gt;<i>
+</I>&gt;<i> You might be able to just remove that particular flag safely with your
+</I>&gt;<i> compiler. The worst thing that would happen is a nasty glibc error
+</I>&gt;<i> complaining that stack smashing was detected.
+</I>&gt;<i>
+</I>&gt;<i> Note, even with it removed, you might run into other issues due to the
+</I>&gt;<i> age of your tool chain. 
+</I>&gt;<i>
+</I>&gt;<i> HTH
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000038.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+	<LI>Next message: <A HREF="000040.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] minor changes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20minor%20changes&In-Reply-To=%3C4A77E25F.60900%40thalesgroup.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000259.html">
+   <LINK REL="Next"  HREF="000261.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] minor changes</H1>
+    <B>Jay Vaughan</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20minor%20changes&In-Reply-To=%3C4A77E25F.60900%40thalesgroup.com%3E"
+       TITLE="[Cryopid-devel] minor changes">jay.vaughan at thalesgroup.com
+       </A><BR>
+    <I>Tue Aug  4 09:25:19 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000259.html">[Cryopid-devel] minor changes
+</A></li>
+        <LI>Next message: <A HREF="000261.html">[Cryopid-devel] minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> please, refer to this:
+</I>&gt;<i> alberti.web.cs.unibo.it/cryopid.tar.gz
+</I>&gt;<i> it's the all tree! :)
+</I>
+
+Ah, okay .. however I get the same results with this copy of the code as well ..
+
+
+
+Linking stub-gzip
+cc -static -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP 
+-DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip stub_common.o common.c 
+arch/asmfuncs.o cpimage_r.o cp_r_fd.o cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o 
+cp_r_fd_socket.o cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o 
+fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib -nostartfiles 
+../dietlibc-i386/dietlibc.a -lgcc
+../dietlibc-i386/dietlibc.a(stderr.o): In function `__fflush_stderr':
+stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).
+../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+vsnprintf.c:(.text+0x88): warning: warning: the printf functions add several kilobytes of 
+bloat.
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libz.a(inflate.o): In function `inflateSync':
+(.text+0x495): undefined reference to `__stack_chk_fail_local'
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libz.a(inflate.o): In function `.L555':
+(.text+0x1db1): undefined reference to `__stack_chk_fail_local'
+collect2: ld returned 1 exit status
+make: *** [stub-gzip] Error 1
+rm stub_common.o
+
+# lsb_release -ds
+&quot;Red Hat Enterprise Linux Server release 5.3 (Tikanga)&quot;
+
+
+However, on my debian machine, no such problems:
+
+Linking stub-gzip
+cc -static -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP 
+-DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip stub_common.o common.c 
+arch/asmfuncs.o cpimage_r.o cp_r_fd.o cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o 
+cp_r_fd_socket.o cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o 
+fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib -nostartfiles 
+../dietlibc-i386/dietlibc.a -lgcc
+../dietlibc-i386/dietlibc.a(stderr.o): In function `__fflush_stderr':
+stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).
+../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+vsnprintf.c:(.text+0x88): warning: warning: the printf functions add several kilobytes of 
+bloat.
+Generating binary object of stub-gzip
+Linking cryopid
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP -Os -o cryopid 
+common.c arch/asmfuncs.o cpimage_w.o cp_w_fd.o cp_w_fd_console.o cp_w_fd_file.o 
+cp_w_fd_fifo.o cp_w_fd_socket.o cp_w_misc.o cp_w_sighand.o cp_w_vma.o cp_w_header.o 
+arch/arch_w_objs.o list.o tcpcp_w.o freeze.o stub-image-gzip.o writer_gzip.c -lz
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP fork2_helper.c -o 
+cryopid-helper
+rm stub-gzip stub_common.o
+
+# lsb_release -ds
+Debian GNU/Linux 4.0 (etch)
+
+
+Testing it now ..
+
+
+-- 
+;
+--
+Jay Vaughan
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000259.html">[Cryopid-devel] minor changes
+</A></li>
+	<LI>Next message: <A HREF="000261.html">[Cryopid-devel] minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

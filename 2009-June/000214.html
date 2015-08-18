@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] On cryopidrc file
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20On%20cryopidrc%20file&In-Reply-To=%3C1245720422.5483.51.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000211.html">
+   <LINK REL="Next"  HREF="000221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] On cryopidrc file</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20On%20cryopidrc%20file&In-Reply-To=%3C1245720422.5483.51.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] On cryopidrc file">echo at echoreply.us
+       </A><BR>
+    <I>Tue Jun 23 03:27:02 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000211.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+        <LI>Next message: <A HREF="000221.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 2009-06-22 at 10:09 -0700, Valery Reznic wrote:
+
+&gt;<i> If you think that I against possibility override compiled in default start 
+</I>&gt;<i> address, then yes you misunderstood me.
+</I>
+I was not sure what you meant :) That's fine. We can have 3 settings for
+this which are meaningful:
+
+1 - A fixed address
+2 - &quot;auto&quot; , meaning just look up the value in /proc
+3 - NULL (or unset) , meaning use the default address value passed at
+compile time
+
+&gt;<i> And by the way, if we are on .rc file...
+</I>&gt;<i> I think it's better to name it .cryopidrc and rename freeze to cryopid.
+</I>
+Yes. fork2helper should also become cryopid-helper.
+
+&gt;<i> And use not only $HOME/.cryopidrc but also something like
+</I>&gt;<i> /etc/criopidrc too.
+</I>
+Yes, I was planning to do it similar to other tools.
+
+I have several patches which I'm now re-working to go in against
+Michele's latest patch set, the largest of which is autoconf. We have
+some out of town guests staying for the next two weeks, so my work on
+CryoPID is being done late night.
+
+I'll be on IRC this evening by 10:00 PM my time (GMT +8).
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000211.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+	<LI>Next message: <A HREF="000221.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C472238.77325.qm%40web110310.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000213.html">
+   <LINK REL="Next"  HREF="000224.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C472238.77325.qm%40web110310.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Thu Jun 25 14:59:03 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000213.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+        <LI>Next message: <A HREF="000224.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Mon, 6/22/09, John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt; wrote:
+
+&gt;<i> From: John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] Older snapshots (almost) work!
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Monday, June 22, 2009, 11:49 PM
+</I>&gt;<i> 
+</I>&gt;<i> Hi Valery,
+</I>&gt;<i> 
+</I>&gt;<i> | Strace output is strange. I can't understand how it's
+</I>&gt;<i> able to work at all :)
+</I>&gt;<i> |
+</I>&gt;<i> | Could you please send freezed program to play with ?
+</I>&gt;<i> 
+</I>&gt;<i> You can grab it from
+</I>&gt;<i> 
+</I>&gt;<i>   <A HREF="http://www.cl.cam.ac.uk/~jrh13/hol-light/Linux/hol.offset">http://www.cl.cam.ac.uk/~jrh13/hol-light/Linux/hol.offset</A>
+</I>Interesting. on my Fedora 8 x86_64 bit it failed with
+Error in munmap(stack): Invalid argument
+
+Here is strace:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery at Fedora8</A> ~]$ strace   ~/MyDownloads/hol.offset 
+execve(&quot;/home/valery/MyDownloads/hol.offset&quot;, [&quot;/home/valery/MyDownloads/hol.off&quot;...], [/* 43 vars */]) = 0
+[ Process PID=1076 runs in 32 bit mode. ]
+mmap2(0x10000, 57344, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x10000
+mmap2(0x1e000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 120380, 0) = 0x1e000
+old_mmap(0x1000000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1000000
+old_mmap(0x1001000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1001000
+old_mmap(0x1002000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1002000
+old_mmap(0x1003000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1003000
+old_mmap(0x1004000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1004000
+old_mmap(0x1005000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1005000
+old_mmap(0x1006000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1006000
+old_mmap(0x1007000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1007000
+old_mmap(0x1008000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1008000
+old_mmap(0x1009000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1009000
+old_mmap(0x100a000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100a000
+old_mmap(0x100b000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100b000
+old_mmap(0x100c000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100c000
+old_mmap(0x100d000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100d000
+old_mmap(0x100e000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100e000
+old_mmap(0x100f000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100f000
+old_mmap(0x1010000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1010000
+old_mmap(0x1011000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1011000
+old_mmap(0x1012000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1012000
+old_mmap(0x1013000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1013000
+old_mmap(0x1014000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1014000
+old_mmap(0x1015000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1015000
+old_mmap(0x1016000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1016000
+old_mmap(0x1017000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1017000
+old_mmap(0x1018000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1018000
+old_mmap(0x1019000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1019000
+old_mmap(0x101a000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101a000
+old_mmap(0x101b000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101b000
+old_mmap(0x101c000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101c000
+old_mmap(0x101d000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101d000
+old_mmap(0x101e000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101e000
+old_mmap(0x101f000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101f000
+old_mmap(0x1020000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1020000
+old_mmap(0x1021000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1021000
+old_mmap(0x1022000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1022000
+old_mmap(0x1023000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1023000
+old_mmap(0x1024000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1024000
+old_mmap(0x1025000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1025000
+old_mmap(0x1026000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1026000
+old_mmap(0x1027000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1027000
+old_mmap(0x1028000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1028000
+old_mmap(0x1029000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1029000
+old_mmap(0x102a000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102a000
+old_mmap(0x102b000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102b000
+old_mmap(0x102c000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102c000
+old_mmap(0x102d000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102d000
+open(&quot;/proc/self/exe&quot;, O_RDONLY)        = 3
+old_mmap(0x7ff000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) = 0x7ff000
+munmap(0x2000000, 4261412864)           = -1 EINVAL (Invalid argument)
+write(2, &quot;Error in munmap(stack): Invalid &quot;..., 41Error in munmap(stack): Invalid argument
+) = 41
+_exit(1)                                = ?
+
+Valery
+
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000213.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+	<LI>Next message: <A HREF="000224.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] kill flag and minor changes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20kill%20flag%20and%20minor%20changes&In-Reply-To=%3C58082.82.85.161.18.1250013143.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000278.html">
+   <LINK REL="Next"  HREF="000276.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] kill flag and minor changes</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20kill%20flag%20and%20minor%20changes&In-Reply-To=%3C58082.82.85.161.18.1250013143.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] kill flag and minor changes">alberti at cs.unibo.it
+       </A><BR>
+    <I>Tue Aug 11 19:52:23 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000278.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+        <LI>Next message: <A HREF="000276.html">[Cryopid-devel] Commit hooks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> I'm about 60% through introducing autoconf, its actually turned out to
+</I>&gt;<i> be a lot more work than I anticipated.
+</I>
+It's great, the project needs it.
+
+&gt;<i> There are about a dozen member
+</I>&gt;<i> changes in various exposed kernel structures from 2.4 to current
+</I>&gt;<i> linux-stable, so its a lot of conditional code. Its going to be a while
+</I>&gt;<i> before I'm comfortable pushing that.
+</I>
+ok.
+
+&gt;<i>
+</I>&gt;<i> I think we'll end up having to make a separate 2.4 branch and back port
+</I>&gt;<i> stuff that is desirable from the main development branch. This is going
+</I>&gt;<i> to limit the amount of ugly conditional code as well as ease the
+</I>&gt;<i> headache of dealing with quirks known in old versions of gcc.
+</I>
+I'm absolutely agree. Now I'm developing only x86-2.6 branch and not so
+worry breaking 2.4 version, sorry :)
+
+&gt;<i>
+</I>&gt;<i> What I'd like to do (now) is implement the dotfile for default
+</I>&gt;<i> configuration options and make the output of freeze less noisy by
+</I>&gt;<i> default. Then, add some run time checks (such as VDSO randomization)
+</I>&gt;<i> which can warn the user that the process may not unfreeze as expected.
+</I>
+yes, I can help.
+
+&gt;<i>
+</I>&gt;<i> And, of course the libc upgrade.
+</I>
+Here there are some problems. I subscribed in dietlibc ml and they said
+that, right now, cryopid don't use dietlibc properly. They said that we
+are using glibc headers and link against diet and it's not right.
+We must switch all stub-common.c &amp; etc. to dietlibc headers.
+
+&gt;<i>
+</I>&gt;<i> After that, we can probably see about getting Cryopid back into debian
+</I>&gt;<i> proper. I think between all who have been participating, enough brain
+</I>&gt;<i> power exists to handle any new bugs rather quickly.
+</I>
+I hope so. ;)
+Ciao,
+
+michele
+
+-- 
+Michele Alberti
+Linux Registered User #467894
+<A HREF="http://alberti.web.cs.unibo.it">http://alberti.web.cs.unibo.it</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000278.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+	<LI>Next message: <A HREF="000276.html">[Cryopid-devel] Commit hooks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

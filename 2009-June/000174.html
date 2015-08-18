@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1245303773.7622.50.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000169.html">
+   <LINK REL="Next"  HREF="000168.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1245303773.7622.50.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] cryopid patch">echo at echoreply.us
+       </A><BR>
+    <I>Thu Jun 18 07:42:53 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000169.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000168.html">[Cryopid-devel] query about cryopid
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 2009-06-16 at 09:28 -0700, John R Harrison wrote:
+&gt;<i> Hi Michele,
+</I>&gt;<i> 
+</I>&gt;<i> | does anyone try my lastest patch?
+</I>&gt;<i> | On my Debian it's ok, in Ubuntu or Fedora?
+</I>&gt;<i> 
+</I>&gt;<i> I tried it on Ubuntu Hardy and Jaunty. On Hardy it compiled without
+</I>&gt;<i> a hitch, though the restarted binaries still segfault. On Jaunty it
+</I>&gt;<i> still didn't quite compile, though it got much further than it did
+</I>&gt;<i> without the patch. The problem actually seems to be in dietlibc, with
+</I>&gt;<i> some references to missing functions &quot;__fprintf_chk&quot; etc. See the
+</I>&gt;<i> attached log. Does anyone recognize this problem?
+</I>
+I am looking into this now, I think there are two problems, but only one
+of them is currently annoying to us:
+
+ - -nostdlib in later versions of binutils seems to turn on some other
+overrides, almost as if its expecting -nostdinc. I'm looking into this
+now .. its a rather dark corner to explore. We're not hitting this
+_yet_, but I've been reading about many problems.
+
+ - As Michele said, porting to the latest version of dietlibc should
+ensure we don't depend on depreciated / missing stubs from the host.
+
+What I might do is just provide a libc_stubs-${ARCH}.h that can serve as
+a collector of various bits that demonstrate themselves as being
+problematic, if just updating dietlibc doesn't fix it across the board.
+I'd rather not, that would be a maintainer nightmare, but its a plan-b. 
+
+I hope to push (at least) the update to dietlibc to the mercurial
+repository by tonight at some point (its 1:35 PM my time now). It seems
+to be holding everyone up.
+
+NB: The HG repository is identical to the latest release tarball, or
+should be. That's something else I'll make sure of, as I assumed the old
+svn tip (minus the last commit) == the last release tarball.
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000169.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000168.html">[Cryopid-devel] query about cryopid
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#174">[ date ]</a>
+              <a href="thread.html#174">[ thread ]</a>
+              <a href="subject.html#174">[ subject ]</a>
+              <a href="author.html#174">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C4A014F30.7020207%40thalesgroup.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000129.html">
+   <LINK REL="Next"  HREF="000134.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Jay Vaughan</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C4A014F30.7020207%40thalesgroup.com%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">jay.vaughan at thalesgroup.com
+       </A><BR>
+    <I>Wed May  6 10:49:52 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000129.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+        <LI>Next message: <A HREF="000134.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> #ifdef COMPILING_STUB
+</I>&gt;<i> #define declare_writer(s, x, desc) struct stream_ops *stream_ops = &amp;x
+</I>&gt;<i> #else
+</I>&gt;<i> #define declare_writer(s, x, desc) \
+</I>&gt;<i>     extern char *_binary_stub_##s##_start; \
+</I>&gt;<i>     extern int _binary_stub_##s##_size; \
+</I>&gt;<i>     struct stream_ops *stream_ops = &x; \
+</I>&gt;<i>     char *stub_start = (char*)&amp;_binary_stub_##s##_start; \
+</I>&gt;<i>     long stub_size = (long)&amp;_binary_stub_##s##_size
+</I>&gt;<i> 
+</I>&gt;<i> #endif
+</I>&gt;<i> 
+</I>&gt;<i> *3* question: can someone explain this? (_binary_stub_##s##_start ?)
+</I>&gt;<i> 
+</I>
+I can help with this.. so, to truly grok this macro globbing phenomenon, please read the
+following closely:
+
+file: /tmp/t.c  (Hacky hacky..)
+---------------------------------------------------------------
+#define declare_writer(s, x, desc) \
+extern char *_binary_stub_##s##_start; \
+extern int _binary_stub_##s##_size; \
+struct stream_ops *stream_ops = &x; \
+char *stub_start = (char*)&amp;_binary_stub_##s##_start; \
+long stub_size = (long)&amp;_binary_stub_##s##_size
+
+int main()
+{
+int aaa, bbb, ccc;
+
+declare_writer(aaa, bbb, ccc);
+
+         return 0;
+}
+
+---------------------------------------------------------------
+NOTE: (int aaa,bbb,ccc) &lt;-- not correct, just there to expand the macro ..
+---------------------------------------------------------------
+
+cmd: gcc -E -C /tmp/t.c -o /tmp/t.a
+
+NOTE: This will not compile the code, just run it through the preprocessor, expanding the
+macro's, and output the resulting expanded code to /tmp/t.a
+---------------------------------------------------------------
+
+file: /tmp/t.a
+
+# 1 &quot;/tmp/t.c&quot;
+# 1 &quot;&lt;built-in&gt;&quot;
+# 1 &quot;&lt;command line&gt;&quot;
+# 1 &quot;/tmp/t.c&quot;
+int main()
+{
+int aaa, bbb, ccc;
+
+extern char *_binary_stub_aaa_start; extern int _binary_stub_aaa_size; struct stream_ops
+*stream_ops = &bbb; char *stub_start = (char*)&amp;_binary_stub_aaa_start; long stub_size =
+(long)&amp;_binary_stub_aaa_size;
+
+  return 0;
+}
+---------------------------------------------------------------
+
+So you can see this macro glomming is used to create custom writer declarations for
+various parts of the binary stub ..
+
+
+
+-- 
+;
+--
+Jay Vaughan
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000129.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+	<LI>Next message: <A HREF="000134.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

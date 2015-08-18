@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C205578.21600.qm%40web110304.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000184.html">
+   <LINK REL="Next"  HREF="000189.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C205578.21600.qm%40web110304.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid patch">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Thu Jun 18 10:21:02 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000184.html">[Cryopid-devel] sparc / alpha support
+</A></li>
+        <LI>Next message: <A HREF="000189.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Thu, 6/18/09, Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt; wrote:
+
+&gt;<i> From: Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] cryopid patch
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: &quot;Michele Alberti&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;, &quot;John R Harrison&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;, <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Thursday, June 18, 2009, 11:03 AM
+</I>&gt;<i> On Thu, 2009-06-18 at 00:10 -0700,
+</I>&gt;<i> Valery Reznic wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Better change CryoPID to mmap to address &gt;= 65536
+</I>&gt;<i> 
+</I>&gt;<i> Not so easy, we would have to save the lowest address as
+</I>&gt;<i> part of the
+</I>&gt;<i> frozen PID, so that when un-freezing, it could tell the
+</I>&gt;<i> user why it
+</I>&gt;<i> won't work. I.e. on system A (where a pid was frozen) its
+</I>&gt;<i> 65536, on B
+</I>&gt;<i> its 0, or vice versa.
+</I>&gt;<i> 
+</I>&gt;<i> A great many of cryopid users work with much older kernels
+</I>&gt;<i> and distros.
+</I>&gt;<i> 
+</I>&gt;<i> I am not opposed to making the starting address floating,
+</I>&gt;<i> but sanity
+</I>&gt;<i> when un-freezing is important .. it should 'just work',
+</I>&gt;<i> otherwise we're
+</I>&gt;<i> back in the same place of Debian dealing with our quirks. 
+</I>I afraid I am not follow.
+
+On old system (with default configuration) the start address isn't a problem
+On the new system (with default configuration) such as last ubuntu and Fedora 11 start address should be &gt;= 0x10000.
+
+Let's always use this value. With it frozen process can be un-freeze on both new and old systems alike,
+
+Valery
+&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000184.html">[Cryopid-devel] sparc / alpha support
+</A></li>
+	<LI>Next message: <A HREF="000189.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

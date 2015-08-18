@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid compile error on rhel5 x86_64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20compile%20error%20on%20rhel5%20x86_64&In-Reply-To=%3C43d34ebe0812031629m67b1f414tc5278cfd61033ba0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000073.html">
+   <LINK REL="Next"  HREF="000075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid compile error on rhel5 x86_64</H1>
+    <B>Alex</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20compile%20error%20on%20rhel5%20x86_64&In-Reply-To=%3C43d34ebe0812031629m67b1f414tc5278cfd61033ba0%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] cryopid compile error on rhel5 x86_64">alexthegamer at gmail.com
+       </A><BR>
+    <I>Thu Dec  4 01:29:46 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000073.html">[Cryopid-devel] cryopid compile error on rhel5 x86_64
+</A></li>
+        <LI>Next message: <A HREF="000075.html">[Cryopid-devel] No UDP socket support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've seen this issue myself - it comes from the fact that PAGE_SIZE is no
+longer defined by the kernel, and even if you do go fix it, CryoPid crashes
+on start (I tried Fedora 9 and CentOS)
+
+On Wed, Dec 3, 2008 at 7:26 PM, Pradnesh Patil &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">blueefire at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i>  I got this error when I tried to compile cryopid on rhel5 x86_64 machine.
+</I>&gt;<i>
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at pilotlnx2</A> src]# make
+</I>&gt;<i> ! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+</I>&gt;<i> make -C arch 'CFLAGS+= -fno-stack-protector'
+</I>&gt;<i> make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-x86_64'
+</I>&gt;<i> cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or &#226;...&#226; before
+</I>&gt;<i> &#226;arch_prctl&#226;
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or &#226;...&#226; before &#226;code&#226;
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or &#226;...&#226; before &#226;addr&#226;
+</I>&gt;<i> stub.c:19: warning: data definition has no type or storage class
+</I>&gt;<i> stub.c:19: warning: type defaults to &#226;int&#226; in declaration of &#226;_syscall2&#226;
+</I>&gt;<i> stub.c: In function &#226;set_fs&#226;:
+</I>&gt;<i> stub.c:37: error: &#226;PAGE_SIZE&#226; undeclared (first use in this function)
+</I>&gt;<i> stub.c:37: error: (Each undeclared identifier is reported only once
+</I>&gt;<i> stub.c:37: error: for each function it appears in.)
+</I>&gt;<i> make[1]: *** [stub.o] Error 1
+</I>&gt;<i> make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-x86_64'
+</I>&gt;<i> make: *** [arch] Error 2
+</I>&gt;<i> [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at pilotlnx2</A> src]# uname -a
+</I>&gt;<i> Linux pilotlnx2 2.6.18-91.el5 #1 SMP Tue Apr 22 17:43:57 EDT 2008 x86_64
+</I>&gt;<i> x86_64 x86_64 GNU/Linux
+</I>&gt;<i>
+</I>&gt;<i>                           first I thought, I got garbage in stub.c file
+</I>&gt;<i> during download...so opened it...but it's clean.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> thanks,
+</I>&gt;<i>
+</I>&gt;<i> Pradnesh
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20081203/b8d50466/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20081203/b8d50466/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000073.html">[Cryopid-devel] cryopid compile error on rhel5 x86_64
+</A></li>
+	<LI>Next message: <A HREF="000075.html">[Cryopid-devel] No UDP socket support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

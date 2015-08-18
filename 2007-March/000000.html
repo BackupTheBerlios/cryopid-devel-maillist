@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Can not compile cryopid on Ubuntu 7.04
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Can%20not%20compile%20cryopid%20on%20Ubuntu%207.04&In-Reply-To=%3Cad422ae80703171719h2357501mfcb7b819ffdfef94%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Can not compile cryopid on Ubuntu 7.04</H1>
+    <B>Foeder Sumkin</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Can%20not%20compile%20cryopid%20on%20Ubuntu%207.04&In-Reply-To=%3Cad422ae80703171719h2357501mfcb7b819ffdfef94%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Can not compile cryopid on Ubuntu 7.04">alendit at googlemail.com
+       </A><BR>
+    <I>Sun Mar 18 01:19:23 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000006.html">[Cryopid-devel] Can not compile cryopid on Ubuntu 7.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+i tried to compile x86-64 version von cryopid 0.5.9.1 on my Ubuntu box.
+With gcc-4.1.2 i've got:
+
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+make -C arch 'CFLAGS+= -fno-stack-protector'
+make[1]: Entering directory `/home/alt/Desktop/cryopid-0.5.9.1/src/arch-x86_64'
+gcc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o  stub.o stub.c
+stub.c:19: error: expected declaration specifiers or '...' before 'arch_prctl'
+stub.c:19: error: expected declaration specifiers or '...' before 'code'
+stub.c:19: error: expected declaration specifiers or '...' before 'addr'
+stub.c:19: warning: data definition has no type or storage class
+stub.c:19: warning: type defaults to 'int' in declaration of '_syscall2'
+make[1]: *** [stub.o] Error 1
+make[1]: Leaving directory `/home/alt/Desktop/cryopid- 0.5.9.1/src/arch-x86_64'
+make: *** [arch] Error 2
+
+With CC=gcc-3.4 make:
+
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+ make -C arch 'CFLAGS+= '
+make[1]: Entering directory `/home/alt/Desktop/cryopid-0.5.9.1/src/arch-x86_64'
+gcc-3.4  -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+stub.c:19: error: syntax error before &quot;arch_prctl&quot;
+stub.c:19: warning: type defaults to `int' in declaration of `_syscall2'
+stub.c:19: warning: data definition has no type or storage class
+make[1]: *** [ stub.o] Error 1
+make[1]: Leaving directory `/home/alt/Desktop/cryopid-0.5.9.1/src/arch-x86_64'
+make: *** [arch] Error 2
+
+I found some bug reports with problems with _syscall2 and gcc on
+Ubuntu, but i didn't see any fixes.
+
+I would be very thankful for help
+
+Dimitri Vorona
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000006.html">[Cryopid-devel] Can not compile cryopid on Ubuntu 7.04
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

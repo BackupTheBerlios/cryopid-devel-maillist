@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid compile error on rhel5 x86_64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20compile%20error%20on%20rhel5%20x86_64&In-Reply-To=%3Caf2d94b20812031626w5c2f5f87p8dbcda1777f7c8fe%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid compile error on rhel5 x86_64</H1>
+    <B>Pradnesh Patil</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20compile%20error%20on%20rhel5%20x86_64&In-Reply-To=%3Caf2d94b20812031626w5c2f5f87p8dbcda1777f7c8fe%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] cryopid compile error on rhel5 x86_64">blueefire at gmail.com
+       </A><BR>
+    <I>Thu Dec  4 01:26:20 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000074.html">[Cryopid-devel] cryopid compile error on rhel5 x86_64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#73">[ date ]</a>
+              <a href="thread.html#73">[ thread ]</a>
+              <a href="subject.html#73">[ subject ]</a>
+              <a href="author.html#73">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+ I got this error when I tried to compile cryopid on rhel5 x86_64 machine.
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at pilotlnx2</A> src]# make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+make -C arch 'CFLAGS+= -fno-stack-protector'
+make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-x86_64'
+cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+stub.c:19: error: expected declaration specifiers or &#226;...&#226; before
+&#226;arch_prctl&#226;
+stub.c:19: error: expected declaration specifiers or &#226;...&#226; before &#226;code&#226;
+stub.c:19: error: expected declaration specifiers or &#226;...&#226; before &#226;addr&#226;
+stub.c:19: warning: data definition has no type or storage class
+stub.c:19: warning: type defaults to &#226;int&#226; in declaration of &#226;_syscall2&#226;
+stub.c: In function &#226;set_fs&#226;:
+stub.c:37: error: &#226;PAGE_SIZE&#226; undeclared (first use in this function)
+stub.c:37: error: (Each undeclared identifier is reported only once
+stub.c:37: error: for each function it appears in.)
+make[1]: *** [stub.o] Error 1
+make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-x86_64'
+make: *** [arch] Error 2
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at pilotlnx2</A> src]# uname -a
+Linux pilotlnx2 2.6.18-91.el5 #1 SMP Tue Apr 22 17:43:57 EDT 2008 x86_64
+x86_64 x86_64 GNU/Linux
+
+                          first I thought, I got garbage in stub.c file
+during download...so opened it...but it's clean.
+
+
+thanks,
+
+Pradnesh
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20081203/e30c0cae/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20081203/e30c0cae/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000074.html">[Cryopid-devel] cryopid compile error on rhel5 x86_64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#73">[ date ]</a>
+              <a href="thread.html#73">[ thread ]</a>
+              <a href="subject.html#73">[ subject ]</a>
+              <a href="author.html#73">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

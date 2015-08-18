@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] minor changes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20minor%20changes&In-Reply-To=%3C4A7961B3.8090701%40thalesgroup.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000268.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] minor changes</H1>
+    <B>Jay Vaughan</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20minor%20changes&In-Reply-To=%3C4A7961B3.8090701%40thalesgroup.com%3E"
+       TITLE="[Cryopid-devel] minor changes">jay.vaughan at thalesgroup.com
+       </A><BR>
+    <I>Wed Aug  5 12:40:51 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000265.html">[Cryopid-devel] minor changes
+</A></li>
+        <LI>Next message: <A HREF="000268.html">[Cryopid-devel] minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> 
+</I>&gt;<i> You can try (as root)
+</I>
+I can't test this on my RedHat machine, where I don't have root rights, so I try it on my 
+Debian box in the lab ..
+
+
+&gt;<i> echo 0 &gt; /proc/sys/kernel/randomize_va_space 
+</I>&gt;<i> Then you can try freeze and run frozen executable.
+</I>
+
+.. and it still segfaults.  My test procedure is like this:
+
+1. Build cryopid fresh from source.
+2. Start up 'top', press Ctrl-Z to put in background.
+3. Get the pid of 'top' (ps ax | grep top)
+4. ./cryopid -l top.freeze $pid
+5. fg, put top in foreground, quit top with 'q'
+6. ./top.freeze
+7. top is 'backgrounded'
+8. fg - put cryo'ed top in foregroud Bang!  segfault
+
+
+Maybe the fd's aren't being properly restored or something else .. ?  Not sure, but I 
+haven't had the chance to investigate it further.  Let me know if you want me to try 
+something else ..
+
+
+
+-- 
+;
+--
+Jay Vaughan
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000265.html">[Cryopid-devel] minor changes
+</A></li>
+	<LI>Next message: <A HREF="000268.html">[Cryopid-devel] minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

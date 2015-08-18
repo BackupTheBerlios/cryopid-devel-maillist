@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Fixes to compile on newer x86_64 kernels
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fixes%20to%20compile%20on%20newer%20x86_64%20kernels&In-Reply-To=%3Cdebc30fc0909150739j38b28791ke6663dfead950776%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000297.html">
+   <LINK REL="Next"  HREF="000299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Fixes to compile on newer x86_64 kernels</H1>
+    <B>J&#233;r&#244;me Poulin</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fixes%20to%20compile%20on%20newer%20x86_64%20kernels&In-Reply-To=%3Cdebc30fc0909150739j38b28791ke6663dfead950776%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Fixes to compile on newer x86_64 kernels">jeromepoulin at gmail.com
+       </A><BR>
+    <I>Tue Sep 15 16:39:00 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000297.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+        <LI>Next message: <A HREF="000299.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Sep 14, 2009 at 4:52 PM, Ondrej Mikle &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">ondrej.mikle at gmail.com</A>&gt; wrote:
+...
+&gt;<i>
+</I>&gt;<i> It took me a while to get it compiled, apparently a lot depends on kernel
+</I>&gt;<i> version. Around kernel version 2.6.20 (I think) the macros _syscall2 and
+</I>&gt;<i> _syscall4 are no longer defined. I've seen them in 2.6.19.x for the last time
+</I>&gt;<i> (same holds for kernel-headers packages AFAIK).
+</I>&gt;<i>
+</I>&gt;<i> I managed to get CryoPID working by hacking the sources a bit - defining the
+</I>&gt;<i> necessary macros if they did not exist (plus couple of includes).
+</I>&gt;<i>
+</I>&gt;<i> So finally it builds and works (tried Gentoo with 2.6.22, Debian Etch with
+</I>&gt;<i> 2.6.18). Resulting binary also works on Debian Lenny and CentOS 5.1.
+</I>&gt;<i>
+</I>&gt;<i> Resulting CryoPID x86_64 binary can be downloaded here (if anyone wants to avoid
+</I>&gt;<i> the compilation hassle; it's based on current repository tip, 7da69201d50e):
+</I>&gt;<i> <A HREF="http://azrael.harpy.ru/CryoPID/cryopid-hg-7da69201d50e-hacked-x86_64.tar.bz2">http://azrael.harpy.ru/CryoPID/cryopid-hg-7da69201d50e-hacked-x86_64.tar.bz2</A>
+</I>&gt;<i>
+</I>I didn't try this yet but...
+
+&gt;<i> If anyone wants to try compiling from source, you may try the attached patch
+</I>&gt;<i> (based on repo tip). Warning, the patch is hackish; the patch expects either
+</I>&gt;<i> correct linux-headers package installed or linux source in /usr/src/linux.
+</I>&gt;<i> Proper way would be to find replacement for _syscall2/_syscall4, but I have no
+</I>&gt;<i> idea what that is in newer kernels.
+</I>&gt;<i>
+</I>I tried compiling the sources and it seemed to have the same problems
+as the old x86 sources, so I just added/replaced the wrong header and
+tried to compile it with your patch added, it compiles but fails to
+work.
+
+Here is what I get:
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jerome at MobileCPU</A> cryopid % ./src/cryopid telnet $(pidof telnet)
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110bfbd000-7f110bfc8000 r-xp 00000000 fe:0c
+1312588                    /lib64/libnss_files-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110bfc8000-7f110c1c7000 ---p 0000b000 fe:0c
+1312588                    /lib64/libnss_files-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c1c7000-7f110c1c8000 r--p 0000a000 fe:0c
+1312588                    /lib64/libnss_files-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c1c8000-7f110c1c9000 rw-p 0000b000 fe:0c
+1312588                    /lib64/libnss_files-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c1c9000-7f110c1cb000 r-xp 00000000 fe:0c
+1312531                    /lib64/libdl-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c1cb000-7f110c3cb000 ---p 00002000 fe:0c
+1312531                    /lib64/libdl-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c3cb000-7f110c3cc000 r--p 00002000 fe:0c
+1312531                    /lib64/libdl-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c3cc000-7f110c3cd000 rw-p 00003000 fe:0c
+1312531                    /lib64/libdl-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c3cd000-7f110c518000 r-xp 00000000 fe:0c
+1312247                    /lib64/libc-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c518000-7f110c718000 ---p 0014b000 fe:0c
+1312247                    /lib64/libc-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c718000-7f110c71c000 r--p 0014b000 fe:0c
+1312247                    /lib64/libc-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c71c000-7f110c71d000 rw-p 0014f000 fe:0c
+1312247                    /lib64/libc-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c71d000-7f110c722000 rw-p 00000000 00:00 0
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c722000-7f110c769000 r-xp 00000000 fe:0c
+199812                     /lib64/libncurses.so.5.6
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c769000-7f110c968000 ---p 00047000 fe:0c
+199812                     /lib64/libncurses.so.5.6
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c968000-7f110c975000 r--p 00046000 fe:0c
+199812                     /lib64/libncurses.so.5.6
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c975000-7f110c977000 rw-p 00053000 fe:0c
+199812                     /lib64/libncurses.so.5.6
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c977000-7f110c978000 rw-p 00000000 00:00 0
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110c978000-7f110c995000 r-xp 00000000 fe:0c
+1312635                    /lib64/ld-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cb71000-7f110cb73000 rw-p 00000000 00:00 0
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cb90000-7f110cb94000 rw-p 00000000 00:00 0
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cb94000-7f110cb95000 r--p 0001c000 fe:0c
+1312635                    /lib64/ld-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cb95000-7f110cb96000 rw-p 0001d000 fe:0c
+1312635                    /lib64/ld-2.9.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cb96000-7f110cbaa000 r-xp 00000000 fe:0c
+1491658                    /usr/bin/telnet
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cda9000-7f110cdaa000 r--p 00013000 fe:0c
+1491658                    /usr/bin/telnet
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cdaa000-7f110cdac000 rw-p 00014000 fe:0c
+1491658                    /usr/bin/telnet
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7f110cdac000-7f110cdda000 rw-p 00000000 00:00
+0                          [heap]
+
+     Ignoring map - in kernel space.
+     Error parsing map: 7fff1b2ff000-7fff1b314000 rw-p 00000000 00:00
+0                          [stack]
+
+     Ignoring map - vsyscall page.
+     Error parsing map: 7fff1b3b9000-7fff1b3ba000 r-xp 00000000 00:00
+0                          [vdso]
+
+     Ignoring map - in kernel space.
+     Error parsing map: ffffffffff600000-ffffffffff601000 r-xp
+00000000 00:00 0                  [vsyscall]
+
+[-] No suitable scribble zone could be found. Aborting.
+zsh: abort (core dumped)  ./src/cryopid telnet $(pidof telnet)
+
+Core was generated by `./src/cryopid telnet 22057'.
+Program terminated with signal 6, Aborted.
+[New process 22230]
+#0  0x00007f1478387205 in *__GI_raise (sig=&lt;value optimized out&gt;) at
+../nptl/sysdeps/unix/sysv/linux/raise.c:64
+64	  return INLINE_SYSCALL (tgkill, 3, pid, selftid, sig);
+(gdb)
+
+I attached to patch to the current hg sources. Maybe I'm missing a
+part of the patch but it just won't work.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: cryopid_syscall_complete.patch
+Type: application/octet-stream
+Size: 5021 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090915/a811a686/attachment.obj">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090915/a811a686/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000297.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+	<LI>Next message: <A HREF="000299.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

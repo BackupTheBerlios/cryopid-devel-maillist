@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Using CryoPID to create binaries
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C200704161945.l3GJjeQN009706%40plxc0930.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000013.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Using CryoPID to create binaries</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C200704161945.l3GJjeQN009706%40plxc0930.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] Using CryoPID to create binaries">johnh at ichips.intel.com
+       </A><BR>
+    <I>Mon Apr 16 21:45:40 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+        <LI>Next message: <A HREF="000013.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Bernard,
+
+Thanks for all the interesting info!
+
+|<i> Ahh. I know Ocaml does crazy things with binaries, but I just tested
+</I>|<i> it on some, built with either with ocamlc and ocamlopt, and it
+</I>|<i> seemed happy. Obviously, that's not to say its foolproof, but if you
+</I>|<i> can isolate a binary which dies (or even better, a scenario), I'll
+</I>|<i> try and dig in when I get a chance.
+</I>
+Well, I'm actually checkpointing the OCaml read-eval-print toplevel
+itself. (That is, I fire up &quot;ocaml&quot;, load in code and set up bindings,
+then externally checkpoint that process without exiting.) It could
+be that it has some particular strange features relative to typical
+application binaries. 
+
+I'll try to find some relatively simple reproducible situation that
+exhibits the problem I was having. Roughly, I think the following may
+work, but I'll need to check: checkpoint the ocaml toplevel with
+&quot;freeze -l&quot;, move the resulting binary to a different machine, fire up
+the binary, go into an infinite loop, e.g. by
+
+  let rec f x = f x in f 1;;
+
+and hit ctrl/c. This ought to just drop you back to the toplevel
+prompt. But if my experience with HOL is typical, it will do so on
+the machine where it was built but (perhaps?) not elsewhere.
+
+John.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+	<LI>Next message: <A HREF="000013.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

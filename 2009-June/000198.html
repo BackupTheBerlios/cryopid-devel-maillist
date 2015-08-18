@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C200906192106.n5JL66O7021484%40plxc1122.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000197.html">
+   <LINK REL="Next"  HREF="000199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C200906192106.n5JL66O7021484%40plxc1122.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">johnh at ichips.intel.com
+       </A><BR>
+    <I>Fri Jun 19 23:06:06 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000197.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+        <LI>Next message: <A HREF="000199.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Valery,
+
+|<i> Could you send output of cat /proc/self/maps on Debian  Etch and
+</I>|<i> on Jaunty?
+</I>
+See the end of this message -- actually I sometimes used &quot;more&quot;, and
+you can guess where :-) For comparison, I also include similar output
+for Knoppix. This is because I've noted one important way in which the
+CryoPID-generated binaries are better on Knoppix. I don't know if this
+applies to other programs, but when I freeze the OCaml toplevel on my
+Knoppix implementation, ctrl/c retains the intended behavior of
+terminating the evaluation but giving you back the toplevel prompt. By
+contrast if I run the Knoppix-generated binaries on the other
+platforms, or even the Etch-generated binary on the same Etch system,
+it immediately terminates the entire process.
+
+Could this possibly be connected with differences in CMOV emulation?
+That /lib/tls/i686/cmov is the only difference that jumps out at me.
+Needless to say, I am running on recent hardware that should support
+CMOV :-), though all these except my Ubuntu Hardy are actually running
+under VirtualBox.
+
+|<i> &gt; observation. But practically it's quite a big deal to me,
+</I>|<i> &gt; since I might
+</I>|<i> &gt; finally stand a chance of sending out usable binaries of my
+</I>|<i> &gt; prover.
+</I>|<i> Just for the record there are other alternatives for such use (abuse ? 
+</I>|<i> :) of cryopid:
+</I>|<i> Statifier - <A HREF="http://statifier.sf.net">http://statifier.sf.net</A>
+</I>|<i> Ermine    - <A HREF="http://magicErmine.com">http://magicErmine.com</A>
+</I>
+Probably not, unfortunately. I need not just to pull in all the
+libraries, but also to retain the state inside the read-eval-print
+loop. (OCaml can't save this state natively, though some other ML
+implementations can.)
+
+|<i> Unfortunately, statifier has same set problem with VDSO memory 
+</I>|<i> randomizaton as cryopid. (but it hasn't problem with nnap_min_addr :)
+</I>|<i> Basically (from nenory randomization POV) where cryopid will work 
+</I>|<i> statifier will work too and via verse)
+</I>
+There seems to be a somewhat different problem too with &quot;ckpt&quot; (Vic
+Zandy). This used to be my checkpointer of choice, and still is under
+Etch, but I haven't even got it to compile in Ubuntu since Gutsy. It
+uses JB_SP, but that seems to have disappeared from &quot;setjmp.h&quot;, and
+just manually setting it to the old value didn't work, I gather
+because of some kind of pointer mangling in recent glibcs. Maybe I
+could use __builtin_frame_address or something instead, but I've
+never made the effort to figure it all out...
+
+|<i> And if we on it - could you please change in the file 
+</I>|<i> arch-i386/stub-linking.x
+</I>|<i> line 
+</I>|<i> PROVIDE (__executable_start = 0x00001000); . = 0x00001000 + 0x180;
+</I>|<i> to
+</I>|<i> PROVIDE (__executable_start = 0x00010000); . = 0x00010000 + 0x180;
+</I>|<i>
+</I>|<i> Rebuild cryopid, rebuild with this cryopid your program and test if 
+</I>|<i> it's work with original mmap_min_addr (i.e 65536)
+</I>
+I'll try that tonight. Indeed, it would be nice not to have to hack
+the mmap_min_addr.
+
+John.
+
+/proc/self/maps output on 4 different systems:
+
+Debian Etch:
+
+08048000-0804c000 r-xp 00000000 03:01 932148     /bin/cat
+0804c000-0804d000 rwxp 00003000 03:01 932148     /bin/cat
+0804d000-0806e000 rwxp 0804d000 00:00 0          [heap]
+b7c8c000-b7db4000 r-xp 00000000 03:01 360005     /usr/lib/locale/locale-archive
+b7db4000-b7db5000 rwxp b7db4000 00:00 0
+b7db5000-b7edc000 r-xp 00000000 03:01 572966     /lib/tls/i686/cmov/libc-2.3.6.so
+b7edc000-b7ee1000 r-xp 00127000 03:01 572966     /lib/tls/i686/cmov/libc-2.3.6.so
+b7ee1000-b7ee3000 rwxp 0012c000 03:01 572966     /lib/tls/i686/cmov/libc-2.3.6.so
+b7ee3000-b7ee6000 rwxp b7ee3000 00:00 0
+b7eec000-b7eee000 rwxp b7eec000 00:00 0
+b7eee000-b7eef000 r-xp b7eee000 00:00 0          [vdso]
+b7eef000-b7f04000 r-xp 00000000 03:01 555970     /lib/ld-2.3.6.so
+b7f04000-b7f06000 rwxp 00014000 03:01 555970     /lib/ld-2.3.6.so
+bfb54000-bfb69000 rw-p bfb54000 00:00 0          [stack]
+
+Ubuntu Hardy:
+
+08048000-0804f000 r-xp 00000000 08:06 10208260   /bin/cat
+0804f000-08050000 rw-p 00006000 08:06 10208260   /bin/cat
+08050000-08071000 rw-p 08050000 00:00 0          [heap]
+b7ca8000-b7ce7000 r--p 00000000 08:06 33928411   /usr/lib/locale/en_US.utf8/LC_CTYPE
+b7ce7000-b7dc8000 r--p 00000000 08:06 1110031    /usr/lib/locale/en_US.utf8/LC_COLLATE
+b7dc8000-b7dc9000 rw-p b7dc8000 00:00 0
+b7dc9000-b7f12000 r-xp 00000000 08:06 34817028   /lib/tls/i686/cmov/libc-2.7.so
+b7f12000-b7f13000 r--p 00149000 08:06 34817028   /lib/tls/i686/cmov/libc-2.7.so
+b7f13000-b7f15000 rw-p 0014a000 08:06 34817028   /lib/tls/i686/cmov/libc-2.7.so
+b7f15000-b7f18000 rw-p b7f15000 00:00 0
+b7f20000-b7f21000 r--p 00000000 08:06 33927213   /usr/lib/locale/en_US.utf8/LC_NUMERIC
+b7f21000-b7f22000 r--p 00000000 08:06 33928268   /usr/lib/locale/en_US.utf8/LC_TIME
+b7f22000-b7f23000 r--p 00000000 08:06 33928271   /usr/lib/locale/en_US.utf8/LC_MONETARY
+b7f23000-b7f24000 r--p 00000000 08:06 33928217   /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+b7f24000-b7f25000 r--p 00000000 08:06 33927227   /usr/lib/locale/en_US.utf8/LC_PAPER
+b7f25000-b7f26000 r--p 00000000 08:06 33928241   /usr/lib/locale/en_US.utf8/LC_NAME
+b7f26000-b7f27000 r--p 00000000 08:06 33928272   /usr/lib/locale/en_US.utf8/LC_ADDRESS
+b7f27000-b7f28000 r--p 00000000 08:06 33928277   /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+b7f28000-b7f29000 r--p 00000000 08:06 33928242   /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+b7f29000-b7f30000 r--s 00000000 08:06 12356854   /usr/lib/gconv/gconv-modules.cache
+b7f30000-b7f31000 r--p 00000000 08:06 33928279   /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION
+b7f31000-b7f33000 rw-p b7f31000 00:00 0
+b7f33000-b7f34000 r-xp b7f33000 00:00 0          [vdso]
+b7f34000-b7f4e000 r-xp 00000000 08:06 33605633   /lib/ld-2.7.so
+b7f4e000-b7f50000 rw-p 00019000 08:06 33605633   /lib/ld-2.7.so
+bfaae000-bfac3000 rw-p bffeb000 00:00 0          [stack]
+
+Ubuntu Jaunty:
+
+08048000-0804f000 r-xp 00000000 08:01 261701     /bin/more
+0804f000-08050000 r--p 00006000 08:01 261701     /bin/more
+08050000-08051000 rw-p 00007000 08:01 261701     /bin/more
+08fd4000-08ff5000 rw-p 08fd4000 00:00 0          [heap]
+b7c47000-b7c48000 rw-p b7c47000 00:00 0 
+b7c48000-b7c87000 r--p 00000000 08:01 34485      /usr/lib/locale/en_CA.utf8/LC_CTYPE
+b7c87000-b7c88000 r--p 00000000 08:01 34490      /usr/lib/locale/en_CA.utf8/LC_NUMERIC
+b7c88000-b7c89000 r--p 00000000 08:01 34493      /usr/lib/locale/en_CA.utf8/LC_TIME
+b7c89000-b7d74000 r--p 00000000 08:01 34484      /usr/lib/locale/en_CA.utf8/LC_COLLATE
+b7d74000-b7d75000 r--p 00000000 08:01 34488      /usr/lib/locale/en_CA.utf8/LC_MONETARY
+b7d75000-b7d76000 r--p 00000000 08:01 34494      /usr/lib/locale/en_CA.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+b7d76000-b7d77000 rw-p b7d76000 00:00 0 
+b7d77000-b7d79000 r-xp 00000000 08:01 140353     /lib/tls/i686/cmov/libdl-2.9.so
+b7d79000-b7d7a000 r--p 00001000 08:01 140353     /lib/tls/i686/cmov/libdl-2.9.so
+b7d7a000-b7d7b000 rw-p 00002000 08:01 140353     /lib/tls/i686/cmov/libdl-2.9.so
+b7d7b000-b7d7c000 rw-p b7d7b000 00:00 0 
+b7d7c000-b7ed8000 r-xp 00000000 08:01 140347     /lib/tls/i686/cmov/libc-2.9.so
+b7ed8000-b7ed9000 ---p 0015c000 08:01 140347     /lib/tls/i686/cmov/libc-2.9.so
+b7ed9000-b7edb000 r--p 0015c000 08:01 140347     /lib/tls/i686/cmov/libc-2.9.so
+b7edb000-b7edc000 rw-p 0015e000 08:01 140347     /lib/tls/i686/cmov/libc-2.9.so
+b7edc000-b7edf000 rw-p b7edc000 00:00 0 
+b7edf000-b7f0e000 r-xp 00000000 08:01 122720     /lib/libncurses.so.5.7
+b7f0e000-b7f10000 r--p 0002e000 08:01 122720     /lib/libncurses.so.5.7
+b7f10000-b7f11000 rw-p 00030000 08:01 122720     /lib/libncurses.so.5.7
+b7f11000-b7f12000 r--p 00000000 08:01 34491      /usr/lib/locale/en_CA.utf8/LC_PAPER
+b7f12000-b7f13000 r--p 00000000 08:01 34489      /usr/lib/locale/en_CA.utf8/LC_NAME
+b7f13000-b7f14000 r--p 00000000 08:01 34483      /usr/lib/locale/en_CA.utf8/LC_ADDRESS
+b7f14000-b7f15000 r--p 00000000 08:01 34492      /usr/lib/locale/en_CA.utf8/LC_TELEPHONE
+b7f15000-b7f16000 r--p 00000000 08:01 34487      /usr/lib/locale/en_CA.utf8/LC_MEASUREMENT
+b7f16000-b7f1d000 r--s 00000000 08:01 458099     /usr/lib/gconv/gconv-modules.cache
+b7f1d000-b7f1e000 r--p 00000000 08:01 34486      /usr/lib/locale/en_CA.utf8/LC_IDENTIFICATION
+b7f1e000-b7f20000 rw-p b7f1e000 00:00 0 
+b7f20000-b7f21000 r-xp b7f20000 00:00 0          [vdso]
+b7f21000-b7f3d000 r-xp 00000000 08:01 122663     /lib/ld-2.9.so
+b7f3d000-b7f3e000 r--p 0001b000 08:01 122663     /lib/ld-2.9.so
+b7f3e000-b7f3f000 rw-p 0001c000 08:01 122663     /lib/ld-2.9.so
+bff2a000-bff3f000 rw-p bffeb000 00:00 0          [stack]
+
+Knoppix:
+
+08048000-0804e000 r-xp 00000000 03:02 70         /bin/more
+0804e000-0804f000 rw-p 00006000 03:02 70         /bin/more
+0804f000-08072000 rw-p 0804f000 00:00 0          [heap]
+b7dd3000-b7dd4000 rw-p b7dd3000 00:00 0
+b7dd4000-b7dd6000 r-xp 00000000 03:02 12838      /lib/tls/libdl-2.3.6.so
+b7dd6000-b7dd8000 rw-p 00001000 03:02 12838      /lib/tls/libdl-2.3.6.so
+b7dd8000-b7dd9000 rw-p b7dd8000 00:00 0
+b7dd9000-b7f07000 r-xp 00000000 03:02 12836      /lib/tls/libc-2.3.6.so
+b7f07000-b7f0c000 r--p 0012e000 03:02 12836      /lib/tls/libc-2.3.6.so
+b7f0c000-b7f0f000 rw-p 00133000 03:02 12836      /lib/tls/libc-2.3.6.so
+b7f0f000-b7f11000 rw-p b7f0f000 00:00 0
+b7f11000-b7f4a000 r-xp 00000000 03:02 12614      /lib/libncurses.so.5.5
+b7f4a000-b7f52000 rw-p 00039000 03:02 12614      /lib/libncurses.so.5.5
+b7f52000-b7f53000 rw-p b7f52000 00:00 0
+b7f65000-b7f68000 rw-p b7f65000 00:00 0
+b7f68000-b7f7d000 r-xp 00000000 03:02 12545      /lib/ld-2.3.6.so
+b7f7d000-b7f7f000 rw-p 00015000 03:02 12545      /lib/ld-2.3.6.so
+bff47000-bff5d000 rw-p bff47000 00:00 0          [stack]
+ffffe000-fffff000 ---p 00000000 00:00 0          [vdso]
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000197.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+	<LI>Next message: <A HREF="000199.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,16 @@
+From tudorambarus at yahoo.com  Sat May 11 14:24:55 2013
+From: tudorambarus at yahoo.com (Tudor Ambarus)
+Date: Sat, 11 May 2013 05:24:55 -0700 (PDT)
+Subject: [Cryopid-devel] cryopid
+Message-ID: <1368275095.50659.YahooMailNeo@web125203.mail.ne1.yahoo.com>
+
+Hello,
+
+Are there any efforts for porting cryopid to a newer kernel version (3.x)?
+
+Thx,?
+Tudor Ambarus
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/cryopid-devel/attachments/20130511/69faa4ad/attachment.html>
+

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C200906182210.n5IMA7sv022244%40plxc1122.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000194.html">
+   <LINK REL="Next"  HREF="000197.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C200906182210.n5IMA7sv022244%40plxc1122.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">johnh at ichips.intel.com
+       </A><BR>
+    <I>Fri Jun 19 00:10:07 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000194.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000197.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#196">[ date ]</a>
+              <a href="thread.html#196">[ thread ]</a>
+              <a href="subject.html#196">[ subject ]</a>
+              <a href="author.html#196">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I've just made another interesting discovery.
+
+After applying the change to mmap_min_addr as suggested on this list,
+I no longer see the original early failure but my restarted binary
+still fails later in other ways. (I sent a trace out earlier but the
+message was big so it's awaiting moderator approval.)
+
+*However* if I (1) make the mmap_min_addr change and (2) try to
+restart on the new system a binary created on my Debian Etch setup
+where cryoPID works perfectly, then it does restart and displays no
+problems! So I can sort of use &quot;freeze&quot; as a cross-compiler. 
+
+Here's an example of restarting on Jaunty (where I can't even compile
+CryoPID) a binary from my Debian Etch setup. (The binary is my HOL
+Light prover, which is basically just the OCaml toplevel with lots
+of stuff preloaded.)
+
+  $ ./hol.static 
+  Segmentation fault
+  $ strace ./hol.static 
+  execve(&quot;./hol.static&quot;, [&quot;./hol.static&quot;], [/* 40 vars */]) = 0
+  mmap2(0x1000, 57344, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = -1 EACCES (Permission denied)
+  --- SIGSEGV (Segmentation fault) @ 0 (0) ---
+  +++ killed by SIGSEGV +++
+  $ more /proc/sys/vm/mmap_min_addr 
+  65536
+  $ cat &gt;0
+  0
+  $ more 0
+  0
+  $ sudo cp 0 /proc/sys/vm/mmap_min_addr 
+  [sudo] password for jrh: 
+  $ more /proc/sys/vm/mmap_min_addr 
+  0
+  $ ./hol.static
+          HOL Light 2.20++, built 29 May 2009 on OCaml 3.09.2 with CryoPID
+  
+  val it : unit = ()
+  # 12;;
+  val it : int = 12
+  #
+
+I'll leave it to others to tell me the significance or otherwise of this
+observation. But practically it's quite a big deal to me, since I might
+finally stand a chance of sending out usable binaries of my prover.
+
+John.
+
+P.S. How do I make the change to /proc/sys/vm/mmap_min_addr permanent? I
+guess it gets reset at boot time. And is it safe to keep it as 0?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000194.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000197.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#196">[ date ]</a>
+              <a href="thread.html#196">[ thread ]</a>
+              <a href="subject.html#196">[ subject ]</a>
+              <a href="author.html#196">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

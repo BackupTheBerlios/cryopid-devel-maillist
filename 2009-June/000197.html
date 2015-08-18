@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C759304.27096.qm%40web110307.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000196.html">
+   <LINK REL="Next"  HREF="000198.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C759304.27096.qm%40web110307.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Fri Jun 19 06:40:47 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000196.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+        <LI>Next message: <A HREF="000198.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Fri, 6/19/09, John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt; wrote:
+
+&gt;<i> From: John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;
+</I>&gt;<i> Subject: [Cryopid-devel] Older snapshots (almost) work!
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Friday, June 19, 2009, 1:10 AM
+</I>&gt;<i> 
+</I>&gt;<i> I've just made another interesting discovery.
+</I>&gt;<i> 
+</I>&gt;<i> After applying the change to mmap_min_addr as suggested on
+</I>&gt;<i> this list,
+</I>&gt;<i> I no longer see the original early failure but my restarted
+</I>&gt;<i> binary
+</I>&gt;<i> still fails later in other ways. (I sent a trace out
+</I>&gt;<i> earlier but the
+</I>&gt;<i> message was big so it's awaiting moderator approval.)
+</I>&gt;<i> 
+</I>&gt;<i> *However* if I (1) make the mmap_min_addr change and (2)
+</I>&gt;<i> try to
+</I>&gt;<i> restart on the new system a binary created on my Debian
+</I>&gt;<i> Etch setup
+</I>&gt;<i> where cryoPID works perfectly, then it does restart and
+</I>&gt;<i> displays no
+</I>&gt;<i> problems! So I can sort of use &quot;freeze&quot; as a
+</I>&gt;<i> cross-compiler. 
+</I>Could you send output of
+cat /proc/self/maps on Debian  Etch and on Jaunty ?
+
+&gt;<i> 
+</I>&gt;<i> Here's an example of restarting on Jaunty (where I can't
+</I>&gt;<i> even compile
+</I>&gt;<i> CryoPID) a binary from my Debian Etch setup. (The binary is
+</I>&gt;<i> my HOL
+</I>&gt;<i> Light prover, which is basically just the OCaml toplevel
+</I>&gt;<i> with lots
+</I>&gt;<i> of stuff preloaded.)
+</I>&gt;<i> 
+</I>&gt;<i> &#160; $ ./hol.static 
+</I>&gt;<i> &#160; Segmentation fault
+</I>&gt;<i> &#160; $ strace ./hol.static 
+</I>&gt;<i> &#160; execve(&quot;./hol.static&quot;, [&quot;./hol.static&quot;], [/* 40 vars
+</I>&gt;<i> */]) = 0
+</I>&gt;<i> &#160; mmap2(0x1000, 57344, PROT_READ|PROT_WRITE|PROT_EXEC,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = -1 EACCES
+</I>&gt;<i> (Permission denied)
+</I>&gt;<i> &#160; --- SIGSEGV (Segmentation fault) @ 0 (0) ---
+</I>&gt;<i> &#160; +++ killed by SIGSEGV +++
+</I>&gt;<i> &#160; $ more /proc/sys/vm/mmap_min_addr 
+</I>&gt;<i> &#160; 65536
+</I>&gt;<i> &#160; $ cat &gt;0
+</I>&gt;<i> &#160; 0
+</I>&gt;<i> &#160; $ more 0
+</I>&gt;<i> &#160; 0
+</I>&gt;<i> &#160; $ sudo cp 0 /proc/sys/vm/mmap_min_addr 
+</I>&gt;<i> &#160; [sudo] password for jrh: 
+</I>&gt;<i> &#160; $ more /proc/sys/vm/mmap_min_addr 
+</I>&gt;<i> &#160; 0
+</I>&gt;<i> &#160; $ ./hol.static
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; HOL Light 2.20++, built
+</I>&gt;<i> 29 May 2009 on OCaml 3.09.2 with CryoPID
+</I>&gt;<i> &#160; 
+</I>&gt;<i> &#160; val it : unit = ()
+</I>&gt;<i> &#160; # 12;;
+</I>&gt;<i> &#160; val it : int = 12
+</I>&gt;<i> &#160; #
+</I>&gt;<i> 
+</I>&gt;<i> I'll leave it to others to tell me the significance or
+</I>&gt;<i> otherwise of this
+</I>&gt;<i> observation. But practically it's quite a big deal to me,
+</I>&gt;<i> since I might
+</I>&gt;<i> finally stand a chance of sending out usable binaries of my
+</I>&gt;<i> prover.
+</I>Just for the record there are other alternatives for such use (abuse ? :) of cryopid:
+Statifier - <A HREF="http://statifier.sf.net">http://statifier.sf.net</A>
+Ermine    - <A HREF="http://magicErmine.com">http://magicErmine.com</A>
+
+(Both mine)
+
+Statifier &quot;freeze&quot; program at very specific point of it's execution -
+after all shared libraries are loaded and al relocations are done and just before initialization.
+So statified executable is portable - all needed shared libraries are inside.
+
+Unfortunately, statifier has same set problem with VDSO memory randomizaton as cryopid. (but it hasn't problem with nnap_min_addr :)
+Basically (from nenory randomization POV) where cryopid will work statifier will work too and via verse)
+
+Ermine deal quite well with memory randomization, but it commercial :(
+Ermine able to deal with memory randomization because it use different approach - both cryopid abd statifier are &quot;freezers&quot;, while Ermine can be considered as very, very thing virtual machine.
+
+&gt;<i> 
+</I>&gt;<i> John.
+</I>&gt;<i> 
+</I>&gt;<i> P.S. How do I make the change to /proc/sys/vm/mmap_min_addr
+</I>&gt;<i> permanent? I
+</I>&gt;<i> guess it gets reset at boot time. And is it safe to keep it
+</I>&gt;<i> as 0?
+</I>It was set to 0x10000 as security measure.
+It will not affect functionality of any program, but make you box protection against (possible) attack weaker.
+
+And if we on it - could you please change in the file 
+arch-i386/stub-linking.x
+line 
+PROVIDE (__executable_start = 0x00001000); . = 0x00001000 + 0x180;
+to
+PROVIDE (__executable_start = 0x00010000); . = 0x00010000 + 0x180;
+
+Rebuild cryopid, rebuild with this cryopid your program and test if it's work with original mmap_min_addr (i.e 65536)
+
+Regards,
+Valery.
+&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000196.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+	<LI>Next message: <A HREF="000198.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

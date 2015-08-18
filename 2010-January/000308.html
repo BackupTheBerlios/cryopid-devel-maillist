@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] build error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20build%20error&In-Reply-To=%3C4B46DAC0.9010101%40speakeasy.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000309.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] build error</H1>
+    <B>Peter Horst</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20build%20error&In-Reply-To=%3C4B46DAC0.9010101%40speakeasy.net%3E"
+       TITLE="[Cryopid-devel] build error">phorst at speakeasy.net
+       </A><BR>
+    <I>Fri Jan  8 08:12:00 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000309.html">[Cryopid-devel] Cryopid on NixOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, everyone -
+
+I'm trying to build CryoPID on CentOS 5.4.  When I run make, I get
+
+[...]
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libz.a(inflate.o): In 
+function `inflateSync':
+(.text+0x495): undefined reference to `__stack_chk_fail_local'
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libz.a(inflate.o): In 
+function `.L555':
+(.text+0x1db1): undefined reference to `__stack_chk_fail_local'
+collect2: ld returned 1 exit status
+make: *** [stub-gzip] Error 1
+
+Any clue what I might be missing here?
+
+Thank you!
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000309.html">[Cryopid-devel] Cryopid on NixOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

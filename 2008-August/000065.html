@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel]  maps parsing problem, cannot freeze
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%20maps%20parsing%20problem%2C%20cannot%20freeze&In-Reply-To=%3CPine.LNX.4.64.0808151328500.7092%40jvaavr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000064.html">
+   <LINK REL="Next"  HREF="000066.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel]  maps parsing problem, cannot freeze</H1>
+    <B>Joel Yliluoma</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%20maps%20parsing%20problem%2C%20cannot%20freeze&In-Reply-To=%3CPine.LNX.4.64.0808151328500.7092%40jvaavr%3E"
+       TITLE="[Cryopid-devel]  maps parsing problem, cannot freeze">bisqwit at iki.fi
+       </A><BR>
+    <I>Fri Aug 15 12:31:06 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000064.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+        <LI>Next message: <A HREF="000066.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#65">[ date ]</a>
+              <a href="thread.html#65">[ thread ]</a>
+              <a href="subject.html#65">[ subject ]</a>
+              <a href="author.html#65">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm running kernel 2.6.26 on x86_64, and when trying to run the
+freeze program, version 0.5.9.1, I get the following:
+
+$ ~bisqwit/a/cryopid-0.5.9.1/src/freeze nesvtmp.bin 12957
+      Ignoring map - looks like resumer.
+      Error parsing map: 00400000-00456000 r-xp 00000000 fd:00 268818309 
+/usr/bin/ircII
+
+      Ignoring map - looks like resumer.
+      Error parsing map: 00656000-0066d000 rw-p 00056000 fd:00 268818309 
+/usr/bin/ircII
+
+      Ignoring map - looks like resumer.
+      Error parsing map: 0066d000-00676000 rw-p 0066d000 00:00 0
+
+      Ignoring map - in kernel space.
+      Error parsing map: 0187e000-03e87000 rw-p 0187e000 00:00 0 
+[heap]
+
+And so on, for a few screenfuls.
+
+[-] No suitable scribble zone could be found. Aborting.
+Aborted
+
+-- 
+Joel Yliluoma
+<A HREF="http://iki.fi/bisqwit/">http://iki.fi/bisqwit/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000064.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+	<LI>Next message: <A HREF="000066.html">[Cryopid-devel] Value too large for defined data type problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#65">[ date ]</a>
+              <a href="thread.html#65">[ thread ]</a>
+              <a href="subject.html#65">[ subject ]</a>
+              <a href="author.html#65">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

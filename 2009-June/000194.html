@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C291554.17281.qm%40web110312.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000193.html">
+   <LINK REL="Next"  HREF="000196.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C291554.17281.qm%40web110312.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid patch">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Thu Jun 18 13:57:37 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000193.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000196.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#194">[ date ]</a>
+              <a href="thread.html#194">[ thread ]</a>
+              <a href="subject.html#194">[ subject ]</a>
+              <a href="author.html#194">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Thu, 6/18/09, Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt; wrote:
+
+&gt;<i> From: Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] cryopid patch
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>
+</I>&gt;<i> Cc: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;, &quot;Michele Alberti&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;, &quot;John R Harrison&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;, <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Thursday, June 18, 2009, 2:48 PM
+</I>&gt;<i> 
+</I>&gt;<i> &gt; On Thu, 2009-06-18 at 03:26 -0700, Valery Reznic
+</I>&gt;<i> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; Yes, VDSO randomization is a big trouble, but how
+</I>&gt;<i> it related
+</I>&gt;<i> &gt;&gt; to changing start addr from one FIXED value to
+</I>&gt;<i> another ?
+</I>&gt;<i> 
+</I>&gt;<i> Valery,
+</I>&gt;<i> mmap_min_addr is not related to VDSO?
+</I>&gt;<i> I don't know nothing about these arguments, sorry.
+</I>No. VDSO (virtual dynamic shared object) it's something that created by kernel and used to implement syscalls with more efficient way then 'int 0x80'
+This VDSO considered by dynamic linker (ld-linux.so) as any other 
+shared library and it's address is saved into frozen process images.
+Unfortunately for CryoPID (and statifier for that matter), when frozen process is run again VDSO address will be different - address space randomization.
+Obviously nothing good can came from it. (Unless segfault count as  good :)
+
+On the other hand mmap_min_addr is just security measure - process not allowed to mmap memory below address in this file.
+(OK, may be root process is allowed - I don't remember)
+
+Valery.
+
+
+
+
+&gt;<i> Cheers,
+</I>&gt;<i> 
+</I>&gt;<i> Michele
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000193.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000196.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#194">[ date ]</a>
+              <a href="thread.html#194">[ thread ]</a>
+              <a href="subject.html#194">[ subject ]</a>
+              <a href="author.html#194">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

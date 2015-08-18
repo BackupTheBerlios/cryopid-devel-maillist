@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] getpid location
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20getpid%20location&In-Reply-To=%3Cf3dda8c30907100808r1a94d56o88a4d41ec967fe0c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000251.html">
+   <LINK REL="Next"  HREF="000253.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] getpid location</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20getpid%20location&In-Reply-To=%3Cf3dda8c30907100808r1a94d56o88a4d41ec967fe0c%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] getpid location">alberti at cs.unibo.it
+       </A><BR>
+    <I>Fri Jul 10 17:08:02 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000251.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+        <LI>Next message: <A HREF="000253.html">[Cryopid-devel] getpid location
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+I want to share some thoughts to clarify the situation.
+First of all, thanks guys for your support; in particular to Valery.
+
+On getpid (better: machine code to execute syscall) location there are
+some problems. In conclusion: we _can't_ use any SYMTAB section. Why?
+I think we have 2 scenarios:
+1) use symbols internal the freezed image. Problem: not possible,
+binaries are stripped.
+2) use generic /lib/libc installed on the machine. Problem: we can
+find a getpid location, but that location is a offset and naturally
+changed everytime libc is mapped in process memory.
+
+So, I think the SYMTAB way is not good.
+Another idea: we have the process maps, in /proc/&lt;pid&gt;/maps. We can
+read the content of map /lib/libc and search a signature in some way,
+right?! I don't think so. Yes it's possible and quite easy (and dirty)
+but if we found an address (say 0x85f20000) we _can't_ use it at
+restore-time because the mapping maybe is changed (maybe we have the
+location at 0x86840000 and call it, it's wrong)
+
+In my opinion the only way is to search the signature at restore time,
+inside /lib/libc maps (we have it and can recognize it). The reason
+are obvious.
+What do you think about that?
+Cheers,
+
+Michele
+
+-- 
+Michele Alberti - CS student @ UniBO
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000251.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+	<LI>Next message: <A HREF="000253.html">[Cryopid-devel] getpid location
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

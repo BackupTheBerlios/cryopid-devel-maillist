@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Cryopid openSuse 11.0  x86_64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20openSuse%2011.0%20%20x86_64&In-Reply-To=%3C20091103104209.228720%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000303.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Cryopid openSuse 11.0  x86_64</H1>
+    <B>Fernando Benites</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20openSuse%2011.0%20%20x86_64&In-Reply-To=%3C20091103104209.228720%40gmx.net%3E"
+       TITLE="[Cryopid-devel] Cryopid openSuse 11.0  x86_64">ISkywalker at gmx.de
+       </A><BR>
+    <I>Tue Nov  3 11:42:09 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000303.html">[Cryopid-devel] Invalid magic in chunk header (0xffffffff !=	0xc0de)!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+I am trying to run cryopid in a opensuse  11.0  x86_64 environment. Till now i had no success with some but with others packages yes, and I tried:
+sharesource files (0.5.9.1) (did compile)
+sourceforge files (0.6.9) (did compile)
+mercurial (did not compile: cryopid/src/cp_r_sighand.c:38: undefined reference to `rt_sigaction')
+ubuntu source (did compile)
+I had to link /usr/sr/linux/include/asm-x86 to src/arch/asm.
+I had also to change linux/user.h to sys/user.h and add sometimes sys/types.h.
+When running with the compiled version i get:
+./freeze boostexter_wipo_273_1 676
+     Ignoring map - in kernel space.
+     Error parsing map: 08048000-08056000 r-xp 00000000 08:06 4900177                            /home/Fernando/Doktorarbeit/experiments/ML-FAM/trunk/boostexter/boostexter
+
+     Ignoring map - in kernel space.
+     Error parsing map: 08056000-08057000 rwxp 0000d000 08:06 4900177                            /home/Fernando/Doktorarbeit/experiments/ML-FAM/trunk/boostexter/boostexter
+
+     Ignoring map - in kernel space.
+     Error parsing map: 08057000-557ec000 rwxp 08057000 00:00 0                                  [heap]
+
+     Ignoring map - in kernel space.
+     Error parsing map: 79742000-f7dc0000 rwxp 79742000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7dc0000-f7df9000 rwxp f7f80000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7e10000-f7e11000 rwxp f7e10000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7e11000-f7f4e000 r-xp 00000000 08:06 9587227                            /lib/libc-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f4e000-f7f50000 r-xp 0013d000 08:06 9587227                            /lib/libc-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f50000-f7f51000 rwxp 0013f000 08:06 9587227                            /lib/libc-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f51000-f7f54000 rwxp f7f51000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f54000-f7f78000 r-xp 00000000 08:06 9587238                            /lib/libm-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f78000-f7f79000 r-xp 00023000 08:06 9587238                            /lib/libm-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f79000-f7f7a000 rwxp 00024000 08:06 9587238                            /lib/libm-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7f7a000-f7f7b000 rwxp f7f7a000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7fa1000-f7fa2000 rwxp f7fa1000 00:00 0 
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7fa2000-f7fbd000 r-xp 00000000 08:06 9587135                            /lib/ld-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7fbd000-f7fbe000 r-xp 0001a000 08:06 9587135                            /lib/ld-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: f7fbe000-f7fbf000 rwxp 0001b000 08:06 9587135                            /lib/ld-2.8.so
+
+     Ignoring map - in kernel space.
+     Error parsing map: fffa9000-fffbe000 rwxp 7ffffffea000 00:00 0                              [stack]
+
+     Ignoring map - vsyscall page.
+     Error parsing map: ffffe000-fffff000 r-xp ffffe000 00:00 0                                  [vdso]
+
+[-] No suitable scribble zone could be found. Aborting.
+
+I checked the /proc/sys/vm/mmap_min_addr and i have 65536. What does it means? I should be 0? and if so what can happen then. I want to freeze a process in another machine, where i am not admin and i should then explain why i need it changed then...
+Thanks and cheers,
+Fernando
+-- 
+GRATIS f&#252;r alle GMX-Mitglieder: Die maxdome Movie-FLAT!
+Jetzt freischalten unter <A HREF="http://portal.gmx.net/de/go/maxdome01">http://portal.gmx.net/de/go/maxdome01</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000303.html">[Cryopid-devel] Invalid magic in chunk header (0xffffffff !=	0xc0de)!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

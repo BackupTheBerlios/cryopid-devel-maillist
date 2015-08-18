@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C60529.84.221.197.26.1243500484.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000160.html">
+   <LINK REL="Next"  HREF="000163.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C60529.84.221.197.26.1243500484.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] cryopid patch">alberti at cs.unibo.it
+       </A><BR>
+    <I>Thu May 28 10:48:04 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000160.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000163.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#162">[ date ]</a>
+              <a href="thread.html#162">[ thread ]</a>
+              <a href="subject.html#162">[ subject ]</a>
+              <a href="author.html#162">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> #include &lt;stdio.h&gt;
+</I>&gt;<i>
+</I>&gt;<i> int main(){
+</I>&gt;<i>
+</I>&gt;<i>          static int count;
+</I>&gt;<i>          while(1) {
+</I>&gt;<i>          printf(&quot;count:%d\r&quot;, count++);
+</I>&gt;<i>          }
+</I>&gt;<i> }
+</I>
+I tested it, it works on my system. But you have a Debian 4.
+
+&gt;<i> bash&gt; ./mycounter
+</I>&gt;<i> countSegmentation fault
+</I>
+Can you &quot;strace&quot; it? I have to know where it goes in segfualt.
+
+&gt;<i>
+</I>&gt;<i> bash&gt; uname -r
+</I>&gt;<i> 2.6.18-5-686-bigmem
+</I>&gt;<i>
+</I>&gt;<i> bash&gt; lsb_release -a
+</I>&gt;<i> No LSB modules are available.
+</I>&gt;<i> Distributor ID: Debian
+</I>&gt;<i> Description:    Debian GNU/Linux 4.0 (etch)
+</I>&gt;<i> Release:        4.0
+</I>&gt;<i> Codename:       etch
+</I>
+In this weekend I'll try to set up a qemu box with a Debian 4.
+Ciao
+
+michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000160.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000163.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#162">[ date ]</a>
+              <a href="thread.html#162">[ thread ]</a>
+              <a href="subject.html#162">[ subject ]</a>
+              <a href="author.html#162">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

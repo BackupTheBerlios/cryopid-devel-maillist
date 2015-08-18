@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] problems with PID?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20problems%20with%20PID%3F&In-Reply-To=%3C50894.84.221.197.193.1236070408.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] problems with PID?</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20problems%20with%20PID%3F&In-Reply-To=%3C50894.84.221.197.193.1236070408.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] problems with PID?">alberti at cs.unibo.it
+       </A><BR>
+    <I>Tue Mar  3 09:53:28 CET 2009</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi guys,
+I build cryopid for my linux box and tried to test some tester (example)
+code.
+I tried sigtest.c, and freezing goes well. But when I tried to resume the
+process, it encounter problems. It is blocked!
+So I read sigtest.c code and this in particular:
+
+for(;;) {
+        raise(SIGUSR1);
+        sleep(2);
+        raise(SIGUSR2);
+        sleep(2);
+}
+
+The problem is that after resume the process, it has got a new PID and so
+the raise syscall failed. In fact if I run this command:
+
+$ kill -SIGUSR1 &lt;new PID&gt;
+
+all goes well, the process caught the right signal.
+If you put a getpid() inside for(;;) statement, you will notice that
+getpid() returns the old pid, the pid before freezing the process.
+
+How can I deal with it? How can I modify the code to obtain the getpid()
+returns the right pid?
+
+Sorry for my bad english.
+Cheers,
+Michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

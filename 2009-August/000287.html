@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Fwd: getpid hack updated
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fwd%3A%20getpid%20hack%20updated&In-Reply-To=%3Ce900d3ec67e6dd1e9ce5798f9942eaac.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000286.html">
+   <LINK REL="Next"  HREF="000288.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Fwd: getpid hack updated</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fwd%3A%20getpid%20hack%20updated&In-Reply-To=%3Ce900d3ec67e6dd1e9ce5798f9942eaac.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] Fwd: getpid hack updated">alberti at cs.unibo.it
+       </A><BR>
+    <I>Tue Aug 18 23:00:22 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000286.html">[Cryopid-devel]  Fwd: getpid hack updated
+</A></li>
+        <LI>Next message: <A HREF="000288.html">[Cryopid-devel] A use scenario for cryopid: Pandora console
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Patch applies cleanly to latest Cryopid sources from cryopid.org.
+</I>
+perfect.
+
+&gt;<i>
+</I>&gt;<i> Build tested on Debian Sid, updated seven days ago. Build is clean using
+</I>&gt;<i> gcc version 4.3.2 (Debian 4.3.2-1.1), with the following minor warnings.
+</I>&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ...
+</I>&gt;&gt;<i> cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP
+</I>&gt;&gt;<i>  -c -o cp_w_fd_socket.o cp_w_fd_socket.c
+</I>&gt;&gt;<i> cp_w_fd_socket.c: In function &#226;get_tcp_socket&#226;:
+</I>&gt;&gt;<i> cp_w_fd_socket.c:64: warning: pointer targets in passing argument 4 of
+</I>&gt;&gt;<i> &#226;r_getpeername&#226; differ in signedness
+</I>&gt;&gt;<i> cp_w_fd_socket.c: In function &#226;get_socket_info&#226;:
+</I>&gt;&gt;<i> cp_w_fd_socket.c:140: warning: value computed is not used
+</I>&gt;&gt;<i> ...
+</I>&gt;&gt;<i> Linking stub-gzip
+</I>&gt;&gt;<i> cc -static -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__
+</I>&gt;&gt;<i> -DUSE_TCPCP -DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip
+</I>&gt;&gt;<i> stub_common.o common.c arch/asmfuncs.o cpimage_r.o cp_r_fd.o
+</I>&gt;&gt;<i> cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o cp_r_fd_socket.o
+</I>&gt;&gt;<i> cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o
+</I>&gt;&gt;<i> fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib
+</I>&gt;&gt;<i> -nostartfiles ../dietlibc-i386/dietlibc.a -lgcc
+</I>&gt;&gt;<i> ../dietlibc-i386/dietlibc.a(stderr.o): In function `__fflush_stderr':
+</I>&gt;&gt;<i> stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k
+</I>&gt;&gt;<i> bloat).
+</I>&gt;&gt;<i> ../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+</I>&gt;&gt;<i> vsnprintf.c:(.text+0x88): warning: warning: the printf functions add
+</I>&gt;&gt;<i> several kilobytes of bloat.
+</I>
+That are not problems :)
+
+&gt;<i>
+</I>&gt;<i> Cryopid freezes testers/mypidis correctly, without errors.
+</I>&gt;<i>
+</I>&gt;<i> A 'mypidis' process frozen with &quot; -l&quot; starts and runs correctly on the
+</I>&gt;<i> build server (Debian Sid) and a CentOS 5.3 web server. The process id
+</I>&gt;<i> is updated correctly on both machines (32 bit, 2.6.26-2-686 and 2.6.23.17
+</I>&gt;<i> i686).
+</I>
+ok, try without &quot;-l&quot; option please. Let me know.
+
+&gt;<i>
+</I>&gt;<i> The frozen process starts in a promising way on 32-bit FreeBSD 7 with
+</I>&gt;<i> linux_base-fc-4_13, but exits with an error when it cannot find
+</I>&gt;<i> /proc/self/.
+</I>&gt;<i> The layout of /proc is different between Linux and FreeBSD.
+</I>
+Maybe in the future eh :)
+
+&gt;<i>
+</I>&gt;<i> The frozen process exits with an error on a 64-bit Linux web server with
+</I>&gt;<i> 2.6.18-53.1.21.el5xen x86_64.
+</I>&gt;<i>
+</I>&gt;<i>   Error in munmap(stack): Invalid argument
+</I>
+Actually, 64 bit version is not supported by the patch. it's not a patch
+related problem. 64 bit needs updates.
+
+&gt;<i>
+</I>&gt;<i> The frozen process segfaults on 32-bit Red Hat 9 (Shrike) with
+</I>&gt;<i> 2.6.11.12 i686 i686 i386 and glibc-2.3.2-11.9.
+</I>
+This is interesting. Try first without the patch and then with.
+It should works, at least without the patch.
+
+&gt;<i>
+</I>&gt;<i> What else should we be testing? :)
+</I>
+I'll let you know :)
+Thanks,
+
+michele
+
+-- 
+Michele Alberti
+Linux Registered User #467894
+<A HREF="http://alberti.web.cs.unibo.it">http://alberti.web.cs.unibo.it</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000286.html">[Cryopid-devel]  Fwd: getpid hack updated
+</A></li>
+	<LI>Next message: <A HREF="000288.html">[Cryopid-devel] A use scenario for cryopid: Pandora console
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

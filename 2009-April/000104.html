@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Is this program maintained?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Is%20this%20program%20maintained%3F&In-Reply-To=%3C1239942355.5444.640.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Is this program maintained?</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Is%20this%20program%20maintained%3F&In-Reply-To=%3C1239942355.5444.640.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] Is this program maintained?">echo at echoreply.us
+       </A><BR>
+    <I>Fri Apr 17 06:25:55 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+        <LI>Next message: <A HREF="000105.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 2009-04-17 at 08:58 +0800, Bernard Blackham wrote:
+&gt;<i> On Fri, Apr 17, 2009 at 08:01:55AM +0800, Tim Post wrote:
+</I>&gt;<i> &gt; I just checked out a full copy, however a .tgz of the repo would be
+</I>&gt;<i> &gt; handy. I think most involved want to use a DVCS such as Mercurial, so
+</I>&gt;<i> &gt; I'm going to see if I can import up to 0.5.9.1 while preserving the
+</I>&gt;<i> &gt; entire history.
+</I>&gt;<i> 
+</I>&gt;<i> Sadly, the initial structure of the repo wasn't a nice trunk/,
+</I>&gt;<i> tags/, branches/ setup, and so importing it into hg seems to get a
+</I>&gt;<i> little complicated. I've uploaded to relevant svndump if anyone
+</I>&gt;<i> wants to give it a shot:
+</I>&gt;<i>   <A HREF="http://dagobah.ucc.asn.au/cryopid-only-svn.dump.bz2">http://dagobah.ucc.asn.au/cryopid-only-svn.dump.bz2</A>
+</I>&gt;<i> 
+</I>&gt;<i> Revision 30 is where it takes the standard trunk/tags/branches form,
+</I>&gt;<i> and that doesn't play nicely with hg convert. It might take a bit of
+</I>&gt;<i> svndump hacking.
+</I>
+You're right, it was a bit of a challenge. While hg convert offers the
+ability to specify the tags, trunk and branches, doing this resulted in
+a completely backwards (and partially missing) history. Attempting to
+just specify the tags didn't work either.
+
+So, I just did the convert, which got the history 100% correct, but the
+repo was more or less an identical clone of the subversion repo (with
+cryopid/trunk/ cryopid/tags/ cryopid/branches/ etc).
+
+I then went to the last tagged release, backed out the commit just after
+the release so that tags/0.5.9.1 was just as it was when you last
+released. I then hg mv'ed that tag to the repository root, and then hg
+rm -f' ed cryopid/. This converted it to the typical Mercurial layout.
+
+Then, I just had to go through the history to restore the tags, which
+wasn't too difficult.
+
+Finally, I added a tag 0.5.9.1-1 , which points to the current location
+of the 0.5.9.1 tag.
+
+So, should you clone to a tag prior to 0.5.9.1-1, you'll get the old SVN
+style layout. If you clone as-is (completely), you'll see a single tree
+that is identical to the last official release.
+
+Note, I did not attempt to restore the SVN branches, as they really are
+not needed. What we have now is a single master branch, from which other
+Mercurial branches can be created.
+
+The point is, tags and history are preserved. There are no unresolved
+heads. The only thing that _might_ be quirky is getting individual file
+logs, some of them may stop at r30. This is no big deal, since r30 is so
+long ago, nobody would be bisecting that far back.
+
+The end result is here:
+
+<A HREF="http://echoreply.us/hg/cryopid.hg">http://echoreply.us/hg/cryopid.hg</A>
+
+I've tested it, it builds find on my (older) Ubuntu desktop. If that
+looks ok to everyone, I'll go ahead and push it to ShareSource. Given
+the complexity of the original repo, I think coming out with history and
+tags in tact is the best we can do.
+
+Anyone playing with it, do a hg archive ../cryo-testing , then test in
+the archived copy. hgignore is not yet set up, so you might accidentally
+start tracking rubbish files. 
+
+
+&gt;<i> &gt; Is it a problem to keep this list going where it currently lives? If I'm
+</I>&gt;<i> &gt; not mistaken, its mentioned in documentation and in many tutorials
+</I>&gt;<i> &gt; scattered around the web.
+</I>&gt;<i> 
+</I>&gt;<i> It shouldn't be an issue. I'll try and recover the Berlios list
+</I>&gt;<i> password.
+</I>
+That would be great. Thank you again for all of your help. Hopefully you
+can continue at some point, if you are able to find the time and
+interest.
+
+Thanks again!
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+	<LI>Next message: <A HREF="000105.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

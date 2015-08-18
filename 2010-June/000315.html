@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Compiling under 64bit
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Compiling%20under%2064bit&In-Reply-To=%3CAANLkTimZackd-xdD8AiLdEL3GE3amiws5DzeD6UUUzEp%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Compiling under 64bit</H1>
+    <B>Alexandre Strube</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Compiling%20under%2064bit&In-Reply-To=%3CAANLkTimZackd-xdD8AiLdEL3GE3amiws5DzeD6UUUzEp%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Compiling under 64bit">surak at surak.eti.br
+       </A><BR>
+    <I>Tue Jun  1 12:55:07 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#315">[ date ]</a>
+              <a href="thread.html#315">[ thread ]</a>
+              <a href="subject.html#315">[ subject ]</a>
+              <a href="author.html#315">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I stumbled over the following error while compiling Cryopid:
+
+Linking stub-gzip
+cc -static -g -Wall -Os -fno-stack-protector -I. -Iarch -D__x86_64__
+ -DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip stub_common.o
+common.c arch/asmfuncs.o cpimage_r.o cp_r_fd.o cp_r_fd_console.o
+cp_r_fd_file.o cp_r_fd_fifo.o cp_r_fd_socket.o cp_r_misc.o cp_r_sighand.o
+cp_r_vma.o cp_r_header.o arch/arch_r_objs.o fork2.o writer_gzip.c -lz
+-DPROVIDE_MALLOC -nostdlib -nostartfiles ../dietlibc-x86_64/dietlibc.a -lgcc
+../dietlibc-x86_64/dietlibc.a(stderr.o): In function `__fflush_stderr':
+stderr.c:(.text+0x8): warning: warning: your code uses stdio (7+k bloat).
+../dietlibc-x86_64/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+vsnprintf.c:(.text+0x8b): warning: warning: the printf functions add several
+kilobytes of bloat.
+cp_r_sighand.o: In function `rt_sigaction':
+arch/arch.h:27: undefined reference to `syscall'
+collect2: ld returned 1 exit status
+make: *** [stub-gzip] Error 1
+rm stub_common.o
+
+
+-- 
+[]
+Alexandre Strube
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at ubuntu.com</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20100601/307bdc34/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20100601/307bdc34/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#315">[ date ]</a>
+              <a href="thread.html#315">[ thread ]</a>
+              <a href="subject.html#315">[ subject ]</a>
+              <a href="author.html#315">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

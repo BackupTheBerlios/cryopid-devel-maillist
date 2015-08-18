@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Cryopid failing in Ubuntu Hardy
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20failing%20in%20Ubuntu%20Hardy&In-Reply-To=%3C43d34ebe0806161744v32f9f280h9a5a0008d4754c51%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000050.html">
+   <LINK REL="Next"  HREF="000051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Cryopid failing in Ubuntu Hardy</H1>
+    <B>Alex</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Cryopid%20failing%20in%20Ubuntu%20Hardy&In-Reply-To=%3C43d34ebe0806161744v32f9f280h9a5a0008d4754c51%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Cryopid failing in Ubuntu Hardy">alexthegamer at gmail.com
+       </A><BR>
+    <I>Tue Jun 17 02:44:06 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000050.html">[Cryopid-devel] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000051.html">[Cryopid-devel] Subject: Cryopid for ARM based devices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+No, sorry, not at all. I have the exact same issue. I am running on 2.6.25,
+GCC 4.3 - I had to make some changes to the code to get it to compile
+(PAGE_SIZE no longer being defined, used getpagesize() instead)
+
+It runs, although it gives ominous warnings, and then dumps the checkpoint.
+Starting that segfaults, just like you said. I tried to debug it, but it is
+either stripped or does not include debug info checkpoint.
+
+I'm trying to get GDB into assembly-level debugging mode to see if that
+helps, but not succeeding.
+
+How about you? Any luck?
+
+-Alex
+
+On Mon, Jun 16, 2008 at 10:32 AM, Alexandre Strube &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at surak.eti.br</A>&gt;
+wrote:
+
+&gt;<i> Hey Alex,
+</I>&gt;<i>
+</I>&gt;<i> Did you have any luck? The package from ubuntu repositories saves the
+</I>&gt;<i> checkpoints, however they segfault immediately upon restart.
+</I>&gt;<i>
+</I>&gt;<i> On Wed, Jun 11, 2008 at 3:48 AM, Alex &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alexthegamer at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hello,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I can confirm that the binaries created by CryoPID cause issue. I
+</I>&gt;<i> compiled
+</I>&gt;<i> &gt; it myself using Fedora 9 (although I had to make some changes for
+</I>&gt;<i> PAGE_SIZE,
+</I>&gt;<i> &gt; as the define is no longer present), and the binaries generated segfault
+</I>&gt;<i> &gt; immediately after launch. I tried freezing vi, and it seems to work, but
+</I>&gt;<i> it
+</I>&gt;<i> &gt; has some errors, such as:
+</I>&gt;<i> &gt;      Ignoring map - looks like resumer.
+</I>&gt;<i> &gt;      Error parsing map: 00110000-0011b000 r-xp 00000000 08:01
+</I>&gt;<i> &gt; 407228                             /lib64/libnss_files-2.8.so
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      Ignoring map - looks like resumer.
+</I>&gt;<i> &gt;      Error parsing map: 0011b000-0031a000 ---p 0000b000 08:01
+</I>&gt;<i> &gt; 407228                             /lib64/libnss_files-2.8.so
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Map: 3dde21a000-3dde419000 ---p 0001a000 08:01 407273
+</I>&gt;<i> &gt; /lib64/libselinux.so.1
+</I>&gt;<i> &gt; ptrace(PTRACE_PEEKTEXT): Input/output error
+</I>&gt;<i> &gt; Map: 3dde419000-3dde41a000 r--p 00019000 08:01 407273
+</I>&gt;<i> &gt; /lib64/libselinux.so.1
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; and
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Map: 7fff457fe000-7fff45800000 r-xp 7fff457fe000 00:00 0          [vdso]
+</I>&gt;<i> &gt;      Ignoring map - in kernel space.
+</I>&gt;<i> &gt;      Error parsing map: ffffffffff600000-ffffffffff601000 r-xp 00000000
+</I>&gt;<i> &gt; 00:00 0                  [vsyscall]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The current kernel is 2.6.25-14.fc9.x86_64 #1 SMP.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Anyone have any ideas?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -Alex
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; CryoPID-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> []
+</I>&gt;<i> Alexandre Strube
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">surak at ubuntu.com</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080616/51fa6882/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080616/51fa6882/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000050.html">[Cryopid-devel] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000051.html">[Cryopid-devel] Subject: Cryopid for ARM based devices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

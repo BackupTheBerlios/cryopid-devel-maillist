@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Mail I'll send to glibc-help about PID caching	problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Mail%20I%27ll%20send%20to%20glibc-help%20about%20PID%20caching%0A%09problem&In-Reply-To=%3Cf3dda8c30907070322g78f2332ald3f4ed913c4c353b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000229.html">
+   <LINK REL="Next"  HREF="000231.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Mail I'll send to glibc-help about PID caching	problem</H1>
+    <B>michele alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Mail%20I%27ll%20send%20to%20glibc-help%20about%20PID%20caching%0A%09problem&In-Reply-To=%3Cf3dda8c30907070322g78f2332ald3f4ed913c4c353b%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] Mail I'll send to glibc-help about PID caching	problem">alberti at cs.unibo.it
+       </A><BR>
+    <I>Tue Jul  7 12:22:29 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000229.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+        <LI>Next message: <A HREF="000231.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#230">[ date ]</a>
+              <a href="thread.html#230">[ thread ]</a>
+              <a href="subject.html#230">[ subject ]</a>
+              <a href="author.html#230">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+I'm working on a project whose goal is to capture the state of a running
+process in GNU/Linux and save it to a file. This file can then be used to
+resume the process later on, even after a reboot. The url to the prject
+page: <A HREF="http://sharesource.org/project/cryopid/">http://sharesource.org/project/cryopid/</A>
+The save file stores all needed information: registers, file descriptors,
+signal handler, TLS (Thread Local Storage), VMA etc.
+Here comes a problem with PID caching. If the process to capture calls a
+getpid (the glibc wrapper),the PID is cached.
+The &quot;frozen&quot; process stores everything, even the cached PID value.
+When the frozen process tries to resume, it uses the previous (old, cached)
+PID, which is incorrect. The call to getpid() still returns the original PID
+even though the restored process has gotten a new one.
+Can anyone tell me where TLS is stored? Is TLS the problem?
+How can I refresh the PID cache? Better yet, how can I avoid caching the PID
+in the first place?
+
+Thanks,
+Michele
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090707/2d72cd2d/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090707/2d72cd2d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000229.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+	<LI>Next message: <A HREF="000231.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#230">[ date ]</a>
+              <a href="thread.html#230">[ thread ]</a>
+              <a href="subject.html#230">[ subject ]</a>
+              <a href="author.html#230">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

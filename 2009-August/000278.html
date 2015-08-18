@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] kill flag and minor changes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20kill%20flag%20and%20minor%20changes&In-Reply-To=%3C1250004939.10302.17.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000275.html">
+   <LINK REL="Next"  HREF="000279.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] kill flag and minor changes</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20kill%20flag%20and%20minor%20changes&In-Reply-To=%3C1250004939.10302.17.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] kill flag and minor changes">echo at echoreply.us
+       </A><BR>
+    <I>Tue Aug 11 17:35:39 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000275.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+        <LI>Next message: <A HREF="000279.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 2009-08-11 at 10:07 +0200, Michele Alberti wrote:
+&gt;<i> Hi all,
+</I>&gt;<i> I have jsut pushed some minor changes. They fix some warnings and
+</I>&gt;<i> update user struct.
+</I>
+I'm catching up with all of your patches now and testing (to the best of
+my ability on a Xen farm). Sorry to be absent lately, I just got over a
+really wretched case of salmonella. I'll send comments soon.
+
+PTRACE_KILL was problematic in some pre-2.6 versions but I don't see any
+reason to not use it.
+
+&gt;<i> Yesterday I pushed a changeset to insert &quot;-kill&quot; flag.
+</I>&gt;<i> It permits to kill the original process after made the frozen image.
+</I>&gt;<i> Command example:
+</I>&gt;<i> 
+</I>&gt;<i> $./cyopid -k [or --kill] &lt;file&gt; &lt;pid&gt;
+</I>
+Awesome! That was on my to-do list.
+
+I'm about 60% through introducing autoconf, its actually turned out to
+be a lot more work than I anticipated. There are about a dozen member
+changes in various exposed kernel structures from 2.4 to current
+linux-stable, so its a lot of conditional code. Its going to be a while
+before I'm comfortable pushing that.
+
+I think we'll end up having to make a separate 2.4 branch and back port
+stuff that is desirable from the main development branch. This is going
+to limit the amount of ugly conditional code as well as ease the
+headache of dealing with quirks known in old versions of gcc.
+
+What I'd like to do (now) is implement the dotfile for default
+configuration options and make the output of freeze less noisy by
+default. Then, add some run time checks (such as VDSO randomization)
+which can warn the user that the process may not unfreeze as expected.
+
+And, of course the libc upgrade. 
+
+After that, we can probably see about getting Cryopid back into debian
+proper. I think between all who have been participating, enough brain
+power exists to handle any new bugs rather quickly.
+
+Cheers,
+--Tim
+
+-- 
+Monkey + Typewriter = Echoreply ( <A HREF="http://echoreply.us">http://echoreply.us</A> )
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000275.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+	<LI>Next message: <A HREF="000279.html">[Cryopid-devel] kill flag and minor changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

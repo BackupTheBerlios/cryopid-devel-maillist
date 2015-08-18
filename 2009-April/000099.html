@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryoPID-devel%20Digest%2C%20Vol%2022%2C%20Issue%201&In-Reply-To=%3C1239780345.5444.538.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000097.html">
+   <LINK REL="Next"  HREF="000098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryoPID-devel%20Digest%2C%20Vol%2022%2C%20Issue%201&In-Reply-To=%3C1239780345.5444.538.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1">echo at echoreply.us
+       </A><BR>
+    <I>Wed Apr 15 09:25:45 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000097.html">[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+</A></li>
+        <LI>Next message: <A HREF="000098.html">[Cryopid-devel] Possible fork? Was:CryoPID-devel Digest, Vol 22,	Issue 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+On Tue, 2009-04-14 at 23:29 -0700, Valery Reznic wrote:
+
+&gt;<i> I think build on modern system shouldn't be a big problem,
+</I>&gt;<i> but memory randomization - stack randomization in particular will.
+</I>
+pax is going to be a _very_ interesting problem, which also bleeds into
+saving groups (who might be using a randomized mmap). By that token,
+futexes also become interesting upon restarting a group, more so that
+mutexes, even without randomization. Processes would just re-start into
+deadlock or segfaults.
+
+I don't see either working in the immediate future. But a working build
+is quite (as you said) easy. If the project gets re-introduced to
+Debian, its likely we can get a few GSOC students next year as well.
+
+&gt;<i> OK, let's move and hope we'll find the solution.
+</I>
+I'd like to wait a few days to see if Bernard can still be found. It
+takes very little time to set up a repository, bug tracker and wiki.
+
+Ideally, we are able to keep this same mailing list, since its already
+got subscribers and is (likely?) mentioned in distro documentation.
+That's one of the many reasons why I hope to hear back from Bernard.
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000097.html">[Cryopid-devel] CryoPID-devel Digest, Vol 22, Issue 1
+</A></li>
+	<LI>Next message: <A HREF="000098.html">[Cryopid-devel] Possible fork? Was:CryoPID-devel Digest, Vol 22,	Issue 1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

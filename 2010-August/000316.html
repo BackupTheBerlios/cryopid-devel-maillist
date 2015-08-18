@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] error while installing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20while%20installing&In-Reply-To=%3CAANLkTin26fjsf2ijJY1F_axqj8vzWq8rOinC1od44_Vc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] error while installing</H1>
+    <B>rahul patil</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20while%20installing&In-Reply-To=%3CAANLkTin26fjsf2ijJY1F_axqj8vzWq8rOinC1od44_Vc%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] error while installing">rahul.deshmukhpatil at gmail.com
+       </A><BR>
+    <I>Mon Aug 30 16:36:23 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello all,
+
+I am a new user of cryopid.
+I tried to install the cryopid but i am getting errors that linux/user.h not
+present.
+
+The error log is as following.
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">rahulp at minint-d119opv</A> src]$ make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory `/media/study/my_projects/process_snapshot/other
+projects/cryopid/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o
+cp_r_regs.o cp_r_regs.c
+cp_r_regs.c:1:24: error: linux/user.h: No such file or directory
+cp_r_regs.c: In function &#8216;load_chunk_regs&#8217;:
+cp_r_regs.c:17: error: dereferencing pointer to incomplete type
+cp_r_regs.c:21: error: &#8216;PAGE_SIZE&#8217; undeclared (first use in this function)
+cp_r_regs.c:21: error: (Each undeclared identifier is reported only once
+cp_r_regs.c:21: error: for each function it appears in.)
+cp_r_regs.c:27: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:28: error: dereferencing pointer to incomplete type
+cp_r_regs.c:31: error: dereferencing pointer to incomplete type
+cp_r_regs.c:32: error: dereferencing pointer to incomplete type
+cp_r_regs.c:36: error: dereferencing pointer to incomplete type
+cp_r_regs.c:37: error: dereferencing pointer to incomplete type
+cp_r_regs.c:63: error: dereferencing pointer to incomplete type
+cp_r_regs.c:64: error: dereferencing pointer to incomplete type
+cp_r_regs.c:65: error: dereferencing pointer to incomplete type
+cp_r_regs.c:66: error: dereferencing pointer to incomplete type
+cp_r_regs.c:67: error: dereferencing pointer to incomplete type
+cp_r_regs.c:84: error: dereferencing pointer to incomplete type
+cp_r_regs.c:85: error: dereferencing pointer to incomplete type
+cp_r_regs.c:86: error: dereferencing pointer to incomplete type
+cp_r_regs.c:92: error: dereferencing pointer to incomplete type
+cp_r_regs.c:93: error: dereferencing pointer to incomplete type
+cp_r_regs.c:94: error: dereferencing pointer to incomplete type
+cp_r_regs.c:93: error: invalid lvalue in asm output 0
+cp_r_regs.c: In function &#8216;read_chunk_regs&#8217;:
+cp_r_regs.c:102: error: storage size of &#8216;user&#8217; isn&#8217;t known
+cp_r_regs.c:104: error: invalid application of &#8216;sizeof&#8217; to incomplete type
+&#8216;struct user&#8217;
+cp_r_regs.c:102: warning: unused variable &#8216;user&#8217;
+make[1]: *** [cp_r_regs.o] Error 1
+make[1]: Leaving directory `/media/study/my_projects/process_snapshot/other
+projects/cryopid/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">rahulp at minint-d119opv</A> src]$
+
+Please help me out to get rid of it.
+
+-- 
+Regards,
+Rahul Patil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20100830/9e6709e0/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20100830/9e6709e0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

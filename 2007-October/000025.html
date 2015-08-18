@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Troble compiling freeze
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Troble%20compiling%20freeze&In-Reply-To=%3C200710052131.l95LVR1V027640%40plxc0930.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000026.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Troble compiling freeze</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Troble%20compiling%20freeze&In-Reply-To=%3C200710052131.l95LVR1V027640%40plxc0930.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] Troble compiling freeze">johnh at ichips.intel.com
+       </A><BR>
+    <I>Fri Oct  5 23:31:27 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000026.html">[Cryopid-devel] Doesn't stop process and doesn't compile on x86_64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Bob,
+
+|<i> When I cd to src and do make I get a slew of errors. The first one is:
+</I>|<i>
+</I>|<i> cc -static -g -Wall -Os -fno-stack-protector -I. -Iarch -D__i386__ 
+</I>|<i> -DUSE_TCPCP -DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip 
+</I>|<i> stub_common.o common.c arch/asmfuncs.o cpimage_r.o cp_r_fd.o 
+</I>|<i> cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o cp_r_fd_socket.o 
+</I>|<i> cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o 
+</I>|<i> fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib 
+</I>|<i> -nostartfiles ../dietlibc-i386/dietlibc.a -lgcc
+</I>|<i> writer_gzip.c:7:18: error: zlib.h: No such file or directory
+</I>|<i>
+</I>|<i> This is strange since I do have zlib.h on my machine:
+</I>|<i> /usr/src/linux-headers-2.6.20-15-generic/include/linux/zlib.h
+</I>|<i> /usr/src/linux-headers-2.6.20-15-generic/include/config/jffs2/zlib.h
+</I>|<i> /usr/src/linux-headers-2.6.20-15/include/linux/zlib.h
+</I>|<i> /usr/src/linux-headers-2.6.20-16/include/linux/zlib.h
+</I>|<i> /usr/src/linux-headers-2.6.20-16-generic/include/linux/zlib.h
+</I>|<i> /usr/src/linux-headers-2.6.20-16-generic/include/config/jffs2/zlib.h
+</I>|<i>
+</I>|<i> I am running Kubuntu Feisty Fawn:
+</I>|<i> Linux version 2.6.20-16-generic (<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at terranova</A>) (gcc version 4.1.2 
+</I>|<i> (Ubuntu 4.1.2-0ubuntu4)) #2 SMP Fri Aug 31 00:55:27 UTC 2007
+</I>
+I just had exactly the same problem on almost exactly the same setup.
+(I've just taken delivery of a new Dell box with Ubuntu pre-installed.
+Bizarrely, it has gcc but not stdio.h by default...) Unlike you, I
+didn't bother to check whether &quot;zlib.h&quot; was there somewhere but just
+blindly grabbed the package anyway:
+
+  sudo apt-get install zlib1g-dev
+
+That solved my problem, as I recall. It's possible that &quot;zlib.h&quot; just
+wasn't in the place that CryoPID expected, or maybe there is some
+significant difference in our setups.
+
+John.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000026.html">[Cryopid-devel] Doesn't stop process and doesn't compile on x86_64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

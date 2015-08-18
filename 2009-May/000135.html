@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C4A04101F.7080108%40thalesgroup.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000134.html">
+   <LINK REL="Next"  HREF="000136.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Jay Vaughan</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C4A04101F.7080108%40thalesgroup.com%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">jay.vaughan at thalesgroup.com
+       </A><BR>
+    <I>Fri May  8 12:57:35 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000134.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+        <LI>Next message: <A HREF="000136.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> but I'm just wondering what is _binary_stub_[...]_start. Where is it defined?
+</I>
+
+
+&gt;<i> Jay, what distribution do you have?
+</I>&gt;<i> I'm using Debian, 2.6.28.9 i686, with:
+</I>&gt;<i> * gcc, version: 4:4.3.3-5
+</I>&gt;<i> * libc6, version: 2.9-10
+</I>&gt;<i>
+</I>
+For my hacking on cryopid, I am using a Debian etch (4.0) system, with the following specs:
+
+Debian GNU/Linux 4.0 (etch)
+2.6.18-5-686-bigmem
+gcc version 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)
+libc-2.3.6
+Multi-core system (8 CPU's).
+
+On this system I am able to build cryopid 0.5.9.1 cleanly for the first time (previous 
+efforts on RedHat have been aborted) but I am unable to run freeze'd apps successfully ..
+
+&gt;<i> On my PC, cryopid builds ok, I follows this bug report (for debian):
+</I>&gt;<i> <A HREF="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=479902">http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=479902</A>
+</I>&gt;<i> The project builds but doesn't work. It is just a work around.
+</I>
+I am not running into this problem, but instead something else .. here is what happens 
+when I try to freeze a 'top' process and re-run it:
+
+bash&gt; ./freeze top.freeze 24338
+Map: 08048000-08054000 r-xp 00000000 08:01 9029436    /usr/bin/top
+Map: 08054000-08055000 rw-p 0000b000 08:01 9029436    /usr/bin/top
+Map: 08055000-08098000 rw-p 08055000 00:00 0          [heap]
+Map: b7e15000-b7e27000 r-xp 00000000 08:01 11813120   /lib/tls/i686/cmov/libnsl-2.3.6.so
+Map: b7e27000-b7e29000 rw-p 00011000 08:01 11813120   /lib/tls/i686/cmov/libnsl-2.3.6.so
+Map: b7e29000-b7e2b000 rw-p b7e29000 00:00 0          (null)
+[+] Found scribble zone: 0xb7e29000
+Map: b7e2b000-b7e33000 r-xp 00000000 08:01 11813406   /lib/tls/i686/cmov/libnss_nis-2.3.6.so
+Map: b7e33000-b7e35000 rw-p 00007000 08:01 11813406   /lib/tls/i686/cmov/libnss_nis-2.3.6.so
+Map: b7e35000-b7e3e000 r-xp 00000000 08:01 11813402   /lib/tls/i686/cmov/libnss_files-2.3.6.so
+Map: b7e3e000-b7e40000 rw-p 00008000 08:01 11813402   /lib/tls/i686/cmov/libnss_files-2.3.6.so
+Map: b7e40000-b7e41000 rw-p b7e40000 00:00 0          (null)
+Map: b7e41000-b7e43000 r-xp 00000000 08:01 11813101   /lib/tls/i686/cmov/libdl-2.3.6.so
+Map: b7e43000-b7e45000 rw-p 00001000 08:01 11813101   /lib/tls/i686/cmov/libdl-2.3.6.so
+Map: b7e45000-b7f6c000 r-xp 00000000 08:01 11813087   /lib/tls/i686/cmov/libc-2.3.6.so
+[+] Found a syscall location at 0xb7e6d8a5
+Map: b7f6c000-b7f71000 r--p 00127000 08:01 11813087   /lib/tls/i686/cmov/libc-2.3.6.so
+Map: b7f71000-b7f73000 rw-p 0012c000 08:01 11813087   /lib/tls/i686/cmov/libc-2.3.6.so
+Map: b7f73000-b7f77000 rw-p b7f73000 00:00 0          (null)
+Map: b7f77000-b7faf000 r-xp 00000000 08:01 11796587   /lib/libncurses.so.5.5
+Map: b7faf000-b7fb7000 rw-p 00038000 08:01 11796587   /lib/libncurses.so.5.5
+Map: b7fb7000-b7fb8000 rw-p b7fb7000 00:00 0          (null)
+Map: b7fb8000-b7fc4000 r-xp 00000000 08:01 11796646   /lib/libproc-3.2.7.so
+Map: b7fc4000-b7fc5000 rw-p 0000b000 08:01 11796646   /lib/libproc-3.2.7.so
+Map: b7fc5000-b7fd8000 rw-p b7fc5000 00:00 0          (null)
+Map: b7fe7000-b7fea000 rw-p b7fe7000 00:00 0          (null)
+Map: b7fea000-b7feb000 r-xp b7fea000 00:00 0          [vdso]
+Map: b7feb000-b8000000 r-xp 00000000 08:01 11796564   /lib/ld-2.3.6.so
+Map: b8000000-b8002000 rw-p 00014000 08:01 11796564   /lib/ld-2.3.6.so
+Map: bffeb000-c0000000 rw-p bffeb000 00:00 0          [stack]
+[+] Terminal device appears to be 136:23
+Saved console chunk (0).
+Saved console chunk (1).
+Saved console chunk (2).
+Heap was at 0x12c00. Want to be at 0x8055000. offset = 0x8042400
+Compressed 604203 bytes into 79235 bytes (87% compression)
+Written image.
+
+bash&gt; ./top.freeze
+Segmentation fault
+
+
+
+
+-- 
+;
+--
+Jay Vaughan
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000134.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+	<LI>Next message: <A HREF="000136.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

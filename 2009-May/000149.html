@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1243414215.5849.29.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000146.html">
+   <LINK REL="Next"  HREF="000151.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1243414215.5849.29.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] cryopid patch">echo at echoreply.us
+       </A><BR>
+    <I>Wed May 27 10:50:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000146.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000151.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#149">[ date ]</a>
+              <a href="thread.html#149">[ thread ]</a>
+              <a href="subject.html#149">[ subject ]</a>
+              <a href="author.html#149">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2009-05-27 at 09:18 +0200, Michele Alberti wrote:
+&gt;<i> &gt; Please go ahead and send the patch, I'll apply it after I do the git
+</I>&gt;<i> &gt; conversion. I also need to get you commit access at sharesource (and
+</I>&gt;<i> &gt; github while its in use).
+</I>&gt;<i> 
+</I>&gt;<i> Yes, I need a commit access. Let me know ASAP.
+</I>
+I'll contact you off list for github, for ShareSource, simply sign up at
+<A HREF="http://sharesource.org">http://sharesource.org</A> and send me your user name.
+
+Anyone else who needs commit access, or even access to update the wiki,
+etc, please let me know.
+
+&gt;<i> Here you are the patch! I'm not an expert in creating pathces, so let me
+</I>&gt;<i> know if I have to change it, and how.
+</I>&gt;<i> I hope that the changes I wrote are good.
+</I>
+I'm looking at it now. A couple of things come to mind:
+
+- There are some blank line insertions, though at this point I doubt
+anyone really cares. Its a matter of c-style and (I too) like a bit of
+space between preprocessors and actual code beginning, however in
+functions it can get confusing, since a newline typically segments the
+flow of the code.
+
+- Instead of getpagesize(), can we use a static _getpagesize() that
+looks for PAGE_SIZE being defined on the command line? If defined, it
+just uses that value. That should be agreeably inlined by gcc and saves
+numerous jumps and calls to sysconf, since we can get the value via
+autoconf (while obeying what the user thinks it should be).
+
+- We (those of us working on it) need to have a discussion regarding
+legacy kernel support .. and how many backwards compatibility kludges
+we're comfortable with. Linux is a moving target .. perhaps some cut off
+point needs to be established. I can work around all of that with
+preprocessor soup that I get from autoconf, but really, its going to get
+ugly and difficult to maintain. 2.6.24 sounds good to me, but I'd like
+to hear from others.
+
+I'll be able to take a closer look in a few hours, I'll send any
+additional comments then.
+
+I know this was a pain in the ass, thank you for doing it!
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000146.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000151.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#149">[ date ]</a>
+              <a href="thread.html#149">[ thread ]</a>
+              <a href="subject.html#149">[ subject ]</a>
+              <a href="author.html#149">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

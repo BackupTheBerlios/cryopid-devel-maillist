@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C284698.1744.qm%40web110307.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000133.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C284698.1744.qm%40web110307.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Fri May  8 21:16:18 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000133.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> 
+</I>&gt;<i> I am not running into this problem, but instead something
+</I>&gt;<i> else .. here is what happens 
+</I>&gt;<i> when I try to freeze a 'top' process and re-run it:
+</I>&gt;<i> 
+</I>&gt;<i> bash&gt; ./freeze top.freeze 24338
+</I>&gt;<i> Map: 08048000-08054000 r-xp 00000000 08:01 9029436&#160;
+</I>&gt;<i> &#160; /usr/bin/top
+</I>&gt;<i> Map: 08054000-08055000 rw-p 0000b000 08:01 9029436&#160;
+</I>&gt;<i> &#160; /usr/bin/top
+</I>&gt;<i> Map: 08055000-08098000 rw-p 08055000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; [heap]
+</I>&gt;<i> Map: b7e15000-b7e27000 r-xp 00000000 08:01
+</I>&gt;<i> 11813120&#160;&#160;&#160;/lib/tls/i686/cmov/libnsl-2.3.6.so
+</I>&gt;<i> Map: b7e27000-b7e29000 rw-p 00011000 08:01
+</I>&gt;<i> 11813120&#160;&#160;&#160;/lib/tls/i686/cmov/libnsl-2.3.6.so
+</I>&gt;<i> Map: b7e29000-b7e2b000 rw-p b7e29000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> [+] Found scribble zone: 0xb7e29000
+</I>&gt;<i> Map: b7e2b000-b7e33000 r-xp 00000000 08:01
+</I>&gt;<i> 11813406&#160;&#160;&#160;/lib/tls/i686/cmov/libnss_nis-2.3.6.so
+</I>&gt;<i> Map: b7e33000-b7e35000 rw-p 00007000 08:01
+</I>&gt;<i> 11813406&#160;&#160;&#160;/lib/tls/i686/cmov/libnss_nis-2.3.6.so
+</I>&gt;<i> Map: b7e35000-b7e3e000 r-xp 00000000 08:01
+</I>&gt;<i> 11813402&#160;&#160;&#160;/lib/tls/i686/cmov/libnss_files-2.3.6.so
+</I>&gt;<i> Map: b7e3e000-b7e40000 rw-p 00008000 08:01
+</I>&gt;<i> 11813402&#160;&#160;&#160;/lib/tls/i686/cmov/libnss_files-2.3.6.so
+</I>&gt;<i> Map: b7e40000-b7e41000 rw-p b7e40000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> Map: b7e41000-b7e43000 r-xp 00000000 08:01
+</I>&gt;<i> 11813101&#160;&#160;&#160;/lib/tls/i686/cmov/libdl-2.3.6.so
+</I>&gt;<i> Map: b7e43000-b7e45000 rw-p 00001000 08:01
+</I>&gt;<i> 11813101&#160;&#160;&#160;/lib/tls/i686/cmov/libdl-2.3.6.so
+</I>&gt;<i> Map: b7e45000-b7f6c000 r-xp 00000000 08:01
+</I>&gt;<i> 11813087&#160;&#160;&#160;/lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> [+] Found a syscall location at 0xb7e6d8a5
+</I>&gt;<i> Map: b7f6c000-b7f71000 r--p 00127000 08:01
+</I>&gt;<i> 11813087&#160;&#160;&#160;/lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> Map: b7f71000-b7f73000 rw-p 0012c000 08:01
+</I>&gt;<i> 11813087&#160;&#160;&#160;/lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> Map: b7f73000-b7f77000 rw-p b7f73000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> Map: b7f77000-b7faf000 r-xp 00000000 08:01
+</I>&gt;<i> 11796587&#160;&#160;&#160;/lib/libncurses.so.5.5
+</I>&gt;<i> Map: b7faf000-b7fb7000 rw-p 00038000 08:01
+</I>&gt;<i> 11796587&#160;&#160;&#160;/lib/libncurses.so.5.5
+</I>&gt;<i> Map: b7fb7000-b7fb8000 rw-p b7fb7000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> Map: b7fb8000-b7fc4000 r-xp 00000000 08:01
+</I>&gt;<i> 11796646&#160;&#160;&#160;/lib/libproc-3.2.7.so
+</I>&gt;<i> Map: b7fc4000-b7fc5000 rw-p 0000b000 08:01
+</I>&gt;<i> 11796646&#160;&#160;&#160;/lib/libproc-3.2.7.so
+</I>&gt;<i> Map: b7fc5000-b7fd8000 rw-p b7fc5000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> Map: b7fe7000-b7fea000 rw-p b7fe7000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; (null)
+</I>&gt;<i> Map: b7fea000-b7feb000 r-xp b7fea000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; [vdso]
+</I>&gt;<i> Map: b7feb000-b8000000 r-xp 00000000 08:01
+</I>&gt;<i> 11796564&#160;&#160;&#160;/lib/ld-2.3.6.so
+</I>&gt;<i> Map: b8000000-b8002000 rw-p 00014000 08:01
+</I>&gt;<i> 11796564&#160;&#160;&#160;/lib/ld-2.3.6.so
+</I>&gt;<i> Map: bffeb000-c0000000 rw-p bffeb000 00:00 0&#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; [stack]
+</I>&gt;<i> [+] Terminal device appears to be 136:23
+</I>&gt;<i> Saved console chunk (0).
+</I>&gt;<i> Saved console chunk (1).
+</I>&gt;<i> Saved console chunk (2).
+</I>&gt;<i> Heap was at 0x12c00. Want to be at 0x8055000. offset =
+</I>&gt;<i> 0x8042400
+</I>&gt;<i> Compressed 604203 bytes into 79235 bytes (87% compression)
+</I>&gt;<i> Written image.
+</I>&gt;<i> 
+</I>&gt;<i> bash&gt; ./top.freeze
+</I>&gt;<i> Segmentation fault
+</I>Could you run it under strace, i,e 'strace -i top.freeze' ?
+
+I think it's due to memory randomization, but may be this time the cause is something else.
+
+
+Valery.
+
+
+&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> ;
+</I>&gt;<i> --
+</I>&gt;<i> Jay Vaughan
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000133.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

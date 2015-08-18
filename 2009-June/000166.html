@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C200906161628.n5GGSxXQ015982%40plxc1122.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000167.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C200906161628.n5GGSxXQ015982%40plxc1122.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] cryopid patch">johnh at ichips.intel.com
+       </A><BR>
+    <I>Tue Jun 16 18:28:59 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000167.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Michele,
+
+|<i> does anyone try my lastest patch?
+</I>|<i> On my Debian it's ok, in Ubuntu or Fedora?
+</I>
+I tried it on Ubuntu Hardy and Jaunty. On Hardy it compiled without
+a hitch, though the restarted binaries still segfault. On Jaunty it
+still didn't quite compile, though it got much further than it did
+without the patch. The problem actually seems to be in dietlibc, with
+some references to missing functions &quot;__fprintf_chk&quot; etc. See the
+attached log. Does anyone recognize this problem?
+
+John.
+
+-------------- next part --------------
+$ tar xvfz cryopid-0.5.9.1-i386.tar.gz
+cryopid-0.5.9.1/
+cryopid-0.5.9.1/dietlibc-i386/
+cryopid-0.5.9.1/dietlibc-i386/dietlibc.a
+cryopid-0.5.9.1/src/
+cryopid-0.5.9.1/src/linux/
+cryopid-0.5.9.1/src/linux/tcpcp.h
+cryopid-0.5.9.1/src/arch-i386/
+cryopid-0.5.9.1/src/arch-i386/plt-resolve.c
+cryopid-0.5.9.1/src/arch-i386/asmfuncs.S
+cryopid-0.5.9.1/src/arch-i386/cp_w_i387.c
+cryopid-0.5.9.1/src/arch-i386/elfwriter.c
+cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c
+cryopid-0.5.9.1/src/arch-i386/cp_r_tls.c
+cryopid-0.5.9.1/src/arch-i386/cplayout.h
+cryopid-0.5.9.1/src/arch-i386/cp_w_regs.c
+cryopid-0.5.9.1/src/arch-i386/cp_w_tls.c
+cryopid-0.5.9.1/src/arch-i386/process.c
+cryopid-0.5.9.1/src/arch-i386/stub.c
+cryopid-0.5.9.1/src/arch-i386/start.S
+cryopid-0.5.9.1/src/arch-i386/cp_r_i387.c
+cryopid-0.5.9.1/src/arch-i386/stub.h
+cryopid-0.5.9.1/src/arch-i386/arch.h
+cryopid-0.5.9.1/src/arch-i386/Makefile
+cryopid-0.5.9.1/src/arch-i386/stub-linking.x
+cryopid-0.5.9.1/src/list.c
+cryopid-0.5.9.1/src/x.h
+cryopid-0.5.9.1/src/cp_r_fd_fifo.c
+cryopid-0.5.9.1/src/cp_r_misc.c
+cryopid-0.5.9.1/src/Makefile
+cryopid-0.5.9.1/src/cp_r_fd_console.c
+cryopid-0.5.9.1/src/cp_w_fd_file.c
+cryopid-0.5.9.1/src/cp_w_fd.c
+cryopid-0.5.9.1/src/cp_r_fd_socket.c
+cryopid-0.5.9.1/src/cp_w_fd_fifo.c
+cryopid-0.5.9.1/src/writer_gzip.c
+cryopid-0.5.9.1/src/cp_w_fd_socket.c
+cryopid-0.5.9.1/src/gtk_support.c
+cryopid-0.5.9.1/src/cryopid.h
+cryopid-0.5.9.1/src/supervisor.c
+cryopid-0.5.9.1/src/writer_buffered.c
+cryopid-0.5.9.1/src/stub_common.c
+cryopid-0.5.9.1/src/process.h
+cryopid-0.5.9.1/src/cp_w_header.c
+cryopid-0.5.9.1/src/cpimage_r.c
+cryopid-0.5.9.1/src/cp_r_vma.c
+cryopid-0.5.9.1/src/tcpcp_r.c
+cryopid-0.5.9.1/src/cpimage_w.c
+cryopid-0.5.9.1/src/cp_w_vma.c
+cryopid-0.5.9.1/src/cp_r_fd.c
+cryopid-0.5.9.1/src/tcpcp_w.c
+cryopid-0.5.9.1/src/cp_r_sighand.c
+cryopid-0.5.9.1/src/writer_lzo.c
+cryopid-0.5.9.1/src/cp_w_misc.c
+cryopid-0.5.9.1/src/cpimage.h
+cryopid-0.5.9.1/src/tcpcp.h
+cryopid-0.5.9.1/src/list.h
+cryopid-0.5.9.1/src/freeze.c
+cryopid-0.5.9.1/src/cp_w_fd_console.c
+cryopid-0.5.9.1/src/fork2_helper.c
+cryopid-0.5.9.1/src/fork2.c
+cryopid-0.5.9.1/src/cp_w_sighand.c
+cryopid-0.5.9.1/src/writer_raw.c
+cryopid-0.5.9.1/src/common.c
+cryopid-0.5.9.1/src/cp_r_header.c
+cryopid-0.5.9.1/src/cp_r_fd_file.c
+cryopid-0.5.9.1/src/.swp
+cryopid-0.5.9.1/testers/
+cryopid-0.5.9.1/testers/spinner.c
+cryopid-0.5.9.1/testers/mypidis.c
+cryopid-0.5.9.1/testers/test.c
+cryopid-0.5.9.1/testers/easytest.c
+cryopid-0.5.9.1/testers/sigtest.c
+cryopid-0.5.9.1/testers/Makefile
+cryopid-0.5.9.1/ChangeLog
+cryopid-0.5.9.1/LICENSE
+cryopid-0.5.9.1/TODO
+cryopid-0.5.9.1/CREDITS
+cryopid-0.5.9.1/README
+$ patch -p0 &lt;./cryopid.patch
+patching file cryopid-0.5.9.1/src/arch-i386/cp_r_i387.c
+patching file cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c
+patching file cryopid-0.5.9.1/src/arch-i386/cp_r_tls.c
+patching file cryopid-0.5.9.1/src/arch-i386/cp_w_i387.c
+patching file cryopid-0.5.9.1/src/arch-i386/cp_w_regs.c
+patching file cryopid-0.5.9.1/src/arch-i386/cp_w_tls.c
+patching file cryopid-0.5.9.1/src/arch-i386/elfwriter.c
+patching file cryopid-0.5.9.1/src/arch-i386/Makefile
+patching file cryopid-0.5.9.1/src/arch-i386/process.c
+patching file cryopid-0.5.9.1/src/arch-i386/stub.h
+patching file cryopid-0.5.9.1/src/common.c
+patching file cryopid-0.5.9.1/src/cpimage.h
+patching file cryopid-0.5.9.1/src/cp_w_vma.c
+patching file cryopid-0.5.9.1/src/Makefile
+patching file cryopid-0.5.9.1/src/process.h
+patch unexpectedly ends in middle of line
+$ cd cryopid-0.5.9.1/src/
+$ make clean
+rm -f *.o arch/*.o freeze fork2_helper
+rm -f arch/arch-i386 arch
+$ make
+ln -s arch-i386 arch
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory `/home/jrh/software/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o stub.o stub.c
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_r_regs.o cp_r_regs.c
+cp_r_regs.c: In function &#226;&#128;&#152;read_chunk_regs&#226;&#128;&#153;:
+cp_r_regs.c:116: warning: format &#226;&#128;&#152;%08x&#226;&#128;&#153; expects type &#226;&#128;&#152;unsigned int&#226;&#128;&#153;, but argument 3 has type &#226;&#128;&#152;long int&#226;&#128;&#153;
+cp_r_regs.c:116: warning: format &#226;&#128;&#152;%08x&#226;&#128;&#153; expects type &#226;&#128;&#152;unsigned int&#226;&#128;&#153;, but argument 4 has type &#226;&#128;&#152;long int&#226;&#128;&#153;
+cp_r_regs.c:116: warning: format &#226;&#128;&#152;%08x&#226;&#128;&#153; expects type &#226;&#128;&#152;unsigned int&#226;&#128;&#153;, but argument 5 has type &#226;&#128;&#152;long int&#226;&#128;&#153;
+cp_r_regs.c:116: warning: format &#226;&#128;&#152;%08x&#226;&#128;&#153; expects type &#226;&#128;&#152;unsigned int&#226;&#128;&#153;, but argument 6 has type &#226;&#128;&#152;long int&#226;&#128;&#153;
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_r_tls.o cp_r_tls.c
+cp_r_tls.c: In function &#226;&#128;&#152;read_chunk_tls&#226;&#128;&#153;:
+cp_r_tls.c:37: warning: format &#226;&#128;&#152;%lx&#226;&#128;&#153; expects type &#226;&#128;&#152;long unsigned int&#226;&#128;&#153;, but argument 4 has type &#226;&#128;&#152;unsigned int&#226;&#128;&#153;
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_r_i387.o cp_r_i387.c
+cc    -c -o start.o start.S
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o plt-resolve.o plt-resolve.c
+ld -m elf_i386  -r -o arch_r_objs.o stub.o cp_r_regs.o cp_r_tls.o cp_r_i387.o start.o plt-resolve.o
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o process.o process.c
+process.c: In function &#226;&#128;&#152;process_is_stopped&#226;&#128;&#153;:
+process.c:186: warning: ignoring return value of &#226;&#128;&#152;fscanf&#226;&#128;&#153;, declared with attribute warn_unused_result
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o elfwriter.o elfwriter.c
+elfwriter.c: In function &#226;&#128;&#152;write_stub&#226;&#128;&#153;:
+elfwriter.c:149: warning: ignoring return value of &#226;&#128;&#152;write&#226;&#128;&#153;, declared with attribute warn_unused_result
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_w_regs.o cp_w_regs.c
+cp_w_regs.c: In function &#226;&#128;&#152;fetch_chunks_regs&#226;&#128;&#153;:
+cp_w_regs.c:40: warning: assignment from incompatible pointer type
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_w_tls.o cp_w_tls.c
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..    -c -o cp_w_i387.o cp_w_i387.c
+cp_w_i387.c: In function &#226;&#128;&#152;fetch_chunks_i387_data&#226;&#128;&#153;:
+cp_w_i387.c:27: warning: assignment from incompatible pointer type
+ld -m elf_i386  -r -o arch_w_objs.o process.o elfwriter.o cp_w_regs.o cp_w_tls.o cp_w_i387.o
+make[1]: Leaving directory `/home/jrh/software/cryopid-0.5.9.1/src/arch-i386'
+cc    -c -o arch/asmfuncs.o arch/asmfuncs.S
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cpimage_w.o cpimage_w.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd.o cp_w_fd.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd_console.o cp_w_fd_console.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd_file.o cp_w_fd_file.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd_fifo.o cp_w_fd_fifo.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_fd_socket.o cp_w_fd_socket.c
+cp_w_fd_socket.c: In function &#226;&#128;&#152;get_tcp_socket&#226;&#128;&#153;:
+cp_w_fd_socket.c:64: warning: pointer targets in passing argument 4 of &#226;&#128;&#152;r_getpeername&#226;&#128;&#153; differ in signedness
+cp_w_fd_socket.c: In function &#226;&#128;&#152;get_socket_info&#226;&#128;&#153;:
+cp_w_fd_socket.c:140: warning: value computed is not used
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_misc.o cp_w_misc.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_sighand.o cp_w_sighand.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_vma.o cp_w_vma.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_w_header.o cp_w_header.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o list.o list.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o tcpcp_w.o tcpcp_w.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o freeze.o freeze.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o stub_common.o stub_common.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cpimage_r.o cpimage_r.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_fd.o cp_r_fd.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_fd_console.o cp_r_fd_console.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_fd_file.o cp_r_fd_file.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_fd_fifo.o cp_r_fd_fifo.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_fd_socket.o cp_r_fd_socket.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_misc.o cp_r_misc.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_sighand.o cp_r_sighand.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_vma.o cp_r_vma.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o cp_r_header.o cp_r_header.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o fork2.o fork2.c
+cc -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP   -c -o tcpcp_r.o tcpcp_r.c
+Linking stub-gzip
+cc -static -g -Wall -O0 -fno-stack-protector -I. -Iarch -D__i386__  -DUSE_TCPCP -DCOMPILING_STUB -Tarch/stub-linking.x -Os -o stub-gzip stub_common.o common.c arch/asmfuncs.o cpimage_r.o cp_r_fd.o cp_r_fd_console.o cp_r_fd_file.o cp_r_fd_fifo.o cp_r_fd_socket.o cp_r_misc.o cp_r_sighand.o cp_r_vma.o cp_r_header.o arch/arch_r_objs.o fork2.o tcpcp_r.o writer_gzip.c -lz -DPROVIDE_MALLOC -nostdlib -nostartfiles ../dietlibc-i386/dietlibc.a -lgcc
+../dietlibc-i386/dietlibc.a(stderr.o): In function `__fflush_stderr':
+stderr.c:(.text+0x7): warning: warning: your code uses stdio (7+k bloat).
+../dietlibc-i386/dietlibc.a(vsnprintf.o): In function `vsnprintf':
+vsnprintf.c:(.text+0x88): warning: warning: the printf functions add several kilobytes of bloat.
+/tmp/ccmfKBKL.o: In function `fprintf':
+/usr/include/bits/stdio2.h:98: undefined reference to `__fprintf_chk'
+/usr/include/bits/stdio2.h:98: undefined reference to `__fprintf_chk'
+/usr/include/bits/stdio2.h:98: undefined reference to `__fprintf_chk'
+/tmp/ccmfKBKL.o: In function `snprintf':
+/usr/include/bits/stdio2.h:65: undefined reference to `__snprintf_chk'
+/tmp/ccmfKBKL.o: In function `vfprintf':
+/usr/include/bits/stdio2.h:128: undefined reference to `__vfprintf_chk'
+arch/arch_r_objs.o: In function `fprintf':
+/usr/include/bits/stdio2.h:98: undefined reference to `__fprintf_chk'
+/usr/include/bits/stdio2.h:98: undefined reference to `__fprintf_chk'
+arch/arch_r_objs.o: In function `fprintf':
+/home/jrh/software/cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c:120: undefined reference to `__fprintf_chk'
+/home/jrh/software/cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c:120: undefined reference to `__fprintf_chk'
+/home/jrh/software/cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c:120: undefined reference to `__fprintf_chk'
+arch/arch_r_objs.o:/home/jrh/software/cryopid-0.5.9.1/src/arch-i386/cp_r_regs.c:120: more undefined references to `__fprintf_chk' follow
+collect2: ld returned 1 exit status
+make: *** [stub-gzip] Error 1
+rm stub_common.o
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000167.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

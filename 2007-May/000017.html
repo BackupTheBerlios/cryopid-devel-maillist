@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] help with freezing of mysqld process
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20help%20with%20freezing%20of%20mysqld%20process&In-Reply-To=%3C989645.19655.qm%40web51307.mail.re2.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000016.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] help with freezing of mysqld process</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20help%20with%20freezing%20of%20mysqld%20process&In-Reply-To=%3C989645.19655.qm%40web51307.mail.re2.yahoo.com%3E"
+       TITLE="[Cryopid-devel] help with freezing of mysqld process">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Tue May 29 22:21:22 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000016.html">[Cryopid-devel] help with freezing of mysqld process
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think your problem is related to VDSO randomization:
+
+when you run &quot;original&quot;  process it's remember where
+VDSO is and when you run &quot;freezed&quot; process it's use
+old VDSO location, but kernel put it somewhere else :(
+
+So if you turn VDSO randomization off it'll (I hope)
+help
+
+Valery.
+P.S. What kernel version and distro you use ?
+P.P.S I am not cryopid developer, so take above with a
+grant of salt
+
+--- Alex Pilchin &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alexander.pilchin at lu.unisi.ch</A>&gt;
+wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i> Could someone please help me understand why
+</I>&gt;<i> freezing/unfreezing of
+</I>&gt;<i> mysqld fails. 
+</I>&gt;<i> 
+</I>&gt;<i> I am trying to freeze a MySql process with freeze
+</I>&gt;<i> version 0.5.9.1 in Amd
+</I>&gt;<i> 64 architecture, which may be a bit ambitious.  The
+</I>&gt;<i> mysqld process seems
+</I>&gt;<i> to have one open listenning socket, which might be a
+</I>&gt;<i> problem; Is it? 
+</I>&gt;<i> In theory, it has a predefined port, so would it be
+</I>&gt;<i> possible to rebind
+</I>&gt;<i> it somehow? 
+</I>&gt;<i> 
+</I>&gt;<i> Here is the output I get when I restart the frozen
+</I>&gt;<i> process.
+</I>&gt;<i>  
+</I>&gt;<i> no longer exists! no longer exists! Assertion failed
+</I>&gt;<i> in cp_malloc_hook
+</I>&gt;<i> (common.c:63)
+</I>&gt;<i> Aborted
+</I>&gt;<i> 
+</I>&gt;<i> Here is the last bit of the output given by the
+</I>&gt;<i> freeze app when ran on
+</I>&gt;<i> mysqld process.  The error below is the only one
+</I>&gt;<i> that I see in the
+</I>&gt;<i> entire output. 
+</I>&gt;<i> 
+</I>&gt;<i> Map: 2b710e580000-2b710e6c7000 r-xp 00000000 08:06
+</I>&gt;<i> 2457621    /lib/libc-2.5.so
+</I>&gt;<i> Map: 2b710e6c7000-2b710e8c7000 ---p 00147000 08:06
+</I>&gt;<i> 2457621    /lib/libc-2.5.so
+</I>&gt;<i> Map: 2b710e8c7000-2b710e8ca000 r--p 00147000 08:06
+</I>&gt;<i> 2457621    /lib/libc-2.5.so
+</I>&gt;<i> Map: 2b710e8ca000-2b710e8cc000 rw-p 0014a000 08:06
+</I>&gt;<i> 2457621    /lib/libc-2.5.so
+</I>&gt;<i> Map: 2b710e8cc000-2b710e8d3000 rw-p 2b710e8cc000
+</I>&gt;<i> 00:00 0          (null)
+</I>&gt;<i> Map: 7fff9dd5c000-7fff9dd71000 rw-p 7fff9dd5c000
+</I>&gt;<i> 00:00 0
+</I>&gt;<i> [stack]
+</I>&gt;<i>      Ignoring map - vsyscall page.
+</I>&gt;<i>      Error parsing map:
+</I>&gt;<i> ffffffffff600000-ffffffffff601000 r-xp 00000000
+</I>&gt;<i> 00:00 0                  [vdso]
+</I>&gt;<i> 
+</I>&gt;<i> Ignoring open character device /proc/26211/fd/0
+</I>&gt;<i> Ignoring open character device /proc/26211/fd/1
+</I>&gt;<i> Ignoring open character device /proc/26211/fd/2
+</I>&gt;<i> fd 14 (ino 67678): UNIX socket connected from  to 
+</I>&gt;<i> (listening: 65536)
+</I>&gt;<i> [+] Process is probably in syscall. Returning EINTR.
+</I>&gt;<i> Heap was at 0x17ce0. Want to be at 0xd92000. offset
+</I>&gt;<i> = 0xd7a320
+</I>&gt;<i> Compressed 163702969 bytes into 5484683 bytes (97%
+</I>&gt;<i> compression)
+</I>&gt;<i> Written image.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Thanks in advance,
+</I>&gt;<i> Alex
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i>
+</I><A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+&gt;<i> 
+</I>
+
+
+ 
+____________________________________________________________________________________
+It's here! Your new message!  
+Get new email alerts with the free Yahoo! Toolbar.
+<A HREF="http://tools.search.yahoo.com/toolbar/features/mail/">http://tools.search.yahoo.com/toolbar/features/mail/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000016.html">[Cryopid-devel] help with freezing of mysqld process
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

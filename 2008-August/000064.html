@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3Ccda0e2660808032238w3258b98bi7add189baeb3b15a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000063.html">
+   <LINK REL="Next"  HREF="000065.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)</H1>
+    <B>Dan Sanders</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3Ccda0e2660808032238w3258b98bi7add189baeb3b15a%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)">dans.spam at gmail.com
+       </A><BR>
+    <I>Mon Aug  4 07:38:01 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000063.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+        <LI>Next message: <A HREF="000065.html">[Cryopid-devel]  maps parsing problem, cannot freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#64">[ date ]</a>
+              <a href="thread.html#64">[ thread ]</a>
+              <a href="subject.html#64">[ subject ]</a>
+              <a href="author.html#64">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have been working on getting CryoPID compiled on x86_64 today, and
+have had no success. Even after patching the includes to be correct,
+and successfully compiling all of the code, linking fails. The current
+problem is that the dietlibc.a provided seems not ho have syscall()
+avaliable.
+
+I'll post again (with a patch) if I get it working.
+
+
+- Dan
+
+On Fri, Aug 1, 2008 at 3:13 PM, Rafael Gardenal &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">rafaelcuenca at gmail.com</A>&gt; wrote:
+&gt;<i> P.S.: this is the msg when emerge calls the compilation,
+</I>&gt;<i>
+</I>&gt;<i> If it is compiled from my own this is the error
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+</I>&gt;<i> make -C arch 'CFLAGS+= -fno-stack-protector'
+</I>&gt;<i> make[1]: Entering directory `/home/gardenal/cryopid-0.5.9.1/src/arch-x86_64'
+</I>&gt;<i> cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o common.o
+</I>&gt;<i> common.c
+</I>&gt;<i> cc    -c -o get_task_size.o get_task_size.S
+</I>&gt;<i> cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or '...' before
+</I>&gt;<i> 'arch_prctl'
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or '...' before 'code'
+</I>&gt;<i> stub.c:19: error: expected declaration specifiers or '...' before 'addr'
+</I>&gt;<i> stub.c:19: warning: data definition has no type or storage class
+</I>&gt;<i> stub.c:19: warning: type defaults to 'int' in declaration of '_syscall2'
+</I>&gt;<i> make[1]: *** [stub.o] Error 1
+</I>&gt;<i> make[1]: Leaving directory `/home/gardenal/cryopid-0.5.9.1/src/arch-x86_64'
+</I>&gt;<i> make: *** [arch] Error 2
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000063.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+	<LI>Next message: <A HREF="000065.html">[Cryopid-devel]  maps parsing problem, cannot freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#64">[ date ]</a>
+              <a href="thread.html#64">[ thread ]</a>
+              <a href="subject.html#64">[ subject ]</a>
+              <a href="author.html#64">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C211199.30958.qm%40web110307.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000201.html">
+   <LINK REL="Next"  HREF="000191.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C211199.30958.qm%40web110307.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid patch">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Thu Jun 18 12:26:53 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000201.html">[Cryopid-devel] cryopid patch
+</A></li>
+        <LI>Next message: <A HREF="000191.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#190">[ date ]</a>
+              <a href="thread.html#190">[ thread ]</a>
+              <a href="subject.html#190">[ subject ]</a>
+              <a href="author.html#190">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Thu, 6/18/09, Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt; wrote:
+
+&gt;<i> From: Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] cryopid patch
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: &quot;Michele Alberti&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;, &quot;John R Harrison&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;, <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Thursday, June 18, 2009, 12:47 PM
+</I>&gt;<i> On Thu, 2009-06-18 at 01:21 -0700,
+</I>&gt;<i> Valery Reznic wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Let's always use this value. With it frozen process
+</I>&gt;<i> can be un-freeze on both
+</I>&gt;<i> &gt; new and old systems alike,
+</I>&gt;<i> 
+</I>&gt;<i> How do these systems set the start of VDSO by default? If
+</I>&gt;<i> the mmap min
+</I>&gt;<i> addr is set, there's a very good chance that VDSO also
+</I>&gt;<i> lives in some
+</I>&gt;<i> random place per process.
+</I>Yes, VDSO randomization is a big trouble, but how it related
+to changing start addr from one FIXED value to another ?
+When I said 
+&quot;With it frozen process can be un-freeze on bot new and old systems alike&quot; 
+I doesn't mean that it will solve VDSO randomization problem,
+but at least it will solve problem with mmap_min_addr 
+
+
+&gt;<i> 
+</I>&gt;<i> At last count, there were ~15 exploits due to VDSO being
+</I>&gt;<i> static.
+</I>&gt;<i> 
+</I>&gt;<i> I'm still inclined to think that the best policy (for now)
+</I>&gt;<i> is to insist
+</I>&gt;<i> on compat VDSO as well as the legacy starting address. I
+</I>&gt;<i> know it sucks,
+</I>&gt;<i> but this is starting to dive into dealing with
+</I>&gt;<i> randomization.
+</I>requirement &quot;no VDSO randomization&quot; I understand and agree with,
+but I don't get what's problem change starting address from x1000 to 0x10000 ?
+This way users will have one requirement less to fullfil
+with no particular cost for us.
+
+&gt;<i> 
+</I>&gt;<i> However, you are correct. I think its worth changing the
+</I>&gt;<i> wiki to explain
+</I>&gt;<i> that frozen processes (on modern distros) can only be
+</I>&gt;<i> restored on the
+</I>&gt;<i> same system that froze them while in the current state that
+</I>&gt;<i> the freezing
+</I>&gt;<i> took place.
+</I>
+
+&gt;<i> 
+</I>&gt;<i> I think there's a lot of work and research to do.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000201.html">[Cryopid-devel] cryopid patch
+</A></li>
+	<LI>Next message: <A HREF="000191.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#190">[ date ]</a>
+              <a href="thread.html#190">[ thread ]</a>
+              <a href="subject.html#190">[ subject ]</a>
+              <a href="author.html#190">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid and statifier
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20and%20statifier&In-Reply-To=%3C961353.1013.qm%40web51311.mail.re2.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000007.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid and statifier</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20and%20statifier&In-Reply-To=%3C961353.1013.qm%40web51311.mail.re2.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid and statifier">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Sun Apr  8 08:40:53 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000007.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+        <LI>Next message: <A HREF="000009.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+--- Bernard Blackham &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">bernard at largestprime.net</A>&gt; wrote:
+
+&gt;<i> Valery Reznic wrote:
+</I>&gt;<i> &gt; Good day, list.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I am author of ELF statifier
+</I>&gt;<i> &gt; (<A HREF="http://statifier.sf.net">http://statifier.sf.net</A>)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Statifier can be considered as special case of
+</I>&gt;<i> &gt; CryoPid: it's freeze executable exactly in one
+</I>&gt;<i> point:
+</I>&gt;<i> &gt; when all DSO already loaded, but before
+</I>&gt;<i> initilization.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Usually, statifier work good enough, but on system
+</I>&gt;<i> &gt; where memory randomization affect stack and/or 
+</I>&gt;<i> kernel
+</I>&gt;<i> &gt; DSO location statified executable segfault.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I wonder, how CryoPid deal with this issue.
+</I>&gt;<i> 
+</I>&gt;<i> I forked CryoPID once to do this too, but I haven't
+</I>&gt;<i> maintained it - 
+</I>&gt;<i> <A HREF="http://dagobah.ucc.asn.au/things/make-static.html">http://dagobah.ucc.asn.au/things/make-static.html</A> .
+</I>I had a look at it. It stop at executable entry_point,
+i.e. all DSO initialization done once in the process
+of executable creating, but otherwise nice.
+
+
+
+&gt;<i> It's suffering worse 
+</I>&gt;<i> from bitrot than CryoPID itself. I'm pretty sure I
+</I>&gt;<i> went to lengths to 
+</I>&gt;<i> get it to play nicely with stack randomisation, but
+</I>&gt;<i> it pre-dated the 
+</I>&gt;<i> kernel VDSO.
+</I>&gt;<i> 
+</I>&gt;<i> The trick to stack randomisation was just to discard
+</I>&gt;<i> the stack segment 
+</I>&gt;<i> from the image, and let the new executable get the
+</I>&gt;<i> stack provided. 
+</I>&gt;<i> Though maybe recent changes to ld.so have broken
+</I>&gt;<i> that.
+</I>Sure, i exclude stack segment - when cryopid freeze
+and then unfreeze process - it's assume same command
+line arguments. But with statifier any invokation
+likely to be with different arguments/environment.
+So I never was tempted to include stack in the process
+image.
+The problem with stack-randomization is that sometimes
+stack and one op PT_LOAD segments of the image-process
+are overlap and then... no good to be expected.
+
+
+&gt;<i> 
+</I>&gt;<i> The kernel VDSO should also be ubiquitous enough now
+</I>&gt;<i> that you can just 
+</I>&gt;<i> rely on it being there (and not save it). To
+</I>Same (and even worst) fgo here: sometimes VDSO here
+and somtines not. And with randomization it's just in
+the other place (and previous address is saved
+somewhere deep in the ld.so maps list).
+
+Valery.
+
+&gt;<i> transport statified 
+</I>&gt;<i> binaries between machines with and without the VDSO
+</I>&gt;<i> would take a lot 
+</I>&gt;<i> more effort (catching segfaults and doing
+</I>&gt;<i> instruction translation), but 
+</I>&gt;<i> it would certainly be possible. More troublesome
+</I>&gt;<i> would be transporting 
+</I>&gt;<i> statified binaries from TLS kernels (2.6.*) to
+</I>&gt;<i> non-TLS kernels (2.4.* or 
+</I>&gt;<i> xen guests). CryoPID has some code to support this
+</I>&gt;<i> which used to cover 
+</I>&gt;<i> everything glibc threw at it, but glibc's evolved
+</I>&gt;<i> further since then and 
+</I>&gt;<i> it needs some more instruction translations.
+</I>&gt;<i> 
+</I>&gt;<i> HTH,
+</I>&gt;<i> Bernard.
+</I>&gt;<i> 
+</I>
+
+
+ 
+____________________________________________________________________________________
+Finding fabulous fares is fun.  
+Let Yahoo! FareChase search your favorite travel sites to find flight and hotel bargains.
+<A HREF="http://farechase.yahoo.com/promo-generic-14795097">http://farechase.yahoo.com/promo-generic-14795097</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000007.html">[Cryopid-devel] cryopid and statifier
+</A></li>
+	<LI>Next message: <A HREF="000009.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

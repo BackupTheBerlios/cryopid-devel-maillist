@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] error in fork2.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C43d34ebe0902260832w17b44b54mbbef8603e07b4414%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000083.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] error in fork2.c</H1>
+    <B>Alex</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C43d34ebe0902260832w17b44b54mbbef8603e07b4414%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] error in fork2.c">alexthegamer at gmail.com
+       </A><BR>
+    <I>Thu Feb 26 17:32:41 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000083.html">[Cryopid-devel] error in fork2.c
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Speaking on the future of cryopid (which does not work on more recent
+kernels in my experience), I was wondering if it makes any sense on keeping
+it alive when considering the 2.6.28 kernel's implementation of process
+groups and process freezing. Wouldn't it be easier to start using the new
+features?
+
+-Alex
+
+On Thu, Feb 26, 2009 at 12:26 AM, Tim Post &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">echo at echoreply.us</A>&gt; wrote:
+
+&gt;<i> Hi
+</I>&gt;<i>
+</I>&gt;<i> On Thu, 2009-02-26 at 09:29 +0530, Rohit Banga wrote:
+</I>&gt;<i> &gt; hello
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; exactly... but look at the code
+</I>&gt;<i> &gt; case 0: parent               ... helper_pid = 0 for child and pid of
+</I>&gt;<i> &gt; child in parent
+</I>&gt;<i> &gt; and execve will hence run in the parent instead of the child
+</I>&gt;<i>
+</I>&gt;<i> Yes, he is correct, sorry I did not see that sooner in the first snippet
+</I>&gt;<i> you posted (I saw the first, but replied to the second)
+</I>&gt;<i>
+</I>&gt;<i> case 0 should contain the child code, where the default should wait.
+</I>&gt;<i>
+</I>&gt;<i> This means execve() is being run in the parent, but then I see the
+</I>&gt;<i> comment:
+</I>&gt;<i>
+</I>&gt;<i> /* FIXME: so unbelievably racy. */
+</I>&gt;<i> int fork2(pid_t pid)
+</I>&gt;<i> {
+</I>&gt;<i>
+</I>&gt;<i> &gt; by the way what is this function supposed to do...return fork() ?
+</I>&gt;<i>
+</I>&gt;<i> Well, its return isn't worth much ... as you don't know where -1 is
+</I>&gt;<i> coming from (which fork()), even if checking errno.
+</I>&gt;<i>
+</I>&gt;<i> This is one of the reasons why it would be so difficult to take over
+</I>&gt;<i> maintaining the code .. the original author is no longer maintaining it.
+</I>&gt;<i>
+</I>&gt;<i> Actually, more traffic on this list has passed today than the entire
+</I>&gt;<i> last 8 months combined.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090226/d1bf2430/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090226/d1bf2430/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000083.html">[Cryopid-devel] error in fork2.c
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#84">[ date ]</a>
+              <a href="thread.html#84">[ thread ]</a>
+              <a href="subject.html#84">[ subject ]</a>
+              <a href="author.html#84">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

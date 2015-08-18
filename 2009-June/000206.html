@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C501281.63362.qm%40web110302.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000210.html">
+   <LINK REL="Next"  HREF="000209.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C501281.63362.qm%40web110302.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Mon Jun 22 08:40:30 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000210.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+        <LI>Next message: <A HREF="000209.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Sat, 6/20/09, John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt; wrote:
+
+&gt;<i> From: John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] Older snapshots (almost) work!
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Saturday, June 20, 2009, 12:06 AM
+</I>&gt;<i> 
+</I>&gt;<i> Hi Valery,
+</I>&gt;<i> 
+</I>&gt;<i> | Could you send output of cat /proc/self/maps on
+</I>&gt;<i> Debian  Etch and
+</I>&gt;<i> | on Jaunty?
+</I>&gt;<i> 
+</I>&gt;<i> See the end of this message -- actually I sometimes used
+</I>&gt;<i> &quot;more&quot;, and
+</I>&gt;<i> you can guess where :-)
+</I>Yes, I see that on Jaunty you used more, but I missed what's joke is ?
+No cat on Jaunty ?
+
+Output you sent shows, that all systems, but Knoppix have VDSO
+randomization.
+I surprised it's work at all on Debian Etch.
+Do your process use system calls ?
+May be after your freeze and then run it, it's only do some calculation and no system calls at all ?
+Please send output of 
+strace ./OCalm.freezed
+
+
+
+ For comparison, I also include
+&gt;<i> similar output
+</I>&gt;<i> for Knoppix. This is because I've noted one important way
+</I>&gt;<i> in which the
+</I>&gt;<i> CryoPID-generated binaries are better on Knoppix. I don't
+</I>&gt;<i> know if this
+</I>&gt;<i> applies to other programs, but when I freeze the OCaml
+</I>&gt;<i> toplevel on my
+</I>&gt;<i> Knoppix implementation, ctrl/c retains the intended
+</I>&gt;<i> behavior of
+</I>&gt;<i> terminating the evaluation but giving you back the toplevel
+</I>&gt;<i> prompt. By
+</I>&gt;<i> contrast if I run the Knoppix-generated binaries on the
+</I>&gt;<i> other
+</I>&gt;<i> platforms, or even the Etch-generated binary on the same
+</I>&gt;<i> Etch system,
+</I>&gt;<i> it immediately terminates the entire process.
+</I>May be it's because Knoppix has VDSO on fixed address, and all other systems have VDSO randomization
+
+Valery.
+&gt;<i> 
+</I>&gt;<i> Could this possibly be connected with differences in CMOV
+</I>&gt;<i> emulation?
+</I>&gt;<i> That /lib/tls/i686/cmov is the only difference that jumps
+</I>&gt;<i> out at me.
+</I>&gt;<i> Needless to say, I am running on recent hardware that
+</I>&gt;<i> should support
+</I>&gt;<i> CMOV :-), though all these except my Ubuntu Hardy are
+</I>&gt;<i> actually running
+</I>&gt;<i> under VirtualBox.
+</I>&gt;<i> 
+</I>&gt;<i> | &gt; observation. But practically it's quite a big deal
+</I>&gt;<i> to me,
+</I>&gt;<i> | &gt; since I might
+</I>&gt;<i> | &gt; finally stand a chance of sending out usable
+</I>&gt;<i> binaries of my
+</I>&gt;<i> | &gt; prover.
+</I>&gt;<i> | Just for the record there are other alternatives for such
+</I>&gt;<i> use (abuse ? 
+</I>&gt;<i> | :) of cryopid:
+</I>&gt;<i> | Statifier - <A HREF="http://statifier.sf.net">http://statifier.sf.net</A>
+</I>&gt;<i> | Ermine    - <A HREF="http://magicErmine.com">http://magicErmine.com</A>
+</I>&gt;<i> 
+</I>&gt;<i> Probably not, unfortunately. I need not just to pull in all
+</I>&gt;<i> the
+</I>&gt;<i> libraries, but also to retain the state inside the
+</I>&gt;<i> read-eval-print
+</I>&gt;<i> loop. (OCaml can't save this state natively, though some
+</I>&gt;<i> other ML
+</I>&gt;<i> implementations can.)
+</I>&gt;<i> 
+</I>&gt;<i> | Unfortunately, statifier has same set problem with VDSO
+</I>&gt;<i> memory 
+</I>&gt;<i> | randomizaton as cryopid. (but it hasn't problem with
+</I>&gt;<i> nnap_min_addr :)
+</I>&gt;<i> | Basically (from nenory randomization POV) where cryopid
+</I>&gt;<i> will work 
+</I>&gt;<i> | statifier will work too and via verse)
+</I>&gt;<i> 
+</I>&gt;<i> There seems to be a somewhat different problem too with
+</I>&gt;<i> &quot;ckpt&quot; (Vic
+</I>&gt;<i> Zandy). This used to be my checkpointer of choice, and
+</I>&gt;<i> still is under
+</I>&gt;<i> Etch, but I haven't even got it to compile in Ubuntu since
+</I>&gt;<i> Gutsy. It
+</I>&gt;<i> uses JB_SP, but that seems to have disappeared from
+</I>&gt;<i> &quot;setjmp.h&quot;, and
+</I>&gt;<i> just manually setting it to the old value didn't work, I
+</I>&gt;<i> gather
+</I>&gt;<i> because of some kind of pointer mangling in recent glibcs.
+</I>&gt;<i> Maybe I
+</I>&gt;<i> could use __builtin_frame_address or something instead, but
+</I>&gt;<i> I've
+</I>&gt;<i> never made the effort to figure it all out...
+</I>&gt;<i> 
+</I>&gt;<i> | And if we on it - could you please change in the file 
+</I>&gt;<i> | arch-i386/stub-linking.x
+</I>&gt;<i> | line 
+</I>&gt;<i> | PROVIDE (__executable_start = 0x00001000); . = 0x00001000
+</I>&gt;<i> + 0x180;
+</I>&gt;<i> | to
+</I>&gt;<i> | PROVIDE (__executable_start = 0x00010000); . = 0x00010000
+</I>&gt;<i> + 0x180;
+</I>&gt;<i> |
+</I>&gt;<i> | Rebuild cryopid, rebuild with this cryopid your program
+</I>&gt;<i> and test if 
+</I>&gt;<i> | it's work with original mmap_min_addr (i.e 65536)
+</I>&gt;<i> 
+</I>&gt;<i> I'll try that tonight. Indeed, it would be nice not to have
+</I>&gt;<i> to hack
+</I>&gt;<i> the mmap_min_addr.
+</I>&gt;<i> 
+</I>&gt;<i> John.
+</I>&gt;<i> 
+</I>&gt;<i> /proc/self/maps output on 4 different systems:
+</I>&gt;<i> 
+</I>&gt;<i> Debian Etch:
+</I>&gt;<i> 
+</I>&gt;<i> 08048000-0804c000 r-xp 00000000 03:01 932148 
+</I>&gt;<i>    /bin/cat
+</I>&gt;<i> 0804c000-0804d000 rwxp 00003000 03:01 932148 
+</I>&gt;<i>    /bin/cat
+</I>&gt;<i> 0804d000-0806e000 rwxp 0804d000 00:00 0     
+</I>&gt;<i>     [heap]
+</I>&gt;<i> b7c8c000-b7db4000 r-xp 00000000 03:01 360005 
+</I>&gt;<i>    /usr/lib/locale/locale-archive
+</I>&gt;<i> b7db4000-b7db5000 rwxp b7db4000 00:00 0
+</I>&gt;<i> b7db5000-b7edc000 r-xp 00000000 03:01 572966 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> b7edc000-b7ee1000 r-xp 00127000 03:01 572966 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> b7ee1000-b7ee3000 rwxp 0012c000 03:01 572966 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.3.6.so
+</I>&gt;<i> b7ee3000-b7ee6000 rwxp b7ee3000 00:00 0
+</I>&gt;<i> b7eec000-b7eee000 rwxp b7eec000 00:00 0
+</I>&gt;<i> b7eee000-b7eef000 r-xp b7eee000 00:00 0     
+</I>&gt;<i>     [vdso]
+</I>&gt;<i> b7eef000-b7f04000 r-xp 00000000 03:01 555970 
+</I>&gt;<i>    /lib/ld-2.3.6.so
+</I>&gt;<i> b7f04000-b7f06000 rwxp 00014000 03:01 555970 
+</I>&gt;<i>    /lib/ld-2.3.6.so
+</I>&gt;<i> bfb54000-bfb69000 rw-p bfb54000 00:00 0     
+</I>&gt;<i>     [stack]
+</I>&gt;<i> 
+</I>&gt;<i> Ubuntu Hardy:
+</I>&gt;<i> 
+</I>&gt;<i> 08048000-0804f000 r-xp 00000000 08:06
+</I>&gt;<i> 10208260   /bin/cat
+</I>&gt;<i> 0804f000-08050000 rw-p 00006000 08:06
+</I>&gt;<i> 10208260   /bin/cat
+</I>&gt;<i> 08050000-08071000 rw-p 08050000 00:00 0     
+</I>&gt;<i>     [heap]
+</I>&gt;<i> b7ca8000-b7ce7000 r--p 00000000 08:06
+</I>&gt;<i> 33928411   /usr/lib/locale/en_US.utf8/LC_CTYPE
+</I>&gt;<i> b7ce7000-b7dc8000 r--p 00000000 08:06 1110031   
+</I>&gt;<i> /usr/lib/locale/en_US.utf8/LC_COLLATE
+</I>&gt;<i> b7dc8000-b7dc9000 rw-p b7dc8000 00:00 0
+</I>&gt;<i> b7dc9000-b7f12000 r-xp 00000000 08:06
+</I>&gt;<i> 34817028   /lib/tls/i686/cmov/libc-2.7.so
+</I>&gt;<i> b7f12000-b7f13000 r--p 00149000 08:06
+</I>&gt;<i> 34817028   /lib/tls/i686/cmov/libc-2.7.so
+</I>&gt;<i> b7f13000-b7f15000 rw-p 0014a000 08:06
+</I>&gt;<i> 34817028   /lib/tls/i686/cmov/libc-2.7.so
+</I>&gt;<i> b7f15000-b7f18000 rw-p b7f15000 00:00 0
+</I>&gt;<i> b7f20000-b7f21000 r--p 00000000 08:06
+</I>&gt;<i> 33927213   /usr/lib/locale/en_US.utf8/LC_NUMERIC
+</I>&gt;<i> b7f21000-b7f22000 r--p 00000000 08:06
+</I>&gt;<i> 33928268   /usr/lib/locale/en_US.utf8/LC_TIME
+</I>&gt;<i> b7f22000-b7f23000 r--p 00000000 08:06
+</I>&gt;<i> 33928271   /usr/lib/locale/en_US.utf8/LC_MONETARY
+</I>&gt;<i> b7f23000-b7f24000 r--p 00000000 08:06
+</I>&gt;<i> 33928217   /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+</I>&gt;<i> b7f24000-b7f25000 r--p 00000000 08:06
+</I>&gt;<i> 33927227   /usr/lib/locale/en_US.utf8/LC_PAPER
+</I>&gt;<i> b7f25000-b7f26000 r--p 00000000 08:06
+</I>&gt;<i> 33928241   /usr/lib/locale/en_US.utf8/LC_NAME
+</I>&gt;<i> b7f26000-b7f27000 r--p 00000000 08:06
+</I>&gt;<i> 33928272   /usr/lib/locale/en_US.utf8/LC_ADDRESS
+</I>&gt;<i> b7f27000-b7f28000 r--p 00000000 08:06
+</I>&gt;<i> 33928277   /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+</I>&gt;<i> b7f28000-b7f29000 r--p 00000000 08:06
+</I>&gt;<i> 33928242   /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+</I>&gt;<i> b7f29000-b7f30000 r--s 00000000 08:06
+</I>&gt;<i> 12356854   /usr/lib/gconv/gconv-modules.cache
+</I>&gt;<i> b7f30000-b7f31000 r--p 00000000 08:06
+</I>&gt;<i> 33928279   /usr/lib/locale/en_US.utf8/LC_IDENTIFICATION
+</I>&gt;<i> b7f31000-b7f33000 rw-p b7f31000 00:00 0
+</I>&gt;<i> b7f33000-b7f34000 r-xp b7f33000 00:00 0     
+</I>&gt;<i>     [vdso]
+</I>&gt;<i> b7f34000-b7f4e000 r-xp 00000000 08:06
+</I>&gt;<i> 33605633   /lib/ld-2.7.so
+</I>&gt;<i> b7f4e000-b7f50000 rw-p 00019000 08:06
+</I>&gt;<i> 33605633   /lib/ld-2.7.so
+</I>&gt;<i> bfaae000-bfac3000 rw-p bffeb000 00:00 0     
+</I>&gt;<i>     [stack]
+</I>&gt;<i> 
+</I>&gt;<i> Ubuntu Jaunty:
+</I>&gt;<i> 
+</I>&gt;<i> 08048000-0804f000 r-xp 00000000 08:01 261701 
+</I>&gt;<i>    /bin/more
+</I>&gt;<i> 0804f000-08050000 r--p 00006000 08:01 261701 
+</I>&gt;<i>    /bin/more
+</I>&gt;<i> 08050000-08051000 rw-p 00007000 08:01 261701 
+</I>&gt;<i>    /bin/more
+</I>&gt;<i> 08fd4000-08ff5000 rw-p 08fd4000 00:00 0     
+</I>&gt;<i>     [heap]
+</I>&gt;<i> b7c47000-b7c48000 rw-p b7c47000 00:00 0 
+</I>&gt;<i> b7c48000-b7c87000 r--p 00000000 08:01 34485   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_CTYPE
+</I>&gt;<i> b7c87000-b7c88000 r--p 00000000 08:01 34490   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_NUMERIC
+</I>&gt;<i> b7c88000-b7c89000 r--p 00000000 08:01 34493   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_TIME
+</I>&gt;<i> b7c89000-b7d74000 r--p 00000000 08:01 34484   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_COLLATE
+</I>&gt;<i> b7d74000-b7d75000 r--p 00000000 08:01 34488   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_MONETARY
+</I>&gt;<i> b7d75000-b7d76000 r--p 00000000 08:01 34494   
+</I>&gt;<i>  
+</I>&gt;<i> /usr/lib/locale/en_CA.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+</I>&gt;<i> b7d76000-b7d77000 rw-p b7d76000 00:00 0 
+</I>&gt;<i> b7d77000-b7d79000 r-xp 00000000 08:01 140353 
+</I>&gt;<i>    /lib/tls/i686/cmov/libdl-2.9.so
+</I>&gt;<i> b7d79000-b7d7a000 r--p 00001000 08:01 140353 
+</I>&gt;<i>    /lib/tls/i686/cmov/libdl-2.9.so
+</I>&gt;<i> b7d7a000-b7d7b000 rw-p 00002000 08:01 140353 
+</I>&gt;<i>    /lib/tls/i686/cmov/libdl-2.9.so
+</I>&gt;<i> b7d7b000-b7d7c000 rw-p b7d7b000 00:00 0 
+</I>&gt;<i> b7d7c000-b7ed8000 r-xp 00000000 08:01 140347 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.9.so
+</I>&gt;<i> b7ed8000-b7ed9000 ---p 0015c000 08:01 140347 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.9.so
+</I>&gt;<i> b7ed9000-b7edb000 r--p 0015c000 08:01 140347 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.9.so
+</I>&gt;<i> b7edb000-b7edc000 rw-p 0015e000 08:01 140347 
+</I>&gt;<i>    /lib/tls/i686/cmov/libc-2.9.so
+</I>&gt;<i> b7edc000-b7edf000 rw-p b7edc000 00:00 0 
+</I>&gt;<i> b7edf000-b7f0e000 r-xp 00000000 08:01 122720 
+</I>&gt;<i>    /lib/libncurses.so.5.7
+</I>&gt;<i> b7f0e000-b7f10000 r--p 0002e000 08:01 122720 
+</I>&gt;<i>    /lib/libncurses.so.5.7
+</I>&gt;<i> b7f10000-b7f11000 rw-p 00030000 08:01 122720 
+</I>&gt;<i>    /lib/libncurses.so.5.7
+</I>&gt;<i> b7f11000-b7f12000 r--p 00000000 08:01 34491   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_PAPER
+</I>&gt;<i> b7f12000-b7f13000 r--p 00000000 08:01 34489   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_NAME
+</I>&gt;<i> b7f13000-b7f14000 r--p 00000000 08:01 34483   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_ADDRESS
+</I>&gt;<i> b7f14000-b7f15000 r--p 00000000 08:01 34492   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_TELEPHONE
+</I>&gt;<i> b7f15000-b7f16000 r--p 00000000 08:01 34487   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_MEASUREMENT
+</I>&gt;<i> b7f16000-b7f1d000 r--s 00000000 08:01 458099 
+</I>&gt;<i>    /usr/lib/gconv/gconv-modules.cache
+</I>&gt;<i> b7f1d000-b7f1e000 r--p 00000000 08:01 34486   
+</I>&gt;<i>   /usr/lib/locale/en_CA.utf8/LC_IDENTIFICATION
+</I>&gt;<i> b7f1e000-b7f20000 rw-p b7f1e000 00:00 0 
+</I>&gt;<i> b7f20000-b7f21000 r-xp b7f20000 00:00 0     
+</I>&gt;<i>     [vdso]
+</I>&gt;<i> b7f21000-b7f3d000 r-xp 00000000 08:01 122663 
+</I>&gt;<i>    /lib/ld-2.9.so
+</I>&gt;<i> b7f3d000-b7f3e000 r--p 0001b000 08:01 122663 
+</I>&gt;<i>    /lib/ld-2.9.so
+</I>&gt;<i> b7f3e000-b7f3f000 rw-p 0001c000 08:01 122663 
+</I>&gt;<i>    /lib/ld-2.9.so
+</I>&gt;<i> bff2a000-bff3f000 rw-p bffeb000 00:00 0     
+</I>&gt;<i>     [stack]
+</I>&gt;<i> 
+</I>&gt;<i> Knoppix:
+</I>&gt;<i> 
+</I>&gt;<i> 08048000-0804e000 r-xp 00000000 03:02 70   
+</I>&gt;<i>      /bin/more
+</I>&gt;<i> 0804e000-0804f000 rw-p 00006000 03:02 70   
+</I>&gt;<i>      /bin/more
+</I>&gt;<i> 0804f000-08072000 rw-p 0804f000 00:00 0     
+</I>&gt;<i>     [heap]
+</I>&gt;<i> b7dd3000-b7dd4000 rw-p b7dd3000 00:00 0
+</I>&gt;<i> b7dd4000-b7dd6000 r-xp 00000000 03:02 12838   
+</I>&gt;<i>   /lib/tls/libdl-2.3.6.so
+</I>&gt;<i> b7dd6000-b7dd8000 rw-p 00001000 03:02 12838   
+</I>&gt;<i>   /lib/tls/libdl-2.3.6.so
+</I>&gt;<i> b7dd8000-b7dd9000 rw-p b7dd8000 00:00 0
+</I>&gt;<i> b7dd9000-b7f07000 r-xp 00000000 03:02 12836   
+</I>&gt;<i>   /lib/tls/libc-2.3.6.so
+</I>&gt;<i> b7f07000-b7f0c000 r--p 0012e000 03:02 12836   
+</I>&gt;<i>   /lib/tls/libc-2.3.6.so
+</I>&gt;<i> b7f0c000-b7f0f000 rw-p 00133000 03:02 12836   
+</I>&gt;<i>   /lib/tls/libc-2.3.6.so
+</I>&gt;<i> b7f0f000-b7f11000 rw-p b7f0f000 00:00 0
+</I>&gt;<i> b7f11000-b7f4a000 r-xp 00000000 03:02 12614   
+</I>&gt;<i>   /lib/libncurses.so.5.5
+</I>&gt;<i> b7f4a000-b7f52000 rw-p 00039000 03:02 12614   
+</I>&gt;<i>   /lib/libncurses.so.5.5
+</I>&gt;<i> b7f52000-b7f53000 rw-p b7f52000 00:00 0
+</I>&gt;<i> b7f65000-b7f68000 rw-p b7f65000 00:00 0
+</I>&gt;<i> b7f68000-b7f7d000 r-xp 00000000 03:02 12545   
+</I>&gt;<i>   /lib/ld-2.3.6.so
+</I>&gt;<i> b7f7d000-b7f7f000 rw-p 00015000 03:02 12545   
+</I>&gt;<i>   /lib/ld-2.3.6.so
+</I>&gt;<i> bff47000-bff5d000 rw-p bff47000 00:00 0     
+</I>&gt;<i>     [stack]
+</I>&gt;<i> ffffe000-fffff000 ---p 00000000 00:00 0     
+</I>&gt;<i>     [vdso]
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000210.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+	<LI>Next message: <A HREF="000209.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

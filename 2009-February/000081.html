@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] error in fork2.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3Cf1cb36b90902251959w3f4372c5p3d93bb2f630f3430%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000082.html">
+   <LINK REL="Next"  HREF="000083.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] error in fork2.c</H1>
+    <B>Rohit Banga</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3Cf1cb36b90902251959w3f4372c5p3d93bb2f630f3430%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] error in fork2.c">iamrohitbanga at gmail.com
+       </A><BR>
+    <I>Thu Feb 26 04:59:09 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000082.html">[Cryopid-devel] error in fork2.c
+</A></li>
+        <LI>Next message: <A HREF="000083.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#81">[ date ]</a>
+              <a href="thread.html#81">[ thread ]</a>
+              <a href="subject.html#81">[ subject ]</a>
+              <a href="author.html#81">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello
+
+exactly... but look at the code
+case 0: parent               ... helper_pid = 0 for child and pid of child
+in parent
+and execve will hence run in the parent instead of the child
+
+by the way what is this function supposed to do...return fork() ?
+
+ switch (helper_pid = fork()) {
+ 21                 case -1:
+ 22                         return -1;
+ 23                 *case 0: /* parent */*
+ 24                         if (waitpid(helper_pid, &amp;status, 0) == -1)
+ 25                                 return -1;
+ 26                         if (WIFEXITED(status)) {
+ 27                                 switch (WEXITSTATUS(status)) {
+ 28                                         case 0:
+ 29                                                 return 0;
+ 30                                         case 2:
+ 31                                                 errno = ENXIO;
+ 32                                                 return -1;
+ 33                                         case 3:
+ 34                                                 errno = EPERM;
+ 35                                                 return -1;
+ 36                                         case 50:
+ 37                                                 fprintf(stderr, &quot;Could
+not find fork2_helper\n&quot;);
+ 38                                                 errno = ENOENT;
+ 39                                                 return -1;
+ 40                                 }
+ 41                         } else
+ 42                                 return -1;
+ 43                 default: /* child */
+ 44                         {
+ 45                                 char *argv[] = {&quot;farewell&quot;, &quot;kitty&quot;,
+&quot;XXXXXXXXXX&quot;, NULL};
+ 46                                 snprintf(argv[2], 10, &quot;%d&quot;, pid);
+ 47                                 execve(&quot;fork2_helper&quot;, argv, environ);
+ 48                                 perror(&quot;execve&quot;);
+ 49                                 _exit(50);
+ 50                         }
+ 51         }
+
+
+-- 
+Rohit Banga
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090226/4f0d43d1/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090226/4f0d43d1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000082.html">[Cryopid-devel] error in fork2.c
+</A></li>
+	<LI>Next message: <A HREF="000083.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#81">[ date ]</a>
+              <a href="thread.html#81">[ thread ]</a>
+              <a href="subject.html#81">[ subject ]</a>
+              <a href="author.html#81">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

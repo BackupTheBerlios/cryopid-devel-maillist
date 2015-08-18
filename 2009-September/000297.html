@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Fixes to compile on newer x86_64 kernels
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fixes%20to%20compile%20on%20newer%20x86_64%20kernels&In-Reply-To=%3C4AAEAD13.8020506%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000296.html">
+   <LINK REL="Next"  HREF="000298.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Fixes to compile on newer x86_64 kernels</H1>
+    <B>Ondrej Mikle</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Fixes%20to%20compile%20on%20newer%20x86_64%20kernels&In-Reply-To=%3C4AAEAD13.8020506%40gmail.com%3E"
+       TITLE="[Cryopid-devel] Fixes to compile on newer x86_64 kernels">ondrej.mikle at gmail.com
+       </A><BR>
+    <I>Mon Sep 14 22:52:35 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000296.html">[Cryopid-devel] cryopid on ARM
+</A></li>
+        <LI>Next message: <A HREF="000298.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I've been experimenting with CryoPID for a while on x86_64 machines. I must say
+I am really impressed by its capabilities.
+
+It took me a while to get it compiled, apparently a lot depends on kernel
+version. Around kernel version 2.6.20 (I think) the macros _syscall2 and
+_syscall4 are no longer defined. I've seen them in 2.6.19.x for the last time
+(same holds for kernel-headers packages AFAIK).
+
+I managed to get CryoPID working by hacking the sources a bit - defining the
+necessary macros if they did not exist (plus couple of includes).
+
+So finally it builds and works (tried Gentoo with 2.6.22, Debian Etch with
+2.6.18). Resulting binary also works on Debian Lenny and CentOS 5.1.
+
+Resulting CryoPID x86_64 binary can be downloaded here (if anyone wants to avoid
+the compilation hassle; it's based on current repository tip, 7da69201d50e):
+<A HREF="http://azrael.harpy.ru/CryoPID/cryopid-hg-7da69201d50e-hacked-x86_64.tar.bz2">http://azrael.harpy.ru/CryoPID/cryopid-hg-7da69201d50e-hacked-x86_64.tar.bz2</A>
+
+If anyone wants to try compiling from source, you may try the attached patch
+(based on repo tip). Warning, the patch is hackish; the patch expects either
+correct linux-headers package installed or linux source in /usr/src/linux.
+Proper way would be to find replacement for _syscall2/_syscall4, but I have no
+idea what that is in newer kernels.
+
+Regards,
+  Ondrej
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: cryopid_syscall.patch
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090914/ae93ab81/attachment.ksh">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090914/ae93ab81/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000296.html">[Cryopid-devel] cryopid on ARM
+</A></li>
+	<LI>Next message: <A HREF="000298.html">[Cryopid-devel] Fixes to compile on newer x86_64 kernels
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

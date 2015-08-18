@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CRYOPID DEVELOPMENT HELP
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CRYOPID%20DEVELOPMENT%20HELP&In-Reply-To=%3C35a750510904290231o47c1980ej84fb9c601d787bd0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000125.html">
+   <LINK REL="Next"  HREF="000127.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CRYOPID DEVELOPMENT HELP</H1>
+    <B>aniket pansare</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CRYOPID%20DEVELOPMENT%20HELP&In-Reply-To=%3C35a750510904290231o47c1980ej84fb9c601d787bd0%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] CRYOPID DEVELOPMENT HELP">aniketpansare at gmail.com
+       </A><BR>
+    <I>Wed Apr 29 11:31:14 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000125.html">[Cryopid-devel] CRYOPID DEVELOPMENT HELP
+</A></li>
+        <LI>Next message: <A HREF="000127.html">[Cryopid-devel] RESTORING SOCKETS IN CRYOPID
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>i create a new socket connection.
+when you run the servers ELF it would wait on the accept call.
+then run clients ELF it would do the connect
+connection established.
+map the old socket descriptors to the new ones using dup2.
+and data transfer continues from the same point where it was freezed.
+
+
+
+
+Aniket Pansare
+
+
+On Wed, Apr 29, 2009 at 2:46 PM, Manish Dwivedi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">mdwivedi at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi Aniket,
+</I>&gt;<i>
+</I>&gt;<i> Can you tell me how do you actually close the sockets while freezing
+</I>&gt;<i> the process ? As I am not sure of any good technique with which I can
+</I>&gt;<i> close a socket connection with other process completely.
+</I>&gt;<i>
+</I>&gt;<i> I do agree that it is a amazing tool. Are we planning to support it
+</I>&gt;<i> for ARM someday ?
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Mani$h
+</I>&gt;<i>
+</I>&gt;<i> On 4/29/09, aniket pansare &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">aniketpansare at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; hi guys,
+</I>&gt;<i> &gt; i know this list is no longer maintained but i find cryopid a great tool.
+</I>&gt;<i> &gt; i was recently working on it and was trying to hibernate network programs
+</I>&gt;<i> &gt; (simple client- server with sockets)
+</I>&gt;<i> &gt; i was able to hibernate and resume this socket programs by restoring the
+</I>&gt;<i> &gt; sockets. cryopid works great and with some modifications can be used to
+</I>&gt;<i> &gt; hibernate all kinds of programs.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; secondly, i also feel that the way cryopid creates the ELF of the process
+</I>&gt;<i> &gt; being freezed can also be used as a debugging tool.
+</I>&gt;<i> &gt; it can allow us to change the flow of execution of a program all
+</I>&gt;<i> together.
+</I>&gt;<i> &gt; i.e can be used as hack.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; it would really be great if everyone start working on its development.
+</I>&gt;<i> &gt; make it compatible with all types of kernels and improve its performance.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; its worth studying CRYOPID in detail.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I would appreciate any help that would make me understand the exact flow
+</I>&gt;<i> of
+</I>&gt;<i> &gt; ELF creation along with how the addresses are set and control is
+</I>&gt;<i> transfered
+</I>&gt;<i> &gt; to the process being resume when the ELF is run.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Can anyone give me short program that would generate an ELF the way
+</I>&gt;<i> cryopid
+</I>&gt;<i> &gt; does.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; thanks...........
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Aniket Pansare
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090429/ca6592a4/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090429/ca6592a4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000125.html">[Cryopid-devel] CRYOPID DEVELOPMENT HELP
+</A></li>
+	<LI>Next message: <A HREF="000127.html">[Cryopid-devel] RESTORING SOCKETS IN CRYOPID
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

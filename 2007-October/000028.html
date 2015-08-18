@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Doesn't stop process and doesn't compile on	x86_64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Doesn%27t%20stop%20process%20and%20doesn%27t%20compile%20on%0A%09x86_64&In-Reply-To=%3C4718B2F0.70608%40imag.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000027.html">
+   <LINK REL="Next"  HREF="000029.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Doesn't stop process and doesn't compile on	x86_64</H1>
+    <B>Bruno Bzeznik</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Doesn%27t%20stop%20process%20and%20doesn%27t%20compile%20on%0A%09x86_64&In-Reply-To=%3C4718B2F0.70608%40imag.fr%3E"
+       TITLE="[Cryopid-devel] Doesn't stop process and doesn't compile on	x86_64">Bruno.Bzeznik at imag.fr
+       </A><BR>
+    <I>Fri Oct 19 15:36:48 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000027.html">[Cryopid-devel] Doesn't stop process and doesn't compile on	x86_64
+</A></li>
+        <LI>Next message: <A HREF="000029.html">[Cryopid-devel] Project status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+John R Harrison a &#233;crit :
+&gt;<i> Hi Bruno,
+</I>&gt;<i> 
+</I>&gt;<i> | cp_r_sighand.o: In function `rt_sigaction':
+</I>&gt;<i> | arch/arch.h:27: undefined reference to `syscall'
+</I>&gt;<i> | collect2: ld returned 1 exit status
+</I>&gt;<i> | make: *** [stub-gzip] Error 1
+</I>&gt;<i> | rm stub_common.o
+</I>&gt;<i> 
+</I>&gt;<i> Yes, I hit exactly this problem too when I tried to compile on a 64-bit
+</I>&gt;<i> system. I'd like to have someone knowledgeable suggest what to do.
+</I>&gt;<i> 
+</I>&gt;<i> | I saw that I'm not the only one having this problem, but no solution has
+</I>&gt;<i> | been posted yet:
+</I>&gt;<i> | <A HREF="http://lists.berlios.de/pipermail/cryopid-devel/2006-December/000158.html">http://lists.berlios.de/pipermail/cryopid-devel/2006-December/000158.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> What I can offer is a solution that got CryoPID to *compile* (but read
+</I>&gt;<i> on before trying it). In &quot;src/Makefile&quot; find the line with the
+</I>&gt;<i> comment:
+</I>&gt;<i> 
+</I>&gt;<i>   # How do we get our libc linked into the stub?
+</I>&gt;<i> 
+</I>&gt;<i> Following that there are two &quot;LIBC = ...&quot; options, with one commented
+</I>&gt;<i> out. Try uncommenting that and commenting the other one instead. As I
+</I>&gt;<i> say, that got CyryoPID to compile for me. In case it's relevant, I
+</I>&gt;<i> also had to change &quot;linux/user.h&quot; into &quot;sys/user.h&quot; in a few places
+</I>&gt;<i> since my system didn't have the former anywhere.
+</I>&gt;<i> 
+</I>&gt;<i> But the resulting &quot;freeze&quot; seems to fail for me in spectacular
+</I>&gt;<i> fashion. I tried it on the OCaml toplevel. The process seemed to save
+</I>&gt;<i> as usual. But restarting the image not only failed but appeared to
+</I>&gt;<i> bring down my machine! I tried it twice to convince myself that it
+</I>&gt;<i> wasn't a coincidence. But since the system is one where I don't have
+</I>&gt;<i> the root password or even physical access to the console, I can't say
+</I>&gt;<i> what went wrong. And I didn't want to make our sysadmin unlock the
+</I>&gt;<i> machine room and reboot a third time.
+</I>&gt;<i> 
+</I>&gt;<i> John.
+</I>&gt;<i> 
+</I>&gt;<i> P.S. &quot;uname -a&quot; tells me that my system is:
+</I>&gt;<i> 
+</I>&gt;<i>   Linux 2.6.9-1.906_ELsmp #1 SMP Sun Dec 12 23:05:02 EST 2004 x86_64 x86_64 x86_64 GNU/Linux
+</I>&gt;<i> 
+</I>&gt;<i> and /etc/motd says:
+</I>&gt;<i> 
+</I>&gt;<i>   OS:   Redhat EL3 - Kernel Version 2.4.21-12 (64-bit)
+</I>
+Thank you for this tip, but the compilation fails in antoher way:
+
+usr/lib64/gcc/x86_64-suse-linux/4.1.0/../../../../x86_64-suse-linux/bin/ld:
+errno: TLS definition in
+/usr/lib64/gcc/x86_64-suse-linux/4.1.0/../../../../lib64/libc.a(errno.o)
+section .tbss mismatches non-TLS reference in arch/arch_r_objs.o
+/usr/lib64/gcc/x86_64-suse-linux/4.1.0/../../../../lib64/libc.a: could
+not read symbols: Bad value
+
+So, I tried to add &quot;#include &lt;sys/errno.h&gt;&quot; into arch.h, but now, it's
+worth: I get a dozen of &quot;undefined reference to `__gcc_personality_v0'&quot;
+
+I wonder if someone is still maintaining this project?
+
+- --
+<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">Bruno.Bzeznik at imag.fr</A>
+Projet CIMENT
+04 76 63 56 69
+<A HREF="http://ciment.ujf-grenoble.fr">http://ciment.ujf-grenoble.fr</A>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iD8DBQFHGLLwKIejyyHkRlIRAop1AJwLTPPrhegzAVqvtiieQOO9tdyz6gCdGw6i
+VclOkbUHwhhe07NBoG9wTQg=
+=il9c
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000027.html">[Cryopid-devel] Doesn't stop process and doesn't compile on	x86_64
+</A></li>
+	<LI>Next message: <A HREF="000029.html">[Cryopid-devel] Project status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

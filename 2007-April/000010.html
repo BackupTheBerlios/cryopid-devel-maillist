@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Using CryoPID to create binaries
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C461D9D5E.3060702%40largestprime.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000009.html">
+   <LINK REL="Next"  HREF="000011.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Using CryoPID to create binaries</H1>
+    <B>Bernard Blackham</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C461D9D5E.3060702%40largestprime.net%3E"
+       TITLE="[Cryopid-devel] Using CryoPID to create binaries">bernard at largestprime.net
+       </A><BR>
+    <I>Thu Apr 12 04:45:50 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000009.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+        <LI>Next message: <A HREF="000011.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John R Harrison wrote:
+&gt;<i> I've been using CryoPID for a few months now, and I've been very
+</I>&gt;<i> impressed with it. I have a couple of questions, but maybe first I
+</I>&gt;<i> should explain in general terms how I'm using it.
+</I>&gt;<i> 
+</I>&gt;<i> I'm the author of a theorem-proving program that's built inside the
+</I>&gt;<i> read-eval print loop of the OCaml programming language. (See
+</I>&gt;<i> &quot;<A HREF="http://www.cl.cam.ac.uk/~jrh13/hol-light/">http://www.cl.cam.ac.uk/~jrh13/hol-light/</A>&quot;.) OCaml, in contrast to
+</I>&gt;<i> some other functional language implementations, has no facility for
+</I>&gt;<i> saving and restoring a session, so I'm using checkpointing programs as
+</I>&gt;<i> a substitute.
+</I>[...]
+&gt;<i> So I poked around a
+</I>&gt;<i> bit for alternatives and found CryoPID, which seems to be exactly what
+</I>&gt;<i> I want.
+</I>
+Awesome! So you're using the x86_64 version successfully?
+
+&gt;<i> One further thing I'd rather like to do is distribute checkpointed
+</I>&gt;<i> images from CryoPID as binaries, to make installation for others
+</I>&gt;<i> trivial. For a little while I was excited to see that this seemed to
+</I>&gt;<i> work fine (using &quot;-l&quot;). However, it later turned out that there were
+</I>&gt;<i> various problems running binaries created on one platform on others.
+</I>&gt;<i> The most notable was signal handling: on control/C, the program would
+</I>&gt;<i> just exit at once instead of dropping me back in the read-eval-print
+</I>&gt;<i> loop. I also encountered other cases where the program would
+</I>&gt;<i> unpredictably exit for no obvious reason. (On the platform where the
+</I>&gt;<i> image was created, everything worked perfectly.)
+</I>&gt;<i> 
+</I>&gt;<i> So my question is: should I expect to be able to create reasonably
+</I>&gt;<i> portable binaries in this way, or am I asking too much? Is there
+</I>&gt;<i> something else I can do to support it?
+</I>
+I've seen unpredictable crashes moving between some machines, but never 
+got to trace down the cause. In theory it should be possible to make the 
+binaries &quot;portable enough&quot;, so long as we can fool the kernel into 
+putting things where they should be. So far I've just been debugging 
+vaguely reproducable crashes and finding their cause (and once you know 
+what's causing it, it's reasonably easy to work around in most cases). 
+But I haven't worked on Cryopid in some time, and am still as behind as 
+ever. Mark O'Neill has some awesome patches to add RT support, in-flight 
+data in FIFOs and more, which I've been meaning to put up on the site. 
+And I promise I will soon! (A week or two - still travelling atm).
+
+&gt;<i> I also have another more minor question. I see that support for
+</I>&gt;<i> preserving the PID is one of the &quot;planned&quot; features. Is this likely to
+</I>&gt;<i> happen soon? I'd certainly find it a rather convenient addition.
+</I>
+That stalled, awaiting support for pid containers and virtual pids to be 
+merged into mainline kernel. The patches were tossed around lkml several 
+times last year, but weren't merged. I'm not sure what the current 
+status is, but as soon as it is merged, preserving PIDs will be trivial :)
+
+Cheers,
+
+Bernard.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000009.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+	<LI>Next message: <A HREF="000011.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

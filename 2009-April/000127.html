@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] RESTORING SOCKETS IN CRYOPID
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20RESTORING%20SOCKETS%20IN%20CRYOPID&In-Reply-To=%3C35a750510904291947v539f8479q6dad0cdad8c5e987%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000126.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] RESTORING SOCKETS IN CRYOPID</H1>
+    <B>aniket pansare</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20RESTORING%20SOCKETS%20IN%20CRYOPID&In-Reply-To=%3C35a750510904291947v539f8479q6dad0cdad8c5e987%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] RESTORING SOCKETS IN CRYOPID">aniketpansare at gmail.com
+       </A><BR>
+    <I>Thu Apr 30 04:47:40 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000126.html">[Cryopid-devel] CRYOPID DEVELOPMENT HELP
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>SERVER SIDE
+
+
+#define PROTO_UNIX    1
+#define PROTO_TCP    6
+#define PROTO_UDP    17
+#define PROTO_X        666
+#define PORT 3500
+static int restore_socket=0;
+static int s;
+
+static struct sockaddr_in addr;
+static int incoming_s;
+static socklen_t incoming_len;
+
+static void restore_fd_socket(struct cp_fd *fd,int action)
+{
+      int rtn;
+
+
+
+    if(restore_socket==0)
+        {
+
+              s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+              if (s == -1) {
+                perror(&quot;Failed to get socket&quot;);
+                exit(EXIT_FAILURE);
+              }
+
+               addr.sin_family = AF_INET;
+              addr.sin_addr.s_addr = INADDR_ANY;
+              addr.sin_port = htons(PORT);
+
+              rtn = bind(s, (struct sockaddr*)&amp;addr, sizeof(addr));
+
+              if (rtn == -1) {
+                perror(&quot;Failed to get socket1&quot;);
+                exit(EXIT_FAILURE);
+              }
+
+             printf(&quot;\ni am listening&quot;);
+             rtn = listen(s, 10);
+
+              if (rtn == -1) {
+                perror(&quot;Failed to listen on socket&quot;);
+                exit(EXIT_FAILURE);
+              }
+
+
+              incoming_len = sizeof(addr);
+              memset(&amp;addr, 0, sizeof(addr));
+
+              incoming_s = accept(s, (struct sockaddr *)&amp;addr,
+&amp;incoming_len);
+
+              if (incoming_s == -1) {
+                perror(&quot;Failed to accept incoming connection&quot;);
+                exit(EXIT_FAILURE);
+              }
+
+              printf(&quot;Accepted incoming connection\n&quot;);
+            fprintf(stderr, &quot;incoming_s= %d -&gt; restore_socket= %d &quot;,
+incoming_s, restore_socket);
+
+
+
+
+        }
+    else
+        {
+        fprintf(stderr, &quot;incoming_s= %d -&gt; restore_socket= %d &quot;, incoming_s,
+restore_socket);
+        if (fd-&gt;fd != incoming_s)
+            {
+                dup2(incoming_s, fd-&gt;fd);
+                //close(incoming_s);
+             }
+
+
+        }
+
+restore_socket++;
+}
+
+
+CLIENT SIDE
+
+
+#define PROTO_UNIX    1
+#define PROTO_TCP    6
+#define PROTO_UDP    17
+#define PROTO_X        666
+#define PORT 3500
+
+static void restore_fd_socket(struct cp_fd *fd,int action)
+{
+    int s1,rtn;
+    struct sockaddr_in addr;
+
+
+
+    s1 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);//INADDR_ANY;
+    addr.sin_port = htons(PORT);
+
+    rtn = connect(s1, (struct sockaddr * )&amp;addr, sizeof(addr) );
+
+    if (rtn == -1)
+    {
+        perror(&quot;Failed to connect to server&quot;);
+        exit(EXIT_FAILURE);
+    }
+
+    if (fd-&gt;fd != s1)
+    {
+        dup2(s1, fd-&gt;fd);
+        close(s1);
+     }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+Aniket Pansare
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090430/4659c096/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090430/4659c096/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000126.html">[Cryopid-devel] CRYOPID DEVELOPMENT HELP
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

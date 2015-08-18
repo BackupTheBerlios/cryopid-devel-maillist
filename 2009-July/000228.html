@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Call for Ideas ;)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Call%20for%20Ideas%20%3B%29&In-Reply-To=%3C842365.10441.qm%40web110316.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000227.html">
+   <LINK REL="Next"  HREF="000229.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Call for Ideas ;)</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Call%20for%20Ideas%20%3B%29&In-Reply-To=%3C842365.10441.qm%40web110316.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Call for Ideas ;)">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Tue Jul  7 11:15:16 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000227.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+        <LI>Next message: <A HREF="000229.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--- On Tue, 7/7/09, Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt; wrote:
+
+&gt;<i> From: Michele Alberti &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">alberti at cs.unibo.it</A>&gt;
+</I>&gt;<i> Subject: [Cryopid-devel] Call for Ideas ;)
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Tuesday, July 7, 2009, 10:48 AM
+</I>&gt;<i> Hi all,
+</I>&gt;<i> this is a call for ideas.
+</I>&gt;<i> The problem is explained here:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/pipermail/cryopid-devel/2009-March/000246.html">https://lists.berlios.de/pipermail/cryopid-devel/2009-March/000246.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> In particular, these are my thoughts:
+</I>&gt;<i> 
+</I>&gt;<i> Cryopid store all information needed to restore the process
+</I>&gt;<i> later.
+</I>&gt;<i> So probrably even information about the process state, PID
+</I>&gt;<i> in particular
+</I>&gt;<i> (somewhere in vma?). The result is that when restoring the
+</I>No, PID stored not in vma, but somewhere in Thread Local Storage
+
+&gt;<i> process, the
+</I>&gt;<i> getpid syscall wrapper of glibc return the old PID even if
+</I>&gt;<i> the process has
+</I>&gt;<i> got a new one. So many things can't work, like reise()
+</I>&gt;<i> syscall.
+</I>&gt;<i> 
+</I>&gt;<i> I need ideas, INFO about Thread Local Storage (I think that
+</I>&gt;<i> it's the
+</I>&gt;<i> origin of the problem, is it right?) and it's
+</I>&gt;<i> implementation in glibc.
+</I>&gt;<i> Please help me, join #cryopid on IRC or just post here in
+</I>&gt;<i> the ml.
+</I>OK, in Fedora Core 1 getpid looks like this:
+
+/lib/tls/libc.so.6:
+0043d070 &lt;__getpid&gt;:
+  43d070:       b8 14 00 00 00          mov    $0x14,%eax
+  43d075:       65 ff 15 10 00 00 00    call   *%gs:0x10
+  43d07c:       c3                      ret    
+  43d07d:       90                      nop    
+  43d07e:       90                      nop    
+  43d07f:       90                      nop    
+
+or like this:
+/lib/libc.so.6:
+000a9590 &lt;__getpid&gt;:
+   a9590:       b8 14 00 00 00          mov    $0x14,%eax
+   a9595:       cd 80                   int    $0x80
+   a9597:       c3                      ret    
+   a9598:       90                      nop    
+   a9599:       90                      nop    
+   a959a:       90                      nop    
+   a959b:       90                      nop    
+   a959c:       90                      nop    
+   a959d:       90                      nop    
+   a959e:       90                      nop    
+   a959f:       90                      nop    
+
+As you can see, no caching was done, so no problem.
+
+On Fedora Core 3 __getpid from /lib/libc.so.6 looks the same,
+but __getpid from /lib/tls/libc.so.6 looks different:
+
+00be2c00 &lt;__getpid&gt;:
+  be2c00:       65 8b 15 4c 00 00 00    mov    %gs:0x4c,%edx
+  be2c07:       85 d2                   test   %edx,%edx
+  be2c09:       89 d0                   mov    %edx,%eax
+  be2c0b:       7e 01                   jle    be2c0e &lt;__getpid+0xe&gt;
+  be2c0d:       c3                      ret    
+  be2c0e:       75 12                   jne    be2c22 &lt;__getpid+0x22&gt;
+  be2c10:       65 a1 48 00 00 00       mov    %gs:0x48,%eax
+  be2c16:       85 c0                   test   %eax,%eax
+  be2c18:       90                      nop    
+  be2c19:       8d b4 26 00 00 00 00    lea    0x0(%esi),%esi
+  be2c20:       75 eb                   jne    be2c0d &lt;__getpid+0xd&gt;
+  be2c22:       b8 14 00 00 00          mov    $0x14,%eax
+  be2c27:       65 ff 15 10 00 00 00    call   *%gs:0x10
+  be2c2e:       85 d2                   test   %edx,%edx
+  be2c30:       75 db                   jne    be2c0d &lt;__getpid+0xd&gt;
+  be2c32:       65 a3 48 00 00 00       mov    %eax,%gs:0x48
+  be2c38:       c3                      ret    
+  be2c39:       90                      nop    
+  be2c3a:       90                      nop    
+  be2c3b:       90                      nop    
+  be2c3c:       90                      nop    
+  be2c3e:       90                      nop    
+  be2c3f:       90                      nop    
+
+
+As we can see here getpid() system call don't called if it value was cached.
+And it's saved in %gs:0x48.
+
+
+I see following ways to deal with problem:
+
+1) On the startup, after everything loaded and initialized (include TLS !), but before program get control do following:
+    get real process id with INLINE SYSCALL getpid, i.e
+    mov    $0x14,%eax
+    int    $0x80
+
+    Save it in the TLS
+    mov    %eax,%gs:0x48
+
+The trouble I don't sure that %gs:0x48 is consistent around different distros
+(but there is good chance it's OK)
+
+2) On startup find address of getpid in /libc and find in getpid
+  mov    $0x14,%eax
+  call   *%gs:0x10
+
+(It starts from be2c22 on my Fedora Core 3)
+  Than execute this function. It will get new PID and cache it in correct place.
+
+3) Some (long) time ago someone on the list asked something like this and then I wrote 
+  small utility execpid, that try to run process with
+specified PID.
+I.e
+execpid 345 /bin/ls -l
+will make sure ls got pid 345. If it's impossible to
+get specified pid, process will not run at all.
+Not sure how useful this program, but at least it was fun to write.
+
+Code attached.
+
+Valery
+    
+&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Michele
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Michele Alberti
+</I>&gt;<i> Linux Registered User #467894
+</I>&gt;<i> <A HREF="http://alberti.web.cs.unibo.it">http://alberti.web.cs.unibo.it</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>
+
+      
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: execpid.c
+Type: text/x-csrc
+Size: 2089 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090707/3733a41c/attachment.c">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090707/3733a41c/attachment.c</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000227.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+	<LI>Next message: <A HREF="000229.html">[Cryopid-devel] Call for Ideas ;)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

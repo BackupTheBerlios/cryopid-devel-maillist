@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1245312191.7622.85.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000187.html">
+   <LINK REL="Next"  HREF="000180.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch&In-Reply-To=%3C1245312191.7622.85.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] cryopid patch">echo at echoreply.us
+       </A><BR>
+    <I>Thu Jun 18 10:03:11 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000187.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+        <LI>Next message: <A HREF="000180.html">[Cryopid-devel] sparc / alpha support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 2009-06-18 at 00:10 -0700, Valery Reznic wrote:
+
+&gt;<i> Better change CryoPID to mmap to address &gt;= 65536
+</I>
+Not so easy, we would have to save the lowest address as part of the
+frozen PID, so that when un-freezing, it could tell the user why it
+won't work. I.e. on system A (where a pid was frozen) its 65536, on B
+its 0, or vice versa.
+
+A great many of cryopid users work with much older kernels and distros.
+
+I am not opposed to making the starting address floating, but sanity
+when un-freezing is important .. it should 'just work', otherwise we're
+back in the same place of Debian dealing with our quirks. 
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000187.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+	<LI>Next message: <A HREF="000180.html">[Cryopid-devel] sparc / alpha support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

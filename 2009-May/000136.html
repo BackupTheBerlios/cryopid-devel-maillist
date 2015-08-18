@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C57429.82.85.161.50.1241783763.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000135.html">
+   <LINK REL="Next"  HREF="000137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C57429.82.85.161.50.1241783763.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">alberti at cs.unibo.it
+       </A><BR>
+    <I>Fri May  8 13:56:03 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000135.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+        <LI>Next message: <A HREF="000137.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;&gt;<i> but I'm just wondering what is _binary_stub_[...]_start. Where is it
+</I>&gt;&gt;<i> defined?
+</I>
+OK, I understand ;)
+
+&gt;<i>
+</I>&gt;<i> Debian GNU/Linux 4.0 (etch)
+</I>&gt;<i> 2.6.18-5-686-bigmem
+</I>&gt;<i> gcc version 4.1.2 20061115 (prerelease) (Debian 4.1.1-21)
+</I>&gt;<i> libc-2.3.6
+</I>&gt;<i> Multi-core system (8 CPU's).
+</I>&gt;<i>
+</I>&gt;<i> On this system I am able to build cryopid 0.5.9.1 cleanly for the first
+</I>&gt;<i> time (previous
+</I>&gt;<i> efforts on RedHat have been aborted) but I am unable to run freeze'd apps
+</I>&gt;<i> successfully ..
+</I>
+It's strange, I tested cryopid on a qemu box with a Debian like yours.
+Freeze and Re-run going well.
+&gt;<i>
+</I>&gt;<i> bash&gt; ./top.freeze
+</I>&gt;<i> Segmentation fault
+</I>
+Do you compile cryopid as super user?
+Don't do that, otherwise Seg Fault :)
+
+Ciao,
+Michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000135.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+	<LI>Next message: <A HREF="000137.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

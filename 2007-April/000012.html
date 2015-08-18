@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Using CryoPID to create binaries
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C20070415070855.GA14228%40mersenne.largestprime.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000011.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Using CryoPID to create binaries</H1>
+    <B>Bernard Blackham</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Using%20CryoPID%20to%20create%20binaries&In-Reply-To=%3C20070415070855.GA14228%40mersenne.largestprime.net%3E"
+       TITLE="[Cryopid-devel] Using CryoPID to create binaries">bernard at blackham.com.au
+       </A><BR>
+    <I>Sun Apr 15 09:08:55 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000011.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Apr 14, 2007 at 08:11:53PM -0700, John R Harrison wrote:
+&gt;<i> Sounds good! If you ever do have any more time to look at this issue
+</I>&gt;<i> with OCaml, I can work more closely with you. It's not a showstopper, 
+</I>&gt;<i> but it would be very attractive to be able to distribute completely
+</I>&gt;<i> portable binaries.
+</I>
+Ahh. I know Ocaml does crazy things with binaries, but I just tested
+it on some, built with either with ocamlc and ocamlopt, and it
+seemed happy. Obviously, that's not to say its foolproof, but if you
+can isolate a binary which dies (or even better, a scenario), I'll
+try and dig in when I get a chance.
+
+&gt;<i> | That stalled, awaiting support for pid containers and virtual pids to be 
+</I>&gt;<i> | merged into mainline kernel. The patches were tossed around lkml several 
+</I>&gt;<i> | times last year, but weren't merged. I'm not sure what the current 
+</I>&gt;<i> | status is, but as soon as it is merged, preserving PIDs will be trivial :)
+</I>&gt;<i> 
+</I>&gt;<i> And it would also make CryoPID's name more appropriate :-)
+</I>&gt;<i> 
+</I>&gt;<i> By the way, do you know of any usable checkpointing packages for
+</I>&gt;<i> Mac OS X or Windows? I've searched a bit and never really found anything.
+</I>&gt;<i> But then I only found out about CryoPID relatively recently because I
+</I>&gt;<i> was relying on a rather old list at &quot;www.checkpointing.org&quot;.
+</I>
+Not that I'm aware of. I once had ambitious goals to 'port' CryoPID
+to FreeBSD and potentially Darwin, but those days are gone (oh, to
+be a uni student again).
+
+I've no idea about Windows and know nothing of its internals. I'm
+sure it's possible (as is anything) - interestingly, Microsoft is
+now making internal OS sources to some versions of Windows available
+to universities for research purposes.  I reckon this would be a
+pretty awesome reason for getting at them, so if anybody is
+pondering undertaking this project, let me know. I know at least one
+university that is involved in this program.
+
+Cheers,
+
+Bernard.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000011.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Cryopid-devel] Using CryoPID to create binaries
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

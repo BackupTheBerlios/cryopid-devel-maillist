@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Is this program maintained?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Is%20this%20program%20maintained%3F&In-Reply-To=%3C46693.82.85.160.178.1239971278.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000109.html">
+   <LINK REL="Next"  HREF="000112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Is this program maintained?</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Is%20this%20program%20maintained%3F&In-Reply-To=%3C46693.82.85.160.178.1239971278.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] Is this program maintained?">alberti at cs.unibo.it
+       </A><BR>
+    <I>Fri Apr 17 14:27:58 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000109.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+        <LI>Next message: <A HREF="000112.html">[Cryopid-devel] CryoPID on Ubuntu?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> On Fri, 2009-04-17 at 12:48 +0200, Michele Alberti wrote:
+</I>
+&gt;&gt;<i> I'm not familiar with Mercurial, I used Git in the past. How many of us
+</I>&gt;&gt;<i> does know Mercurial? And Git?
+</I>&gt;&gt;<i> Git++ [me ;-) ]
+</I>&gt;<i>
+</I>&gt;<i> HG is similar but less complex. If you can use SVN, you can use HG. By
+</I>&gt;<i> that extension, if you can use Git, HG is easy.
+</I>&gt;<i> I published a quick start here:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://sharesource.org/project/cryopid/wiki/Developers/">http://sharesource.org/project/cryopid/wiki/Developers/</A>
+</I>&gt;<i>
+</I>&gt;<i> Its really, really easy to use.
+</I>
+Thanks Tim for the quick start and your job!
+
+&gt;&gt;<i> I've just seen the Debian report about the problem with the project
+</I>&gt;&gt;<i> build
+</I>&gt;&gt;<i> in new Kernel. That patch doesn't work.
+</I>&gt;&gt;<i> I make a patch for cryopid in my PC. The patch uses some .h (user32.h is
+</I>&gt;&gt;<i> like the old user.h) from the kernel source, and I think it's a problem.
+</I>&gt;&gt;<i> I'll try with sys/user.h, but I'm not optimist.
+</I>&gt;<i>
+</I>&gt;<i> The hardest part is going to be (automatically) realizing when members
+</I>&gt;<i> vanish in favor of some syscall to retrieve them, or change names, or
+</I>&gt;<i> get obsoleted.
+</I>
+In my opinion, we can use user32.h locally, copying it in arch-i386/ from
+the kernel and then fixing the #include directives. But I know, It's a
+quite dirty.
+But we can do it until a better solution jumps out.
+
+Cheers,
+Michele
+
+-- 
+Michele Alberti
+Linux Registered User #467894
+<A HREF="http://alberti.web.cs.unibo.it">http://alberti.web.cs.unibo.it</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000109.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+	<LI>Next message: <A HREF="000112.html">[Cryopid-devel] CryoPID on Ubuntu?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

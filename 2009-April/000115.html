@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Autoconf options / gtk
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Autoconf%20options%20/%20gtk&In-Reply-To=%3C1240144515.5444.853.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000114.html">
+   <LINK REL="Next"  HREF="000116.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Autoconf options / gtk</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Autoconf%20options%20/%20gtk&In-Reply-To=%3C1240144515.5444.853.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] Autoconf options / gtk">echo at echoreply.us
+       </A><BR>
+    <I>Sun Apr 19 14:35:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000114.html">[Cryopid-devel] Autoconf options / gtk
+</A></li>
+        <LI>Next message: <A HREF="000116.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sorry for top posting.
+
+No sooner did I send this than I remembered something else.
+
+Does anyone think that a --with-dietlibc=[path] would be prudent? This
+would allow linking against a different object, should the user wish to
+do so.
+
+The only bad result will be, it doesn't build, or doesn't work .. but
+someone smart enough to specify another static lib would likely realize
+why :)
+
+Most distros would __not__ want to use this for the sake of just using a
+provided DSO, since it would almost always mean retarding the user's
+dietlibc install when installing CryoPID. I thought of it only as a
+convenience for developers, who might have altered the dietlibc printf()
+sub system, etc, et al.
+
+Thoughts?
+
+Cheers,
+--Tim
+
+On Sun, 2009-04-19 at 20:20 +0800, Tim Post wrote:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> As you know I am working on bringing the build of CryoPID under the
+</I>&gt;<i> control of autoconf (note, not automake, just autoconf).
+</I>&gt;<i> 
+</I>&gt;<i> As far as I can tell, beyond the typical 'configure' options, we will
+</I>&gt;<i> need the following:
+</I>&gt;<i> 
+</I>&gt;<i> --disable-tcpcp (currently enabled by default)
+</I>&gt;<i> --enable-gtk (currently disabled by default)
+</I>&gt;<i> 
+</I>&gt;<i> No external library path is needed (or should be passed to) these
+</I>&gt;<i> directives, since they simply introduce internal wrappers.
+</I>&gt;<i> 
+</I>&gt;<i> The GTK support (can) use gtk/gtk.h if its present, however it isn't
+</I>&gt;<i> really needed, unless GTK completely breaks their existing interface by
+</I>&gt;<i> shuffling types.
+</I>&gt;<i> 
+</I>&gt;<i> There is one assertion in the wrapper which is defined if gtk/gtk.h is
+</I>&gt;<i> not included:
+</I>&gt;<i> 
+</I>&gt;<i> #define GTK_IS_WINDOW(x) (1) /* Bleh, live with the assertions */
+</I>&gt;<i> 
+</I>&gt;<i> Which would normally call GTK_CHECK_TYPE on x. I am not a GTK wizard, so
+</I>&gt;<i> if someone else wants to chime in on depending on gtk for build that
+</I>&gt;<i> would be great. From the research I did, it seems like this is a pretty
+</I>&gt;<i> harmless assertion (given how we use it), however I'd be more
+</I>&gt;<i> comfortable with someone well versed in GTK looking into it.
+</I>&gt;<i> 
+</I>&gt;<i> Finally, I am planning on tracking the configure script itself in the
+</I>&gt;<i> repository. I know its 6k lines, but it doesn't force potential
+</I>&gt;<i> contributors to have autotools of a specific version installed. If they
+</I>&gt;<i> have them, they can use them.
+</I>&gt;<i> 
+</I>&gt;<i> I should have a kernel agnostic build committed by the end of the week.
+</I>&gt;<i> 
+</I>&gt;<i> BTW, The project is finally live at ShareSource with everything working.
+</I>&gt;<i> again, anyone needing commit access needs only to register and e-mail me
+</I>&gt;<i> with your username.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000114.html">[Cryopid-devel] Autoconf options / gtk
+</A></li>
+	<LI>Next message: <A HREF="000116.html">[Cryopid-devel] Is this program maintained?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

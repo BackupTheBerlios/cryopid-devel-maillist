@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] error in fork2.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C43d34ebe0902251051q7e88edfdrbeb5f9967788491b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000078.html">
+   <LINK REL="Next"  HREF="000080.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] error in fork2.c</H1>
+    <B>Alex</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C43d34ebe0902251051q7e88edfdrbeb5f9967788491b%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] error in fork2.c">alexthegamer at gmail.com
+       </A><BR>
+    <I>Wed Feb 25 19:51:28 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000078.html">[Cryopid-devel] error in fork2.c
+</A></li>
+        <LI>Next message: <A HREF="000080.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+The man page of fork(2) says that fork() returns the Child's PID to the
+parent. If I am not mistaken, the child starts executing at the next
+instruction, otherwise each fork() would result in an infinite loop.
+Assuming helper_pid was initialized to 0, the original processes will go
+into the waitpid code.
+
+-Alex
+
+On Wed, Feb 25, 2009 at 12:55 PM, Rohit Banga &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">iamrohitbanga at gmail.com</A>&gt;wrote:
+
+&gt;<i> hello
+</I>&gt;<i> i haven't really studied the source code in detail. just noticed an error
+</I>&gt;<i> in fork2.c
+</I>&gt;<i>
+</I>&gt;<i> switch(helper_pid = fork()) {
+</I>&gt;<i>
+</I>&gt;<i> case 0: /* parent */
+</I>&gt;<i>
+</I>&gt;<i>                 waitpid code
+</I>&gt;<i>
+</I>&gt;<i> default:  /* child */
+</I>&gt;<i>                 execve code
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> fork returns 0 in child and not in parent ?
+</I>&gt;<i> --
+</I>&gt;<i> Rohit Banga
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090225/1460e31c/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090225/1460e31c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000078.html">[Cryopid-devel] error in fork2.c
+</A></li>
+	<LI>Next message: <A HREF="000080.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

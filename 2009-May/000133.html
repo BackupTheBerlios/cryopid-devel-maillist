@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C928414.8839.qm%40web110307.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000132.html">
+   <LINK REL="Next"  HREF="000139.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C928414.8839.qm%40web110307.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Wed May  6 12:19:08 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000132.html">[Cryopid-devel] Fw:  CryoPID on Fedora i386
+</A></li>
+        <LI>Next message: <A HREF="000139.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#133">[ date ]</a>
+              <a href="thread.html#133">[ thread ]</a>
+              <a href="subject.html#133">[ subject ]</a>
+              <a href="author.html#133">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Wed, 5/6/09, Jay Vaughan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>&gt; wrote:
+
+&gt;<i> From: Jay Vaughan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">jay.vaughan at thalesgroup.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] cryopid's ELF
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Date: Wednesday, May 6, 2009, 12:50 PM
+</I>&gt;<i> &gt; On my Fedora system there is
+</I>&gt;<i> /usr/include/linux/user.h file
+</I>&gt;<i> &gt; all it has is following line:
+</I>&gt;<i> &gt; #include &lt;asm/user.h&gt;
+</I>&gt;<i> &gt; So I think you can just replace &lt;linux/user.h&gt;
+</I>&gt;<i> to &lt;asm/user.h&gt;
+</I>&gt;<i> &gt; I too have some problems with compilation and some
+</I>&gt;<i> time ago sent patch to the list.
+</I>&gt;<i> &gt; I can re-send it if you need.
+</I>&gt;<i> 
+</I>&gt;<i> Okay, I guess this is a distro-specific issue then .. I
+</I>&gt;<i> tried to use asm/user.h but ran into this:
+</I>&gt;<i> 
+</I>Yes, I run into this problem too.
+I re-sent my previous mail with a patch
+
+Valery.
+
+P.S. You mailed me directly instead of mailing list.
+Reply-all should work :)
+
+&gt;<i> In file included from cp_r_regs.c:5:
+</I>&gt;<i> /usr/include/sys/ptrace.h:33: error: syntax error before
+</I>&gt;<i> numeric constant
+</I>&gt;<i> /usr/include/sys/ptrace.h:49: error: syntax error before
+</I>&gt;<i> numeric constant
+</I>&gt;<i> /usr/include/sys/ptrace.h:61: error: syntax error before
+</I>&gt;<i> numeric constant
+</I>&gt;<i> make[1]: *** [cp_r_regs.o] Error 1
+</I>&gt;<i> 
+</I>&gt;<i> (This is on RHE4.0, alas.. don't have the option to use
+</I>&gt;<i> anything more recent at the moment, but maybe I'll try a
+</I>&gt;<i> VirtualBox instance to get a chance to play with cryopid..)
+</I>&gt;<i> 
+</I>&gt;<i> I'lll try to work through it .. if you have the chance,
+</I>&gt;<i> though, I'd definitely like to see your patch if you got
+</I>&gt;<i> everything working..
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> j.
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000132.html">[Cryopid-devel] Fw:  CryoPID on Fedora i386
+</A></li>
+	<LI>Next message: <A HREF="000139.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#133">[ date ]</a>
+              <a href="thread.html#133">[ thread ]</a>
+              <a href="subject.html#133">[ subject ]</a>
+              <a href="author.html#133">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

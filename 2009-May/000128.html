@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid's ELF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C50483.78.13.73.172.1241595464.squirrel%40ssl.cs.unibo.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid's ELF</H1>
+    <B>Michele Alberti</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%27s%20ELF&In-Reply-To=%3C50483.78.13.73.172.1241595464.squirrel%40ssl.cs.unibo.it%3E"
+       TITLE="[Cryopid-devel] cryopid's ELF">alberti at cs.unibo.it
+       </A><BR>
+    <I>Wed May  6 09:37:44 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000129.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+I'm trying to understand and study cryopid's code and now I'm on the ELF
+creation. In freeze.c, after saving some things, there is a call to
+&quot;write_stub&quot;, a function of elfwriter.c. In &quot;write_stub&quot; function cryopid
+examines the ELF, looking for &quot;cryopid.tramp&quot; and &quot;cryopid.image&quot;.
+*1* question: in write_stub, don't we create the ELF?
+*2* question: cryopid looks for some records in the ELF, who does create
+the &quot;default (?)&quot; ELF image?
+
+Variable &quot;stub_start&quot; is declare in cryopid.h as:
+
+#ifdef COMPILING_STUB
+#define declare_writer(s, x, desc) struct stream_ops *stream_ops = &amp;x
+#else
+#define declare_writer(s, x, desc) \
+    extern char *_binary_stub_##s##_start; \
+    extern int _binary_stub_##s##_size; \
+    struct stream_ops *stream_ops = &x; \
+    char *stub_start = (char*)&amp;_binary_stub_##s##_start; \
+    long stub_size = (long)&amp;_binary_stub_##s##_size
+
+#endif
+
+*3* question: can someone explain this? (_binary_stub_##s##_start ?)
+
+Speaking about the ELF layout written in cplayout.h:
+*4* question: who does fill in the resumer code? can you tell me where to
+look in cryopid's code?
+
+Please Bernard, help me (us) to understand so we can write a final (?)
+docs and mantain your work. Please. :D (only joking, but I need your help)
+
+Cheers,
+Michele
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000129.html">[Cryopid-devel] cryopid's ELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

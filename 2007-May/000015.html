@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Help with compilation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Help%20with%20compilation&In-Reply-To=%3C1180439078.18402.10.camel%40apilchin-laptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Help with compilation</H1>
+    <B>Alex Pilchin</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Help%20with%20compilation&In-Reply-To=%3C1180439078.18402.10.camel%40apilchin-laptop%3E"
+       TITLE="[Cryopid-devel] Help with compilation">alexander.pilchin at lu.unisi.ch
+       </A><BR>
+    <I>Tue May 29 13:44:38 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000016.html">[Cryopid-devel] help with freezing of mysqld process
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+I am having trouble with the compilation of both the 0.5.9.1 version and
+the and the 0.5.3 version on an X86_64 machine. 
+
+I would very much appreciate your help. 
+
+The error I get is 
+%.../cryopid-0.5.9.1/src$ make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+make -C arch 'CFLAGS+= -fno-stack-protector'
+make[1]: Entering directory `.../cryopid-0.5.9.1/src/arch-x86_64'
+cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o
+stub.c
+stub.c:19: error: expected declaration specifiers or &#8216;...&#8217; before
+&#8216;arch_prctl&#8217;
+stub.c:19: error: expected declaration specifiers or &#8216;...&#8217; before &#8216;code&#8217;
+stub.c:19: error: expected declaration specifiers or &#8216;...&#8217; before &#8216;addr&#8217;
+stub.c:19: warning: data definition has no type or storage class
+stub.c:19: warning: type defaults to &#8216;int&#8217; in declaration of &#8216;_syscall2&#8217;
+make[1]: *** [stub.o] Error 1
+make[1]: Leaving directory `.../cryopid-0.5.9.1/src/arch-x86_64'
+make: *** [arch] Error 2
+
+
+The kernel I'm using is 
+Linux node2 2.6.20-15-generic #2 SMP Sun Apr 15 06:17:24 UTC 2007 x86_64
+GNU/Linux
+
+The version of CC is below. 
+---------------------------
+Using built-in specs.
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --enable-languages=c,c
+++,fortran,objc,obj-c++,treelang --prefix=/usr --enable-shared
+--with-system-zlib --libexecdir=/usr/lib --without-included-gettext
+--enable-threads=posix --enable-nls --program-suffix=-4.1
+--enable-__cxa_atexit --enable-clocale=gnu --enable-libstdcxx-debug
+--enable-mpfr --enable-checking=release x86_64-linux-gnu
+Thread model: posix
+gcc version 4.1.2 (Ubuntu 4.1.2-0ubuntu4)
+
+Thanks for your help,
+Cheers,
+Alex
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000016.html">[Cryopid-devel] help with freezing of mysqld process
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

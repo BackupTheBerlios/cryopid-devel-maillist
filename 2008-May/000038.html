@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] trouble with redhat install
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3C1210991813.7648.616.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000037.html">
+   <LINK REL="Next"  HREF="000039.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] trouble with redhat install</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3C1210991813.7648.616.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] trouble with redhat install">echo at echoreply.us
+       </A><BR>
+    <I>Sat May 17 04:36:53 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000037.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+        <LI>Next message: <A HREF="000039.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 2008-05-16 at 15:28 -0400, Jerod Sikorskyj wrote:
+&gt;<i> Dear anyone who can help,
+</I>&gt;<i> 
+</I>&gt;<i> I am attempting to compile Cryopid on Redhat with the following uname
+</I>&gt;<i> info:
+</I>&gt;<i> 
+</I>&gt;<i> Linux bioinfo4.niagara.edu 2.4.21-9.ELsmp #1 SMP Thu Jan 8 17:08:56
+</I>&gt;<i> EST 2004 i686 i686 i386 GNU/Linux
+</I>
+That means that your tool chain (gcc, ld, ar, etc) are also from 2004
+and will not understand some of the compiler settings.
+
+My first inclination would be to simply upgrade your tool chain to a
+more recent version. 
+
+&gt;<i> 
+</I>&gt;<i> I followed the installation readme, and typed &quot;make&quot; while in the /src
+</I>&gt;<i> directory.  Here is the error message I got:
+</I>&gt;<i> 
+</I>&gt;<i> [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at bioinfo4</A> src]# make
+</I>&gt;<i> ! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+</I>&gt;<i> make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+</I>&gt;<i> make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-i386'
+</I>&gt;<i> cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c
+</I>&gt;<i> -o stub.o stub.c
+</I>&gt;<i> cc1: unrecognized option `-fno-stack-protector'
+</I>&gt;<i> make[1]: *** [stub.o] Error 1
+</I>&gt;<i> make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-i386'
+</I>&gt;<i> make: *** [arch] Error 2
+</I>
+What version of gcc are you using, exactly? iirc, protection from stack
+smashing was introduced before the option to turn it off
+(no-stack-protector).
+
+You might be able to just remove that particular flag safely with your
+compiler. The worst thing that would happen is a nasty glibc error
+complaining that stack smashing was detected.
+
+Note, even with it removed, you might run into other issues due to the
+age of your tool chain. 
+
+HTH
+
+Cheers,
+--Tim
+
+-- 
+Monkey + Typewriter = Echoreply ( <A HREF="http://echoreply.us">http://echoreply.us</A> )
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000037.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+	<LI>Next message: <A HREF="000039.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

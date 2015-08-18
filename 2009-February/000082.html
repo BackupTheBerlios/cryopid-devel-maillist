@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] error in fork2.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C1235617367.5390.416.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000085.html">
+   <LINK REL="Next"  HREF="000081.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] error in fork2.c</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20error%20in%20fork2.c&In-Reply-To=%3C1235617367.5390.416.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] error in fork2.c">echo at echoreply.us
+       </A><BR>
+    <I>Thu Feb 26 04:02:47 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000085.html">[Cryopid-devel] error in fork2.c
+</A></li>
+        <LI>Next message: <A HREF="000081.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#82">[ date ]</a>
+              <a href="thread.html#82">[ thread ]</a>
+              <a href="subject.html#82">[ subject ]</a>
+              <a href="author.html#82">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2009-02-25 at 23:25 +0530, Rohit Banga wrote:
+&gt;<i> hello
+</I>&gt;<i> i haven't really studied the source code in detail. just noticed an
+</I>&gt;<i> error in fork2.c
+</I>&gt;<i> 
+</I>&gt;<i> switch(helper_pid = fork()) {
+</I>&gt;<i> 
+</I>&gt;<i> case 0: /* parent */
+</I>&gt;<i> 
+</I>&gt;<i>                 waitpid code 
+</I>&gt;<i> 
+</I>&gt;<i> default:  /* child */
+</I>&gt;<i>                 execve code
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> fork returns 0 in child and not in parent ?
+</I>
+It makes a lot more sense when you keep in mind that bot child and
+parent are going to run through the cases at the same time. One will be
+a parent waiting for the result of the child, one will be the child
+actually talking to execve.
+
+The child will be long gone before the parent gets out of the switch().
+
+All of this, of course, depending on fork() working in the first place.
+
+HTH
+
+Cheers,
+--Tim
+
+
+
+&gt;<i> -- 
+</I>&gt;<i> Rohit Banga
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> CryoPID-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">CryoPID-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">https://lists.berlios.de/mailman/listinfo/cryopid-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000085.html">[Cryopid-devel] error in fork2.c
+</A></li>
+	<LI>Next message: <A HREF="000081.html">[Cryopid-devel] error in fork2.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#82">[ date ]</a>
+              <a href="thread.html#82">[ thread ]</a>
+              <a href="subject.html#82">[ subject ]</a>
+              <a href="author.html#82">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

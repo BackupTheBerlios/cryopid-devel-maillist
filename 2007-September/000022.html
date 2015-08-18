@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Batch checkpointing of an interactive program
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Batch%20checkpointing%20of%20an%20interactive%20program&In-Reply-To=%3C200709072007.l87K7wgl015763%40plxc0930.pdx.intel.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000023.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Batch checkpointing of an interactive program</H1>
+    <B>John R Harrison</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Batch%20checkpointing%20of%20an%20interactive%20program&In-Reply-To=%3C200709072007.l87K7wgl015763%40plxc0930.pdx.intel.com%3E"
+       TITLE="[Cryopid-devel] Batch checkpointing of an interactive program">johnh at ichips.intel.com
+       </A><BR>
+    <I>Fri Sep  7 22:07:58 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000023.html">[Cryopid-devel] Troble compiling freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+For the build process of my theorem prover HOL Light, I'd really like
+to be able to do the following:
+
+ * Start up an OCaml toplevel (this isn't, I hope, OCaml-specific, so
+   think of any other program with a read-eval-print loop).
+
+ * Load some code into the toplevel and leave OCaml waiting for more
+   input
+
+ * Use CryoPID to create a checkpoint.
+
+If I do this interactively, everything works fine, using CryoPID from
+another shell. Indeed, after a little experimentation, I've found that
+I can get the OCaml session to checkpoint itself by calling &quot;freeze&quot;
+as a subprocess, and nothing much seems to go wrong. This means I can
+easily hack things so that the restarted image will print a banner
+just by continuing the execution after a short delay loop. Thus if a
+file 'test.ml' contains the following code:
+
+  let self_destruct bannerstring =
+    let rec waste_time n = if n = 0 then () else waste_time(n - 1) in
+    Gc.compact();
+    ignore(Sys.command &quot;(sleep 1s; freeze hol.freeze $PPID) &amp;&quot;);
+    waste_time 100000000;
+    Format.print_string bannerstring;
+    Format.print_newline(); Format.print_newline();;
+  
+  self_destruct &quot;Preloaded with ...&quot;;;
+
+I can start up an Ocaml toplevel, do
+
+  #use &quot;test.ml&quot;;;
+
+and it checkpoints itself, giving an image that prints &quot;Preloaded with
+...&quot; on startup. All fine so far. The problem comes when I want to do
+this noninteractively as part of the build process. I tried various
+things like
+
+  echo '#use &quot;test.ml&quot;;;' | ocaml
+  (echo '#use &quot;test.ml&quot;;;'; cat -) | ocaml
+
+but in each case, when the checkpointed image is restarted, it gives
+
+  # I/O error: Bad file descriptor
+
+which I suspect is because the pipe isn't there any more. Since the
+OCaml toplevel will automatically execute an &quot;.ocamlinit&quot; file, I
+tried
+
+  echo '#use &quot;test.ml&quot;;;' &gt;.ocamlinit
+  ocaml
+
+However, if the checkpointed image is restarted when there is no file
+&quot;.ocamlinit&quot; in the same directory, the same problem arises, so I
+guess the file is still open when checkpointing happens.
+
+Does anyone have any suggestions for automating this in a reliable
+and non-hacky way?
+
+John.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000023.html">[Cryopid-devel] Troble compiling freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

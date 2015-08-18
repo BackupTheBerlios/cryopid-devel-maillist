@@ -1,0 +1,867 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] Older snapshots (almost) work!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C331200.23564.qm%40web110310.mail.gq1.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000222.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] Older snapshots (almost) work!</H1>
+    <B>Valery Reznic</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20Older%20snapshots%20%28almost%29%20work%21&In-Reply-To=%3C331200.23564.qm%40web110310.mail.gq1.yahoo.com%3E"
+       TITLE="[Cryopid-devel] Older snapshots (almost) work!">valery_reznic at yahoo.com
+       </A><BR>
+    <I>Mon Jun 22 19:18:44 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000222.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+        <LI>Next message: <A HREF="000213.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+
+--- On Mon, 6/22/09, John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt; wrote:
+
+&gt;<i> From: John R Harrison &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">johnh at ichips.intel.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Cryopid-devel] Older snapshots (almost) work!
+</I>&gt;<i> To: &quot;Valery Reznic&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">valery_reznic at yahoo.com</A>&gt;
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">cryopid-devel at lists.berlios.de</A>
+</I>&gt;<i> Date: Monday, June 22, 2009, 5:28 PM
+</I>&gt;<i> 
+</I>&gt;<i> Hi Valery,
+</I>&gt;<i> 
+</I>&gt;<i> | Yes, I see that on Jaunty you used more, but I missed
+</I>&gt;<i> what's joke is ?
+</I>&gt;<i> | No cat on Jaunty ?
+</I>&gt;<i> 
+</I>&gt;<i> Nothing like that, I just absent-mindedly sometimes used
+</I>&gt;<i> cat and sometimes
+</I>&gt;<i> more.
+</I>&gt;<i> 
+</I>&gt;<i> | Output you sent shows, that all systems, but Knoppix have
+</I>&gt;<i> VDSO
+</I>&gt;<i> | randomization. I surprised it's work at all on Debian
+</I>&gt;<i> Etch. Do
+</I>&gt;<i> | your process use system calls ? May be after your freeze
+</I>&gt;<i> and then
+</I>&gt;<i> | run it, it's only do some calculation and no system calls
+</I>&gt;<i> at all ?
+</I>&gt;<i> | Please send output of strace ./OCalm.freezed
+</I>&gt;<i> 
+</I>&gt;<i> Normal use of the system is essentially just doing
+</I>&gt;<i> calculation. But
+</I>&gt;<i> it's a toplevel read-eval-print loop so at the very least
+</I>&gt;<i> it's doing
+</I>&gt;<i> some basic I/O. I also just tested that it can do file I/O
+</I>&gt;<i> via the
+</I>&gt;<i> OCaml primitives. Only on being interrupted does it show
+</I>&gt;<i> any issues.
+</I>&gt;<i> The strace output is below. This is just starting it on my
+</I>&gt;<i> Hardy 
+</I>&gt;<i> system until it prints its banner and the prompt.
+</I>Strace output is strange. I can't understand how it's able to work at all :)
+
+Could you please send freezed program to play with ?
+
+Valery.
+
+&gt;<i> 
+</I>&gt;<i> John.
+</I>&gt;<i> 
+</I>&gt;<i> $ strace ./hol
+</I>&gt;<i> execve(&quot;./hol&quot;, [&quot;./hol&quot;], [/* 40 vars */]) = 0
+</I>&gt;<i> mmap2(0x10000, 57344, PROT_READ|PROT_WRITE|PROT_EXEC,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x10000
+</I>&gt;<i> mmap2(0x1e000, 16384, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 120380, 0) = 0x1e000
+</I>&gt;<i> old_mmap(0x1000000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1000000
+</I>&gt;<i> old_mmap(0x1001000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1001000
+</I>&gt;<i> old_mmap(0x1002000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1002000
+</I>&gt;<i> old_mmap(0x1003000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1003000
+</I>&gt;<i> old_mmap(0x1004000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1004000
+</I>&gt;<i> old_mmap(0x1005000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1005000
+</I>&gt;<i> old_mmap(0x1006000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1006000
+</I>&gt;<i> old_mmap(0x1007000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1007000
+</I>&gt;<i> old_mmap(0x1008000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1008000
+</I>&gt;<i> old_mmap(0x1009000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1009000
+</I>&gt;<i> old_mmap(0x100a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100a000
+</I>&gt;<i> old_mmap(0x100b000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100b000
+</I>&gt;<i> old_mmap(0x100c000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100c000
+</I>&gt;<i> old_mmap(0x100d000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100d000
+</I>&gt;<i> old_mmap(0x100e000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100e000
+</I>&gt;<i> old_mmap(0x100f000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x100f000
+</I>&gt;<i> old_mmap(0x1010000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1010000
+</I>&gt;<i> old_mmap(0x1011000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1011000
+</I>&gt;<i> old_mmap(0x1012000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1012000
+</I>&gt;<i> old_mmap(0x1013000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1013000
+</I>&gt;<i> old_mmap(0x1014000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1014000
+</I>&gt;<i> old_mmap(0x1015000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1015000
+</I>&gt;<i> old_mmap(0x1016000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1016000
+</I>&gt;<i> old_mmap(0x1017000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1017000
+</I>&gt;<i> old_mmap(0x1018000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1018000
+</I>&gt;<i> old_mmap(0x1019000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1019000
+</I>&gt;<i> old_mmap(0x101a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101a000
+</I>&gt;<i> old_mmap(0x101b000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101b000
+</I>&gt;<i> old_mmap(0x101c000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101c000
+</I>&gt;<i> old_mmap(0x101d000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101d000
+</I>&gt;<i> old_mmap(0x101e000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101e000
+</I>&gt;<i> old_mmap(0x101f000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x101f000
+</I>&gt;<i> old_mmap(0x1020000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1020000
+</I>&gt;<i> old_mmap(0x1021000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1021000
+</I>&gt;<i> old_mmap(0x1022000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1022000
+</I>&gt;<i> old_mmap(0x1023000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1023000
+</I>&gt;<i> old_mmap(0x1024000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1024000
+</I>&gt;<i> old_mmap(0x1025000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1025000
+</I>&gt;<i> old_mmap(0x1026000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1026000
+</I>&gt;<i> old_mmap(0x1027000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1027000
+</I>&gt;<i> old_mmap(0x1028000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1028000
+</I>&gt;<i> old_mmap(0x1029000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1029000
+</I>&gt;<i> old_mmap(0x102a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102a000
+</I>&gt;<i> open(&quot;/proc/self/exe&quot;, O_RDONLY)&#160; &#160; &#160; &#160;
+</I>&gt;<i> = 3
+</I>&gt;<i> old_mmap(0x7ff000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0x7ff000
+</I>&gt;<i> munmap(0x2000000, 3187671040)&#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160;&#160;&#160;= 0
+</I>&gt;<i> lseek(42, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; = -1 EBADF (Bad file
+</I>&gt;<i> descriptor)
+</I>&gt;<i> lseek(3, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\2\0\3\0\1\0\0\0\0\315\5&quot;...,
+</I>&gt;<i> 52) = 52
+</I>&gt;<i> lseek(3, 57580, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57580
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\1\0\0\0\3\0\0\0\0\0\0\0\0@\4\10\320\336\0\0a\0\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57040, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57040
+</I>&gt;<i> old_mmap(0x102b000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102b000
+</I>&gt;<i> read(3, &quot;\0.shstrtab\0.text\0cryopid.tramp\0.&quot;..., 97) =
+</I>&gt;<i> 97
+</I>&gt;<i> lseek(3, 57140, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57140
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\0\0\0\0\0\0\0\0\0\0\0\0\0@\4\10\0\0\0\0\0\0\0\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57180, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57180
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\v\0\0\0\1\0\0\0\6\0\0\0\200A\5\10\200\1\0\0w\213\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57220, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57220
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\21\0\0\0\1\0\0\0\3\0\0\0\0\315\5\10\0\215\0\0d\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57260, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57260
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\37\0\0\0\1\0\0\0\2\0\0\0\200\315\5\10\200\215\0\0dH\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57300, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57300
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\'\0\0\0\1\0\0\0\2\0\0\0\344\25\6\10\344\325\0\0X\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57340, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57340
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;1\0\0\0\1\0\0\0\3\0\0\0&lt;&amp;\6\10&lt;\326\0\0\f\0\0\0\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57380, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57380
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;6\0\0\0\1\0\0\0\3\0\0\0H&amp;\6\10H\326\0\0\f\0\0\0\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57420, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57420
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;?\0\0\0\1\0\0\0\3\0\0\0`&amp;\6\10`\326\0\0000\2\0\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57460, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57460
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;E\0\0\0\10\0\0\0\3\0\0\0\240(\6\10\220\330\0\0`1\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57500, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57500
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;J\0\0\0\1\0\0\0\0\0\0\0\0@\4\10\220\330\0\0&lt;\6\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57540, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57540
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;S\0\0\0\1\0\0\0\1\0\0\0\254P\4\10\314\336\0\0\4\0\0\0\0&quot;...,
+</I>&gt;<i> 40) = 40
+</I>&gt;<i> lseek(3, 57036, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57036
+</I>&gt;<i> read(3, &quot;\24\341\0\0&quot;, 4)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 4
+</I>&gt;<i> lseek(3, 57620, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 57620
+</I>&gt;<i> old_mmap(0x102c000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102c000
+</I>&gt;<i> old_mmap(0x102d000, 12288, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x102d000
+</I>&gt;<i> old_mmap(0x1030000, 131072, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1030000
+</I>&gt;<i> old_mmap(0x1050000, 135168, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1050000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;x\234\354\275y|TE\326?|;\351\33.\20\350\26\2\4\1AY\4Ae&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> old_mmap(0x1071000, 32768, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1071000
+</I>&gt;<i> dup2(0, 4)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; = 4
+</I>&gt;<i> close(0)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> close(1)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> close(2)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> old_mmap(0x1079000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1079000
+</I>&gt;<i> old_mmap(0x107a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x107a000
+</I>&gt;<i> fstat(4, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0),
+</I>&gt;<i> ...}) = 0
+</I>&gt;<i> old_mmap(0x107b000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x107b000
+</I>&gt;<i> fcntl(2, F_SETFD, 0)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = -1 EBADF (Bad file
+</I>&gt;<i> descriptor)
+</I>&gt;<i> fcntl(2, F_SETFL, O_RDONLY)&#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= -1 EBADF (Bad file descriptor)
+</I>&gt;<i> lseek(2, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160;&#160;&#160;= -1 EBADF (Bad file
+</I>&gt;<i> descriptor)
+</I>&gt;<i> set_thread_area(0)&#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = -1 EFAULT (Bad
+</I>&gt;<i> address)
+</I>&gt;<i> set_thread_area({entry_number:6, base_addr:0xb7d888e0,
+</I>&gt;<i> limit:1048575, seg_32bit:1, contents:0, read_exec_only:0,
+</I>&gt;<i> limit_in_pages:1, seg_not_present:0, useable:1}) = 0
+</I>&gt;<i> old_mmap(0x107d000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x107d000
+</I>&gt;<i> open(&quot;/usr/local/bin/ocamlrun&quot;, O_RDONLY) = 0
+</I>&gt;<i> lseek(0, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\2\0\3\0\1\0\0\0\360\v\5&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\25\0\0\0[\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2\1\0\0\0\0\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\271A\251D\7\331\230\367\322|\307\26q}\343nYs\24\271\237&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\4\0\0\0\21\0\31\0V\26\0\0\216\311\5\0104\0\0\0\22\0\r&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\265\0\0\0\22\0\r\0\262\24\0\0:F\5\10#\0\0\0\22\0\r\0m&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0, &quot;inh\0ldexp\0log\0fmod\0frexp\0asin\0co&quot;..., 4096)
+</I>&gt;<i> = 4096
+</I>&gt;<i> read(0, &quot;int_4\0caml_output_value_to_block&quot;..., 4096) =
+</I>&gt;<i> 4096
+</I>&gt;<i> read(0, &quot;tput_value\0caml_ml_seek_out\0caml&quot;..., 4096) =
+</I>&gt;<i> 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\0u\20\307D$\4\0\0\0\0\211&lt;$\350x\35\1\0\367\306\1\0\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;$\4R\6\10\350\321\377\377\377U\211\345\203\354\10\213E&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\340\236z\2t,\203}\320\0\17\204U\2\0\0\331\311\335\350&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\300\350\310\364\377\377\205\300xh9\307~d;u\324r\23w\5&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\10\213B\374\301\350\n\215\4\205\377\377\377\377\17\276&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\377\377?v\27\350r\246\377\377\307\0K\0\0\0\307\4$\1\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;_]\303U\211\345\203\354\30\213E\10\211E\370\213E\f\211&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;F\3\210V\5\210N\4\203\303\10\203\306\10\203\357\1u\277&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\243&lt;\253\6\10i\0354\253\6\10?\0\1\0\211&lt;$\377\321\1\303&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\4$\350\272o\377\3779]\354\17\206\341\371\377\377\213F&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\235`\377\377\377\1\323\213\205,\376\377\3771\310#\205&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\303U\211\345\213E\f\321\370\213U\10\210B\374\270\1\0\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\27\307D$\4\377\377\377\377\241\270\264\6\10\211\4$\350&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\203\302\1\211\327\17\257=\f\274\6\10\351H\377\377\377&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\266V\2\17\266\5\320_\6\0109\302t\241\215q\23\211\367\374&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\16\25\377\377\211\205\0\377\377\377\213\205\320\376\377&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\205\320\376\377\377\321\3709\6|\10\213v\4\2154\262\353&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\0\0\0\353Z\211\4$\350\377\352\376\377\203\303\1\213\4&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;$\10\336\313\272\0\0\0\0RQ\337,$\215d$\10\336\373\331\312&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0, &quot;caml_format_float\0caml_float_of_&quot;..., 4096) =
+</I>&gt;<i> 4096
+</I>&gt;<i> close(0)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> old_mmap(0x8048000, 118784, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x8048000
+</I>&gt;<i> mprotect(0x8048000, 118784, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x107e000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x107e000
+</I>&gt;<i> old_mmap(0x8065000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x8065000
+</I>&gt;<i> mprotect(0x8065000, 4096, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x107f000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x107f000
+</I>&gt;<i> brk(0x81eb000)&#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; =
+</I>&gt;<i> 0x81eb000
+</I>&gt;<i> old_mmap(0x8066000, 1593344, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x8066000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\251_*\275#\356\377s7U*\317\332\\\251\234\374@\2452qKr&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;P\37W\377\36\241\376\33LH\355{&gt;OY\320\235\231\254\263W&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0x8066000, 1593344, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1080000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1080000
+</I>&gt;<i> old_mmap(0xb58d9000, 1306624, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb58d9000
+</I>&gt;<i> read(3, &quot;\34\264\366
+</I>&gt;<i> ]\233\353\312\207Y\377aG\246\240\335j\322\333&quot;..., 131216) =
+</I>&gt;<i> 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\177\321{O\362\214\325:b#\317\177\237\24\363\371_f\7.\275&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb58d9000, 1306624, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1081000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1081000
+</I>&gt;<i> open(&quot;/usr/local/lib/ocaml/stublibs/dllunix.so&quot;, O_RDONLY)
+</I>&gt;<i> = 0
+</I>&gt;<i> lseek(0, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\220A\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;F\0\0\0\22\0\0\0I\7\0\0\0\0\0\0005\0\0\0\22\0\0\0\240\2&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\227\0\0\0\22\0\v\0\247\5\0\0]h\0\0\262\1\0\0\22\0\v\000&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1\0\1&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\4\0\0\351\20\367\377\377\377\243D\2\0\0hp\4\0\0\351\0&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\354\30\211]\370\211u\374\350J\362\377\377\201\303\363&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\270\1\0\0\0\213]\370\213u\374\211\354]\303U\211\345WV&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\211t$\4\215\203\317\371\377\377\211\4$\350&amp;\320\377\377&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;_]\303\220U\211\345S\203\354\24\350G\302\377\377\201\303&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\247\377\377\2114$\350\255\247\377\377\213E\10\211D$\4&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> close(0)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> old_mmap(0xb5a50000, 40960, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb5a50000
+</I>&gt;<i> mprotect(0xb5a50000, 40960, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1082000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1082000
+</I>&gt;<i> old_mmap(0xb5a5a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb5a5a000
+</I>&gt;<i> mprotect(0xb5a5a000, 4096, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1083000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1083000
+</I>&gt;<i> old_mmap(0xb5a5b000, 507904, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb5a5b000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\214\177r(\273\224\262z\304k\2507\3152^BY\v\360\306\327&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb5a5b000, 507904, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1084000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1084000
+</I>&gt;<i> old_mmap(0xb5ada000, 10412032, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb5ada000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\344\343\240Q\312\367|G\266?S\237\33\330\202\305\267\240&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\203\33\f)\2677]\212\244\375\353\3152l\324\241S7n\336\262&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;BS\177\367\342\242\241?\n\377\260\320s\241z\346\23\207&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\271\335n{?E\37-\301?\363\337Rki2~\331\342\227\322\265&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\324\334\246\362\274\3616\323W\37d\230\327\253\240\7\265&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\361\36\310\356q\25\266\377\35*l\202xr\\\371\r\303\270&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;&gt;\357?\301\357y\231\307E~\261|6\35&amp;\3363\326\233\271Oa&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\17jkA\251W\362\366\374g\230\222\313\35\371\177\271\304&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;*\24{\243\274t\234\315y{\1y\363\243\236^\204\337\t\377&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;+\211\215\222?A\235\v\357\321\355\321E\372\202{L;{\241&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\255\24\246\225\317\2642\337+6~M\275\345\203UF?\334J_\311&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;vj\224\334k\2272^\311\256\250~\261\357*\354\344\376\366&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;U\335+\254\373\220\376WT\371j\&quot;\356\21y\360\n\357\333\23&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;O\256\376\326Q\377\237jY?\376\215\202\273\372\373G\320&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\266\3625X\307\206\304xQ%\375\t\305\266,\341\263l,\224&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;]V\357\330\302\217\303\241\316\371&lt;\370\n\331E\207\310&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\376\245\201s\\\211\0378\307\237\214\3\3478\225I\340\34&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;B\225\277\227\360\325=4\21\257K0\322\24iOn\362\tU\'\255&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;#\266Y\327\336zXy\342\10\256\201I\330\204\216\20\353Z\262&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;E\230\37c~\235\225\237\0\2133\277\217\3713\241\306\3\317&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;&lt;K#V\236\23\27h\334[K\342\n\215XyM\\\247\21+o\210\2334&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;`=[\216\211\35\346\376\310u\266\264c\336\263e;\3g\313\366&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;vXz{\27,\275\275\7\326\32\271}\260\326\34\36\200\25\307&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\372O$\377\324\253\320J\324\257\204\375\10uG\1\345\237&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\267Z\177o\333\255\352\260\211\345p\355\226\353\5\5\267&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\237%\263\376\313\302\272\237\254.\330\373?\323\371\266&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb5ada000, 10412032, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1085000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1085000
+</I>&gt;<i> old_mmap(0xb6b14000, 528384, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb6b14000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\270q\'*\32\26StlbR\361\24**\31\25)slCEe\33\333XQ\221\'&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;D\33\272\331\254\330\341\201\376\314\2544\211\323\327e&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb6b14000, 528384, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1086000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1086000
+</I>&gt;<i> old_mmap(0xb7c61000, 954368, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7c61000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;\221M\231}\231\356\311\347\270v\317\316m\236\335\247\235&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb7c61000, 954368, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1087000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1087000
+</I>&gt;<i> old_mmap(0xb7d88000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7d88000
+</I>&gt;<i> mprotect(0xb7d88000, 4096, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1088000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1088000
+</I>&gt;<i> open(&quot;/lib/tls/libc-2.3.6.so&quot;, O_RDONLY) = -1 ENOENT (No
+</I>&gt;<i> such file or directory)
+</I>&gt;<i> old_mmap(0xb7d89000, 1236992, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7d89000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;go]y\254\375\375\317\314\<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">377 at L</A>\3660\22\337\267\26\343\311&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;z\32y]\3003\3758+y\225\227U\355s\221\243c?\252\3425\253&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;e\256\276a\236AZi\25:&amp;\341\215Nfg\347\223K\7$OYy-\325\0&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;+\17N\3433\312\203\23\371\264\232\211\21\2422\341\&quot;\352&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;w\245\4v\210\353\261EQ[-\22\273\3\337][\324`@]\32\201\255&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb7d89000, 1236992, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1089000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1089000
+</I>&gt;<i> open(&quot;/lib/tls/libc-2.3.6.so&quot;, O_RDONLY) = -1 ENOENT (No
+</I>&gt;<i> such file or directory)
+</I>&gt;<i> old_mmap(0xb7eb7000, 20480, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7eb7000
+</I>&gt;<i> mprotect(0xb7eb7000, 20480, PROT_READ)&#160; = 0
+</I>&gt;<i> old_mmap(0x108a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108a000
+</I>&gt;<i> old_mmap(0xb7ebc000, 12288, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7ebc000
+</I>&gt;<i> mprotect(0xb7ebc000, 12288, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x108b000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108b000
+</I>&gt;<i> old_mmap(0xb7ebf000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7ebf000
+</I>&gt;<i> mprotect(0xb7ebf000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x108c000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108c000
+</I>&gt;<i> open(&quot;/lib/tls/libpthread-2.3.6.so&quot;, O_RDONLY) = -1 ENOENT
+</I>&gt;<i> (No such file or directory)
+</I>&gt;<i> old_mmap(0xb7ec1000, 57344, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7ec1000
+</I>&gt;<i> mprotect(0xb7ec1000, 57344, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x108d000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108d000
+</I>&gt;<i> old_mmap(0xb7ecf000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7ecf000
+</I>&gt;<i> mprotect(0xb7ecf000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x108e000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108e000
+</I>&gt;<i> old_mmap(0xb7ed1000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7ed1000
+</I>&gt;<i> mprotect(0xb7ed1000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x108f000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x108f000
+</I>&gt;<i> open(&quot;/lib/libncurses.so.5.5&quot;, O_RDONLY) = -1 ENOENT (No
+</I>&gt;<i> such file or directory)
+</I>&gt;<i> old_mmap(0xb7ed3000, 233472, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7ed3000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;/\307\vG\365e\332N\275/J\253\331\33\346u\221\1\177\17\214&quot;...,
+</I>&gt;<i> 131216) = 131216
+</I>&gt;<i> mprotect(0xb7ed3000, 233472, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1090000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1090000
+</I>&gt;<i> old_mmap(0xb7f0c000, 32768, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f0c000
+</I>&gt;<i> mprotect(0xb7f0c000, 32768, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1091000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1091000
+</I>&gt;<i> old_mmap(0xb7f14000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7f14000
+</I>&gt;<i> mprotect(0xb7f14000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1092000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1092000
+</I>&gt;<i> open(&quot;/lib/tls/libdl-2.3.6.so&quot;, O_RDONLY) = -1 ENOENT (No
+</I>&gt;<i> such file or directory)
+</I>&gt;<i> old_mmap(0xb7f16000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f16000
+</I>&gt;<i> mprotect(0xb7f16000, 8192, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1093000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1093000
+</I>&gt;<i> old_mmap(0xb7f18000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f18000
+</I>&gt;<i> mprotect(0xb7f18000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1094000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1094000
+</I>&gt;<i> open(&quot;/lib/tls/libm-2.3.6.so&quot;, O_RDONLY) = -1 ENOENT (No
+</I>&gt;<i> such file or directory)
+</I>&gt;<i> old_mmap(0xb7f1a000, 147456, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f1a000
+</I>&gt;<i> read(3,
+</I>&gt;<i> &quot;H\227\10hD\315\357\322\370Po\247r\205\3[\24\271\312\344&quot;...,
+</I>&gt;<i> 131216) = 74786
+</I>&gt;<i> mprotect(0xb7f1a000, 147456, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1095000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1095000
+</I>&gt;<i> old_mmap(0xb7f3e000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f3e000
+</I>&gt;<i> mprotect(0xb7f3e000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1096000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1096000
+</I>&gt;<i> open(&quot;/usr/local/lib/ocaml/stublibs/dllnums.so&quot;, O_RDONLY)
+</I>&gt;<i> = 0
+</I>&gt;<i> lseek(0, 0, SEEK_SET)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\200\17&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\0\0\1\203\304\4[]\303\215\264&amp;\0\0\0\0U\211\345S\350.&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> read(0,
+</I>&gt;<i> &quot;\370\203x\374\0t\v\353\23\213\2\203\352\4\205\300u\n\203&quot;...,
+</I>&gt;<i> 4096) = 4096
+</I>&gt;<i> close(0)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> old_mmap(0xb7f4f000, 12288, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f4f000
+</I>&gt;<i> mprotect(0xb7f4f000, 12288, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x1097000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1097000
+</I>&gt;<i> old_mmap(0xb7f52000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f52000
+</I>&gt;<i> mprotect(0xb7f52000, 4096, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1098000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1098000
+</I>&gt;<i> old_mmap(0xb7f53000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xb7f53000
+</I>&gt;<i> mprotect(0xb7f53000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x1099000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x1099000
+</I>&gt;<i> open(&quot;/lib/ld-2.3.6.so&quot;, O_RDONLY)&#160; &#160; &#160; = -1
+</I>&gt;<i> ENOENT (No such file or directory)
+</I>&gt;<i> old_mmap(0xb7f55000, 86016, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f55000
+</I>&gt;<i> mprotect(0xb7f55000, 86016, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> old_mmap(0x109a000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x109a000
+</I>&gt;<i> old_mmap(0xb7f6a000, 8192, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb7f6a000
+</I>&gt;<i> mprotect(0xb7f6a000, 8192, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> old_mmap(0x109b000, 4096, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x109b000
+</I>&gt;<i> old_mmap(0xbfa62000, 86016, PROT_READ|PROT_WRITE,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_GROWSDOWN, -1, 0) =
+</I>&gt;<i> 0xbfa62000
+</I>&gt;<i> mprotect(0xbfa62000, 86016, PROT_READ|PROT_WRITE) = 0
+</I>&gt;<i> dup2(4, 0)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; = 0
+</I>&gt;<i> ioctl(0, SNDCTL_TMR_START or TCSETS, {B38400 opost isig
+</I>&gt;<i> icanon echo ...}) = 0
+</I>&gt;<i> fcntl(0, F_SETFD, 0)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = 0
+</I>&gt;<i> fcntl(0, F_SETFL, O_RDWR)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> dup2(4, 1)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; = 1
+</I>&gt;<i> ioctl(1, SNDCTL_TMR_START or TCSETS, {B38400 opost isig
+</I>&gt;<i> icanon echo ...}) = 0
+</I>&gt;<i> fcntl(1, F_SETFD, 0)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = 0
+</I>&gt;<i> fcntl(1, F_SETFL, O_RDWR)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> dup2(4, 2)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; = 2
+</I>&gt;<i> ioctl(2, SNDCTL_TMR_START or TCSETS, {B38400 opost isig
+</I>&gt;<i> icanon echo ...}) = 0
+</I>&gt;<i> fcntl(2, F_SETFD, 0)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = 0
+</I>&gt;<i> fcntl(2, F_SETFL, O_RDWR)&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> rt_sigaction(SIGHUP, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGINT, {0x8050e9d, [], 0}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGQUIT, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGILL, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGTRAP, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGABRT, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGBUS, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGFPE, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGUSR1, {SIG_DFL}, NULL, 8) = 0
+</I>
+&gt;<i> rt_sigaction(SIGSEGV, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGUSR2, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGPIPE, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGALRM, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGTERM, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGSTKFLT, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGCHLD, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGCONT, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGTSTP, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGTTIN, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGTTOU, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGURG, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGXCPU, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGXFSZ, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGVTALRM, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGPROF, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGWINCH, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGIO, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> rt_sigaction(SIGPWR, {SIG_DFL}, NULL, 8) = 0
+</I>&gt;<i> old_mmap(0x800000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC,
+</I>&gt;<i> MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, 0, 0) = 0x800000
+</I>&gt;<i> mprotect(0x800000, 4096, PROT_READ|PROT_EXEC) = 0
+</I>&gt;<i> close(3)&#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; = 0
+</I>&gt;<i> munmap(0x1000000, 16777216)&#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> munmap(0, 8388608)&#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; = 0
+</I>&gt;<i> kill(0, SIGWINCH)&#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160;&#160;&#160;= 0
+</I>&gt;<i> --- SIGWINCH (Window changed) @ 0 (0) ---
+</I>&gt;<i> write(1, &quot;&#160; &#160; &#160; &#160; HOL Light 2.20++,
+</I>&gt;<i> built &quot;..., 74&#160; &#160; &#160; &#160; HOL Light 2.20++,
+</I>&gt;<i> built 19 June 2009 on OCaml 3.09.3 with CryoPID
+</I>&gt;<i> ) = 74
+</I>&gt;<i> write(1, &quot;\n&quot;, 1
+</I>&gt;<i> )&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160;&#160;&#160;= 1
+</I>&gt;<i> write(1, &quot;val it : unit = ()\n&quot;, 19val it : unit = ()
+</I>&gt;<i> )&#160; &#160; = 19
+</I>&gt;<i> write(1, &quot;# &quot;, 2# )&#160; &#160; &#160; &#160; &#160;
+</I>&gt;<i> &#160; &#160; &#160; &#160; &#160; &#160;&#160;&#160;= 2
+</I>&gt;<i> read(0,&#160; 
+</I>&gt;<i> 
+</I>
+
+      
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000222.html">[Cryopid-devel] On cryopidrc file
+</A></li>
+	<LI>Next message: <A HREF="000213.html">[Cryopid-devel] Older snapshots (almost) work!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

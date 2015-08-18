@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] trouble with redhat install
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3Cc81cf3500805161228r5f09d506g3754b0c85b11c944%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000038.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] trouble with redhat install</H1>
+    <B>Jerod Sikorskyj</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20trouble%20with%20redhat%20install&In-Reply-To=%3Cc81cf3500805161228r5f09d506g3754b0c85b11c944%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] trouble with redhat install">jerod.sikorskyj at gmail.com
+       </A><BR>
+    <I>Fri May 16 21:28:47 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000038.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear anyone who can help,
+
+I am attempting to compile Cryopid on Redhat with the following uname info:
+
+Linux bioinfo4.niagara.edu 2.4.21-9.ELsmp #1 SMP Thu Jan 8 17:08:56 EST 2004
+i686 i686 i386 GNU/Linux
+
+I followed the installation readme, and typed &quot;make&quot; while in the /src
+directory.  Here is the error message I got:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at bioinfo4</A> src]# make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-i386'
+cc -DUSE_TCPCP -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o
+stub.o stub.c
+cc1: unrecognized option `-fno-stack-protector'
+make[1]: *** [stub.o] Error 1
+make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-i386'
+make: *** [arch] Error 2
+
+Can anyone help me please?
+
+Thanks in advance,
+Jerod
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080516/d6d106e4/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080516/d6d106e4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000038.html">[Cryopid-devel] trouble with redhat install
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

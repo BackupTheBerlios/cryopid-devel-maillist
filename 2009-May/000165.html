@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] query about cryopid
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20query%20about%20cryopid&In-Reply-To=%3Ca3414e510905291920n3bcf4c54q300806d81c2885ec%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000161.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] query about cryopid</H1>
+    <B>shuxi liu</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20query%20about%20cryopid&In-Reply-To=%3Ca3414e510905291920n3bcf4c54q300806d81c2885ec%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] query about cryopid">liushuxi2009 at gmail.com
+       </A><BR>
+    <I>Sat May 30 04:20:40 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000161.html">[Cryopid-devel] cryopid patch
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#165">[ date ]</a>
+              <a href="thread.html#165">[ thread ]</a>
+              <a href="subject.html#165">[ subject ]</a>
+              <a href="author.html#165">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello sir or madam,
+   nowdays, I have used cryopid-0.5.9.1 in 2.6.27.5-117.fc10.i686,but have
+some error in compiling and running .
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at fedora10</A> src]# make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-i386 arch || true
+make -C arch 'CFLAGS+=-DUSE_TCPCP -fno-stack-protector'
+make[1]: Entering directory `/root/cryopid-0.5.9.1/src/arch-i386'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/root/cryopid-0.5.9.1/src/arch-i386'
+
+when i use test(example in cryopid)
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at fedora10</A> src]# ./freeze test 25921
+     Ignoring map - looks like resumer.
+     Error parsing map: 00110000-00111000 r-xp 00110000 00:00 0
+[vdso]
+     Ignoring map - looks like resumer.
+     Error parsing map: 00738000-00758000 r-xp 00000000 fd:00 218326
+/lib/ld-2.9.so
+     Ignoring map - looks like resumer.
+     Error parsing map: 00759000-0075a000 r--p 00020000 fd:00 218326
+/lib/ld-2.9.so
+     Ignoring map - looks like resumer.
+     Error parsing map: 0075a000-0075b000 rw-p 00021000 fd:00 218326
+/lib/ld-2.9.so
+     Ignoring map - looks like resumer.
+     Error parsing map: 0075d000-008cb000 r-xp 00000000 fd:00 218327
+/lib/libc-2.9.so
+Map: 008cb000-008cd000 r--p 0016e000 fd:00 218327     /lib/libc-2.9.so
+Map: 008cd000-008ce000 rw-p 00170000 fd:00 218327     /lib/libc-2.9.so
+Map: 008ce000-008d1000 rw-p 008ce000 00:00 0          (null)
+[+] Found scribble zone: 0x8ce000
+Map: 08048000-08049000 r-xp 00000000 fd:00 332555
+/root/cryopid-0.5.9.1/testers/test
+Map: 08049000-0804a000 rw-p 00000000 fd:00 332555
+/root/cryopid-0.5.9.1/testers/test
+Map: b7ec5000-b80c9000 rw-p b7ec5000 00:00 0          (null)
+Map: b80dd000-b80de000 rw-p b80dd000 00:00 0          (null)
+Map: bfac9000-bfade000 rw-p bffeb000 00:00 0          [stack]
+[+] Terminal device appears to be 136:1
+No syscall locations found! Cannot do remote syscall.
+&#24050;&#25918;&#24323;
+i don't know why  .i look forward to your reply
+thanks very much.
+
+
+
+
+Jack
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090530/92516b24/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20090530/92516b24/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000161.html">[Cryopid-devel] cryopid patch
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#165">[ date ]</a>
+              <a href="thread.html#165">[ thread ]</a>
+              <a href="subject.html#165">[ subject ]</a>
+              <a href="author.html#165">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

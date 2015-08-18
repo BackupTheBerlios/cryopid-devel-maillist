@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-July/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3C1217483945.5463.536.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000056.html">
+   <LINK REL="Next"  HREF="000058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20CryptoPID%20on%20Gentoo%20%28Linux%202.6.26%29&In-Reply-To=%3C1217483945.5463.536.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)">echo at echoreply.us
+       </A><BR>
+    <I>Thu Jul 31 07:59:05 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000056.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+        <LI>Next message: <A HREF="000058.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#57">[ date ]</a>
+              <a href="thread.html#57">[ thread ]</a>
+              <a href="subject.html#57">[ subject ]</a>
+              <a href="author.html#57">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2008-07-30 at 22:32 -0700, Dan Sanders wrote:
+
+&gt;<i> The same changes did not allow CryptoID to compile on my AMD64 Debian
+</I>&gt;<i> Unstable box, which continues to produce compiler errors.
+</I>
+In my very, very spare time I have begun working on bringing the build
+under Autoconf, which can account for (or at least fail on) some of
+these quirks. I am working on using CryoPID with a few projects of my
+own to build a brain dead single system image cluster. It is not an
+elegant way to migrate a process, but it works without having to touch
+the kernel.
+
+Anyway, I hope to finish a set of patches to make it easy
+to ./configure :)
+
+Its likely that when you copied stuff over to the AMD64 box, some stubs
+were broken that direct traffic to bits/ asm/ etc. Those can be quite a
+maze to follow when your trying to nail down a compiler error.
+
+What exactly did you copy over to the AMD64 box, and what errors did you
+get?
+
+Cheers!
+--Tim
+
+-- 
+Monkey + Typewriter = Echoreply ( <A HREF="http://echoreply.us">http://echoreply.us</A> )
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000056.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+	<LI>Next message: <A HREF="000058.html">[Cryopid-devel] CryptoPID on Gentoo (Linux 2.6.26)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#57">[ date ]</a>
+              <a href="thread.html#57">[ thread ]</a>
+              <a href="subject.html#57">[ subject ]</a>
+              <a href="author.html#57">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

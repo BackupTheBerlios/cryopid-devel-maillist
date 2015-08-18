@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%28no%20subject%29&In-Reply-To=%3C1206328935.6746.184.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000033.html">
+   <LINK REL="Next"  HREF="000035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] (no subject)</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%28no%20subject%29&In-Reply-To=%3C1206328935.6746.184.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] (no subject)">echo at echoreply.us
+       </A><BR>
+    <I>Mon Mar 24 04:22:15 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000033.html">[Cryopid-devel] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000035.html">[Cryopid-devel] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bah, sorry, I didn't realize that its Linux centric, somehow I thought
+it was part of libc. Brain fart :)
+
+Try installing the development headers for your kernel version and it
+should work.
+
+Cheers,
+--Tim
+
+On Mon, 2008-03-24 at 11:17 +0800, Tim Post wrote:
+&gt;<i> On Mon, 2008-03-24 at 00:42 +0100, Pavel Kobel wrote:
+</I>&gt;<i> &gt; rata &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">ratatouil at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I'm trying to compile CryoPID but I have this message :
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; &gt; make[1]: entrant dans le r\303\251pertoire \302\253 /stockage/tmp/cryopid-0.5.9.1
+</I>&gt;<i> &gt; /src/arch-x86_64 \302\273
+</I>&gt;<i> &gt; &gt; cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+</I>&gt;<i> &gt; &gt; stub.c:19: erreur: expected declaration specifiers or '...' before 'arch_prctl'
+</I>&gt;<i> &gt; &gt; stub.c:19: erreur: expected declaration specifiers or '...' before 'code'
+</I>&gt;<i> &gt; &gt; stub.c:19: erreur: expected declaration specifiers or '...' before 'addr'
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Is there a way to fixe this ?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Mmm, the cryopid-devel list is very quiet.
+</I>&gt;<i> 
+</I>&gt;<i> Indeed. I subscribed two months ago, this is the first message I have
+</I>&gt;<i> seen :)
+</I>&gt;<i> 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; What is your type of system? AMD Opteron with FC8 64 bit?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Have you made your system to update recently? with &quot;yum update&quot;?
+</I>&gt;<i> &gt; Your kernel is new. What about other libraries and gcc?
+</I>&gt;<i> 
+</I>&gt;<i> does /usr/include/sys/prctl.h and /usr/include/asm/prctl.h exist on your
+</I>&gt;<i> computer? Did you see any other errors or warnings prior to the text
+</I>&gt;<i> that you pasted?
+</I>&gt;<i> 
+</I>&gt;<i> Afaik, you should have it as part of your standard libc development
+</I>&gt;<i> package. Something went wrong when you installed your toolchain, or you
+</I>&gt;<i> forgot to install libc devel along with gcc/make.
+</I>&gt;<i> 
+</I>&gt;<i> I'm not quite sure what FC8 names those packages, a quick `yum search
+</I>&gt;<i> libc' | grep devel should turn it up.
+</I>&gt;<i> 
+</I>&gt;<i> HTH.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> --Tim
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000033.html">[Cryopid-devel] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000035.html">[Cryopid-devel] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

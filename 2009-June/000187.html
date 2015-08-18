@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch%20%28on%20mmap_min_addr%20%26c.%29&In-Reply-To=%3C1245312855.7622.95.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000186.html">
+   <LINK REL="Next"  HREF="000185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)</H1>
+    <B>Tim Post</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20cryopid%20patch%20%28on%20mmap_min_addr%20%26c.%29&In-Reply-To=%3C1245312855.7622.95.camel%40localhost.localdomain%3E"
+       TITLE="[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)">echo at echoreply.us
+       </A><BR>
+    <I>Thu Jun 18 10:14:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000186.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+        <LI>Next message: <A HREF="000185.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 2009-06-18 at 16:04 +0800, Tim Post wrote:
+&gt;<i> On Thu, 2009-06-18 at 09:46 +0200, Michele Alberti wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Syscall results are checked, but often the warn message is poor and useless.
+</I>&gt;<i> &gt; But again, they are checked.
+</I>&gt;<i> 
+</I>&gt;<i> I should have said &quot;properly handled&quot;, if that was the case, there would
+</I>&gt;<i> be no segfaults, just an informative assertion that fails :)
+</I>
+We could have:
+
+cryopid_assert() as well as cryopid_oshit(), the difference being that
+the latter stops even if NDEBUG is set high. For now and the immediate
+future, every release is a debug build .. but packagers may unwittingly
+disagree with us.
+
+Here be dragons ... and we have to be able to assert that on a case by
+case basis despite the build. Otherwise handling bugs entails weeks of
+cat and mouse to actually get the information that we need from the user
+or the distro asking on behalf of its users.
+
+Cheers,
+--Tim
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000186.html">[Cryopid-devel] cryopid patch (on mmap_min_addr &amp;c.)
+</A></li>
+	<LI>Next message: <A HREF="000185.html">[Cryopid-devel] cryopid patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>

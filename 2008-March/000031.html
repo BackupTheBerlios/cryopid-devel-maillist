@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cryopid-devel] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cryopid-devel/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%28no%20subject%29&In-Reply-To=%3C706b55520803231324o3d7b670axcf4ed5cdcd695a73%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000032.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cryopid-devel] (no subject)</H1>
+    <B>rata</B> 
+    <A HREF="mailto:cryopid-devel%40lists.berlios.de?Subject=Re%3A%20%5BCryopid-devel%5D%20%28no%20subject%29&In-Reply-To=%3C706b55520803231324o3d7b670axcf4ed5cdcd695a73%40mail.gmail.com%3E"
+       TITLE="[Cryopid-devel] (no subject)">ratatouil at gmail.com
+       </A><BR>
+    <I>Sun Mar 23 21:24:51 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000032.html">[Cryopid-devel]  (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#31">[ date ]</a>
+              <a href="thread.html#31">[ thread ]</a>
+              <a href="subject.html#31">[ subject ]</a>
+              <a href="author.html#31">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I'm trying to compile CryoPID but I have this message :
+*
+[<A HREF="https://lists.berlios.de/mailman/listinfo/cryopid-devel">root at cxr69</A> src]# make
+! test -h arch &amp;&amp; rm -f arch &amp;&amp; ln -s arch-x86_64 arch || true
+make -C arch 'CFLAGS+= -fno-stack-protector'
+make[1]: entrant dans le r&#233;pertoire &#171; /stockage/tmp/cryopid-
+0.5.9.1/src/arch-x86_64 &#187;
+cc -fno-stack-protector -g -Wall -Os -fpic -I. -I..   -c -o stub.o stub.c
+stub.c:19: erreur: expected declaration specifiers or '...' before
+'arch_prctl'
+stub.c:19: erreur: expected declaration specifiers or '...' before 'code'
+stub.c:19: erreur: expected declaration specifiers or '...' before 'addr'
+stub.c:19: attention : la d&#233;finition de donn&#233;es n'a pas de type ni de classe
+de stockage
+stub.c:19: attention : type defaults to 'int' in declaration of '_syscall2'
+make[1]: *** [stub.o] Erreur 1
+make[1]: quittant le r&#233;pertoire &#171; /stockage/tmp/cryopid-
+0.5.9.1/src/arch-x86_64 &#187;
+make: *** [arch] Erreur 2*
+
+Is there a way to fixe this ?
+
+Here is my distro :
+Linux 2.6.24.3-34.fc8 #1 SMP Wed Mar 12 16:51:49 EDT 2008 x86_64 GNU/Linux
+
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080323/ce3f75e2/attachment.html">https://lists.berlios.de/pipermail/cryopid-devel/attachments/20080323/ce3f75e2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000032.html">[Cryopid-devel]  (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#31">[ date ]</a>
+              <a href="thread.html#31">[ thread ]</a>
+              <a href="subject.html#31">[ subject ]</a>
+              <a href="author.html#31">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cryopid-devel">More information about the CryoPID-devel
+mailing list</a><br>
+</body></html>
